@@ -45,6 +45,26 @@ const TOOL = {
   },
 } as const;
 
+/**
+ * Claim categories where a third party, not the candidate, is the authority.
+ *
+ * Retrieval by similarity cannot find a contradiction, and this is not a
+ * limitation of the embedder — it is what similarity means. Measured on this
+ * corpus with all-MiniLM-L6-v2, "Led a team of 8 engineers" and "She did not
+ * have direct reports at any point" score −0.02 cosine: the most decisive pair
+ * in the evidence pack looks like unrelated text, because the second sentence
+ * is the answer precisely by meaning the opposite of the first.
+ *
+ * A better model does not fix that. So contradiction is handled structurally
+ * instead: for claims about scope, employment or credentials, every attested
+ * document enters the context and the adjudicator reads them all.
+ */
+const THIRD_PARTY_AUTHORITATIVE = new Set<ResumeClaim["category"]>([
+  "scope",
+  "employment",
+  "credential",
+]);
+
 const SYSTEM = `You adjudicate a single résumé claim against retrieved evidence.
 
 Four verdicts, and the distinction matters:
@@ -94,7 +114,10 @@ export const corroborate: StepDef<CorroborateInput, CorroborateOutput> = {
     const retrieval: CorroborateOutput["retrieval"] = {};
 
     for (const claim of input.claims) {
-      const hits = await input.index.search(claim.text, 6);
+      const hits = await input.index.search(claim.text, 6, {
+        includeAllAttested: THIRD_PARTY_AUTHORITATIVE.has(claim.category),
+        pinAttested: 1,
+      });
       retrieval[claim.id] = hits.map((h) => ({ docId: h.doc.id, score: h.score }));
 
       const context = hits
@@ -120,7 +143,8 @@ ${context || "(nothing retrieved)"}`,
         tool: TOOL,
       });
 
-      const { valid, rejected } = checkCitations(raw.citations ?? [], docsById);
+      const retrievedIds = new Set(hits.map((h) => h.doc.id));
+      const { valid, rejected } = checkCitations(raw.citations ?? [], docsById, retrievedIds);
       for (const r of rejected) {
         fabricated.push({
           claimId: claim.id,
@@ -190,6 +214,15 @@ ${context || "(nothing retrieved)"}`,
           out.fabricated.length === 0
             ? "no unresolvable citations"
             : `${out.fabricated.length} unresolvable citation(s) rejected before scoring`,
+      },
+      {
+        // Without this, a fixture or a model with memory of the corpus can cite
+        // evidence it was never shown, and the demo silently flatters retrieval.
+        name: "verdicts cite only retrieved evidence",
+        passed: out.verdicts.every((v) =>
+          v.citations.every((c) => (out.retrieval[v.claimId] ?? []).some((r) => r.docId === c.docId)),
+        ),
+        detail: "every surviving citation names a document that retrieval returned for that claim",
       },
     ];
   },

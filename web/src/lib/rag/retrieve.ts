@@ -23,6 +23,22 @@ export interface Hit {
   score: number;
 }
 
+export interface SearchOptions {
+  /** MMR trade-off between relevance and diversity. */
+  lambda?: number;
+  /**
+   * How many slots are reserved for the best-matching attested documents.
+   * Set to 0 for pure similarity retrieval.
+   */
+  pinAttested?: number;
+  /**
+   * Include every attested document, regardless of similarity. Used for claims
+   * where a third party is the natural authority — see the note on `search`.
+   * Safe because attestations are few; it would need a cap on a real corpus.
+   */
+  includeAllAttested?: boolean;
+}
+
 const CHUNK_CHARS = 320;
 const CHUNK_OVERLAP = 80;
 
@@ -76,11 +92,17 @@ export class EvidenceIndex {
   }
 
   /**
-   * Top-k with MMR. A claim about one project will otherwise retrieve five
-   * chunks of the same document, and corroboration from one source is weaker
-   * than corroboration from three.
+   * Top-k with MMR, plus structured pre-filtering.
+   *
+   * MMR because a claim about one project will otherwise retrieve five chunks of
+   * the same document, and corroboration from one source is weaker than from
+   * three.
+   *
+   * Slots are reserved for attested evidence before ranking — see the note
+   * inside the method.
    */
-  async search(query: string, k = 6, lambda = 0.72): Promise<Hit[]> {
+  async search(query: string, k = 6, options: SearchOptions = {}): Promise<Hit[]> {
+    const { lambda = 0.72, pinAttested = 1, includeAllAttested = false } = options;
     const [q] = await this.embedder.embed([query]);
     if (!q) return [];
 
@@ -88,7 +110,35 @@ export class EvidenceIndex {
     scored.sort((a, b) => b.score - a.score);
     const pool = scored.slice(0, Math.max(k * 4, 20)).filter((s) => s.score > 0.01);
 
-    const picked: typeof pool = [];
+    // Attested evidence is included, not ranked.
+    //
+    // Reference checks and certificates are few, short, and written by someone
+    // other than the candidate. Ranking them against thirty pull requests by
+    // similarity buries them every time — and they are the only documents that
+    // can independently contradict a claim. So for claims where a third party
+    // is the natural authority, every attested document goes into context, and
+    // similarity is left to fill the remaining slots.
+    const pinned: { i: number; score: number }[] = [];
+    if (includeAllAttested || pinAttested > 0) {
+      const bestPerDoc = new Map<string, { i: number; score: number }>();
+      for (const { i, score } of scored) {
+        const chunk = this.chunks[i];
+        const doc = chunk ? this.docs.get(chunk.docId) : undefined;
+        if (!doc?.attested) continue;
+        const current = bestPerDoc.get(doc.id);
+        if (!current || score > current.score) bestPerDoc.set(doc.id, { i, score });
+      }
+      const ranked = [...bestPerDoc.values()].sort((a, b) => b.score - a.score);
+      pinned.push(...(includeAllAttested ? ranked : ranked.slice(0, pinAttested)));
+
+      const pinnedIdx = new Set(pinned.map((p) => p.i));
+      for (let i = pool.length - 1; i >= 0; i--) {
+        const entry = pool[i];
+        if (entry && pinnedIdx.has(entry.i)) pool.splice(i, 1);
+      }
+    }
+
+    const picked: typeof pool = [...pinned];
     while (picked.length < k && pool.length > 0) {
       let bestIdx = 0;
       let best = -Infinity;
@@ -111,7 +161,7 @@ export class EvidenceIndex {
       if (chosen) picked.push(chosen);
     }
 
-    return picked
+    return picked.slice(0, Math.max(k, pinned.length))
       .map(({ i, score }) => {
         const chunk = this.chunks[i];
         const doc = chunk ? this.docs.get(chunk.docId) : undefined;

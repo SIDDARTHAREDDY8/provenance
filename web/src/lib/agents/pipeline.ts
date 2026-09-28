@@ -10,7 +10,7 @@ import type {
   Verdict,
 } from "@/lib/types";
 import { selectProvider, type LlmProvider } from "@/lib/llm";
-import { selectEmbedder } from "@/lib/rag/embed";
+import { selectEmbedderWithFallback } from "@/lib/rag/embed";
 import { EvidenceIndex } from "@/lib/rag/retrieve";
 import { Runner, RunFailed } from "./runtime";
 import { extractClaims } from "./extract-claims";
@@ -52,7 +52,7 @@ export async function runAssessment(input: AssessmentInput): Promise<Assessment>
   const runner = new Runner(input.application.id, llm);
 
   try {
-    const embedder = selectEmbedder();
+    const embedder = await selectEmbedderWithFallback();
     const index = await EvidenceIndex.build(input.docs, embedder);
 
     const claims = await runner.step(extractClaims, {

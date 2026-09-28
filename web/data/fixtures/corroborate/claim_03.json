@@ -6,10 +6,6 @@
       "quote": "Proposal to move the ledger_entries table (890M rows) to declarative partitioning by month"
     },
     {
-      "docId": "ev_006",
-      "quote": "Ran over nine nights with zero customer-facing errors"
-    },
-    {
       "docId": "ev_007",
       "quote": "the migration landed with no incidents"
     }

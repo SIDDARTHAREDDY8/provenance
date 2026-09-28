@@ -40,6 +40,41 @@ the bar on an unreliable signal removes good candidates faster than bad ones.
 under which rule, has to be answerable six months later — which is a property of
 the architecture, not a report you can generate afterwards.
 
+## The finding that shaped the retrieval design
+
+Retrieval by similarity cannot find a contradiction, and that is not a weakness
+of the embedder — it is what similarity means.
+
+Measured on this corpus with `all-MiniLM-L6-v2`:
+
+```
+"Led a team of 8 engineers"
+"She did not have direct reports at any point"      cosine  −0.02
+```
+
+The single most decisive pair in the evidence pack scores as **unrelated text**,
+because the second sentence is the answer precisely by meaning the opposite of
+the first. A better embedding model does not fix this.
+
+So the two jobs are separated:
+
+- **Supporting evidence is a similarity problem.** Semantic embeddings handle it,
+  and measurably better than lexical — switching cut citations to non-retrieved
+  documents from 7 to 4 and moved verified fit from 20% to 35%.
+- **Contradicting evidence is a structural problem.** For claims about scope,
+  employment or credentials, *every* attested third-party document enters the
+  context and the adjudicator reads them all. Reference checks are few, short,
+  and written by someone other than the candidate. You do not rank them. You
+  read them.
+
+A gate in `corroborate.ts` enforces the consequence: **a verdict may only cite
+documents that retrieval actually returned for that claim.** A citation to a
+document the adjudicator was never shown is unfounded even when the quote is
+real — it means the verdict came from somewhere other than the evidence.
+
+That gate is also what caught this: the hand-written fixtures had been citing
+referee documents the retriever never surfaced, quietly flattering the pipeline.
+
 ## The four things that make it defensible
 
 ### 1. A verdict without a resolvable citation does not exist
@@ -107,7 +142,8 @@ Pipeline steps
 Verdict accuracy     100.0%   14/14
 Adverse precision    100.0%   3/3 adverse calls correct
 Adverse recall       100.0%   3/3 adverse claims caught
-Grounding            1 citation rejected (quote_not_found), 0 survived
+Grounding            21 citations, all from retrieved evidence
+                     1 rejected (quote_not_found), 0 survived
 Claimed fit 60%  ·  Verified fit 35%  ·  Inflation 25 points
 ```
 
@@ -136,7 +172,7 @@ accuracy numbers, it shows up as quietly worse verification a quarter later.
 | Styling | Tailwind v4, CSS-first `@theme` tokens | — |
 | Agent runtime | Typed steps, retries with backoff, per-step output gates, full trace | `web/src/lib/agents/runtime.ts` |
 | LLM | Forced tool use, `temperature: 0` | `ANTHROPIC_API_KEY` → live; absent → authored fixtures |
-| Retrieval | Chunking, IDF-weighted lexical embedder, cosine + MMR | `EMBEDDING_PROVIDER=openai` |
+| Retrieval | Chunking, local sentence-transformer, cosine + MMR, attested evidence included not ranked | `EMBEDDING_PROVIDER=openai` / `=lexical` |
 | ML | scikit-learn training in Python, coefficients exported, inference in TypeScript | `ml/` |
 | Storage | File store | `DATABASE_URL` → Postgres (`db/schema.sql`) |
 | Queue | In-process, at-least-once, bounded retries | `REDIS_URL` → reliable-queue on Redis |
@@ -168,9 +204,10 @@ anything that wants a Python runtime.
 - **The cohort on `/compliance` is seeded** so the monitor has something to
   measure, with one group deliberately below threshold — a monitor that never
   fires is indistinguishable from one that does not work.
-- **Retrieval is lexical, not semantic.** Honest about what it is: it will not
-  match paraphrase. `EMBEDDING_PROVIDER=openai` fixes that; at corpus scale the
-  index belongs in pgvector, and `db/schema.sql` says where.
+- **Retrieval runs a local model by default** (~90MB on first run, cached). If it
+  cannot load it falls back to the lexical embedder with a warning rather than
+  failing. At corpus scale the index belongs in pgvector — `db/schema.sql` says
+  where — and `includeAllAttested` would need a cap.
 - **No authentication.** Reviewer identity is typed into a form. The visibility
   and signoff rules are modelled and enforced in the layers that own them, but
   there is no login.

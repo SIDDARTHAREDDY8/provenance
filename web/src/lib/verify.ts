@@ -19,15 +19,30 @@ export function quoteAppearsIn(quote: string, doc: EvidenceDoc): boolean {
   return normalise(`${doc.title}\n${doc.body}`).includes(normalise(quote));
 }
 
+export type RejectionReason =
+  | "unknown_document"
+  | "quote_not_found"
+  | "too_short"
+  | "not_retrieved";
+
 export interface CitationCheck {
   valid: Citation[];
-  rejected: { citation: Citation; reason: "unknown_document" | "quote_not_found" | "too_short" }[];
+  rejected: { citation: Citation; reason: RejectionReason }[];
 }
 
-/** The gate. Nothing reaches a verdict that cannot be traced to a real span. */
+/**
+ * The gate. Nothing reaches a verdict that cannot be traced to a real span in a
+ * document the adjudicator was actually shown.
+ *
+ * `retrievedDocIds` matters as much as the quote check. A citation to a document
+ * outside the retrieved context is unfounded even when the quote is real: it
+ * means the verdict was reached from something other than the evidence in front
+ * of it, which is exactly the property the whole pipeline exists to rule out.
+ */
 export function checkCitations(
   citations: Citation[],
   docsById: Map<string, EvidenceDoc>,
+  retrievedDocIds?: Set<string>,
 ): CitationCheck {
   const valid: Citation[] = [];
   const rejected: CitationCheck["rejected"] = [];
@@ -36,6 +51,10 @@ export function checkCitations(
     const doc = docsById.get(citation.docId);
     if (!doc) {
       rejected.push({ citation, reason: "unknown_document" });
+      continue;
+    }
+    if (retrievedDocIds && !retrievedDocIds.has(citation.docId)) {
+      rejected.push({ citation, reason: "not_retrieved" });
       continue;
     }
     if (citation.quote.trim().length < MIN_QUOTE_CHARS) {

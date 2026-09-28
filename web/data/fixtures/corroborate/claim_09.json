@@ -2,10 +2,6 @@
   "status": "partially_verified",
   "citations": [
     {
-      "docId": "ev_010",
-      "quote": "Instrumented the settlement pipeline with OpenTelemetry spans"
-    },
-    {
       "docId": "ev_009",
       "quote": "Added a Prometheus rule plus a dashboard panel"
     }

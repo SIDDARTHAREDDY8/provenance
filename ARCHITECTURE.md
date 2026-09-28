@@ -52,9 +52,19 @@ multi-line body and teaches nothing, while normalised containment still makes a
 fabricated quote impossible to pass.
 
 **`rag/`** — chunking with sentence-boundary preference so spans stay quotable,
-IDF fitted on *this* corpus rather than a global one, and MMR on retrieval so one
-document cannot supply all six hits. Corroboration from one source is weaker than
-corroboration from three, and the retrieval should reflect that.
+MMR so one document cannot supply all six hits, and reserved slots for attested
+evidence. The embedder is swappable; the lexical one keeps its corpus-fitted IDF
+as an offline fallback.
+
+The load-bearing decision is that retrieval has two jobs, not one. Finding
+*supporting* evidence is a similarity problem and gets semantic search. Finding
+*contradicting* evidence is not — measured here, the most decisive pair in the
+corpus scores −0.02 cosine, because a contradiction is not a paraphrase. That
+half is handled by structure: for claims a third party is authoritative about,
+every attestation enters the context.
+
+`corroborate.ts` then gates on it — a verdict may only cite what retrieval
+returned for that claim.
 
 **`store/`** — the only module that touches persistence. `FileStore` and
 `PostgresStore` implement one interface; nothing outside the directory knows

@@ -1,0 +1,32 @@
+{
+  "name": "review_ranker",
+  "featureVersion": 2,
+  "features": [
+    "verified_score",
+    "claimed_score",
+    "inflation",
+    "blockers",
+    "contradicted",
+    "attested_ratio",
+    "distinct_sources_norm"
+  ],
+  "coefficients": [
+    2.163895,
+    0.575434,
+    -1.588462,
+    -1.39091,
+    -1.110043,
+    0.822843,
+    1.191252
+  ],
+  "intercept": -1.327037,
+  "trainedAt": "2026-09-28T17:30:12.914967+00:00",
+  "metrics": {
+    "roc_auc": 0.7535,
+    "average_precision": 0.6479,
+    "brier": 0.2,
+    "n_train": 1350,
+    "n_test": 450,
+    "positive_rate": 0.3956
+  }
+}

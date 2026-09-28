@@ -1,0 +1,62 @@
+# Full stack: web + ML service + Postgres + Redis.
+#
+# Not required to run the demo — `npm run dev` works with no infrastructure at
+# all, on files and an in-process queue. This exists so the Postgres driver, the
+# Redis queue driver and the Python service are exercised rather than asserted.
+#
+#   docker compose up --build   →  http://localhost:3210
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: provenance
+      POSTGRES_PASSWORD: provenance
+      POSTGRES_DB: provenance
+    ports: ["5432:5432"]
+    volumes:
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U provenance"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  ml:
+    build: ./ml
+    ports: ["8000:8000"]
+    volumes:
+      - ./web/data/models:/models:ro
+    environment:
+      MODELS_DIR: /models
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request;urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  web:
+    build: ./web
+    ports: ["3210:3210"]
+    depends_on:
+      postgres: { condition: service_healthy }
+      redis: { condition: service_healthy }
+    environment:
+      DATABASE_URL: postgres://provenance:provenance@postgres:5432/provenance
+      REDIS_URL: redis://redis:6379
+      ML_SERVICE_URL: http://ml:8000
+      # ANTHROPIC_API_KEY: set to run live instead of on authored fixtures
+      NODE_ENV: production
+
+volumes:
+  pgdata:

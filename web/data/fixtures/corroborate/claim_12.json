@@ -1,0 +1,15 @@
+{
+  "status": "partially_verified",
+  "citations": [
+    {
+      "docId": "ev_018",
+      "quote": "She has started reviewing Hana's pull requests carefully and explaining the reasoning rather than just approving"
+    },
+    {
+      "docId": "ev_ref01",
+      "quote": "She reviewed pull requests for one junior engineer, Hana, over about six months"
+    }
+  ],
+  "rationale": "Documented mentoring of one junior engineer over roughly six months; the plural overstates the scope.",
+  "supportedLevel": "beginner"
+}

@@ -1,0 +1,11 @@
+{
+  "status": "verified",
+  "citations": [
+    {
+      "docId": "ev_017",
+      "quote": "Worked with legal to agree which fields are personal data and which are transaction records"
+    }
+  ],
+  "rationale": "The ticket records the implementation and the work with legal on what constitutes personal data.",
+  "supportedLevel": "intermediate"
+}

@@ -1,0 +1,116 @@
+{
+  "claims": [
+    {
+      "id": "claim_01",
+      "text": "Reduced p95 latency on the invoice list endpoint from 1.9s to 240ms",
+      "category": "achievement",
+      "assertedLevel": null,
+      "retrievalScores": [],
+      "outcome": "verified"
+    },
+    {
+      "id": "claim_02",
+      "text": "Cut the settlement report query from 34s to 1.1s by adding a partial index",
+      "category": "achievement",
+      "assertedLevel": null,
+      "retrievalScores": [],
+      "outcome": "verified"
+    },
+    {
+      "id": "claim_03",
+      "text": "Migrated an 890M-row ledger to partitioned tables with zero customer-facing errors",
+      "category": "achievement",
+      "assertedLevel": "advanced",
+      "retrievalScores": [],
+      "outcome": "verified"
+    },
+    {
+      "id": "claim_04",
+      "text": "Designed and shipped the v2 payouts API with idempotency keys and cursor pagination",
+      "category": "achievement",
+      "assertedLevel": "advanced",
+      "retrievalScores": [],
+      "outcome": "verified"
+    },
+    {
+      "id": "claim_05",
+      "text": "Led a team of 8 engineers across Payments and Data Platform",
+      "category": "scope",
+      "assertedLevel": "advanced",
+      "retrievalScores": [],
+      "outcome": "contradicted"
+    },
+    {
+      "id": "claim_06",
+      "text": "Owned the backend hiring loop and ran interview debriefs",
+      "category": "scope",
+      "assertedLevel": "intermediate",
+      "retrievalScores": [],
+      "outcome": "unsupported"
+    },
+    {
+      "id": "claim_07",
+      "text": "Expert-level production experience with Kafka and event streaming",
+      "category": "skill",
+      "assertedLevel": "expert",
+      "retrievalScores": [],
+      "outcome": "contradicted"
+    },
+    {
+      "id": "claim_08",
+      "text": "Primary on-call for payments and resolved a sev1 connection-pool exhaustion in 38 minutes",
+      "category": "achievement",
+      "assertedLevel": "advanced",
+      "retrievalScores": [],
+      "outcome": "verified"
+    },
+    {
+      "id": "claim_09",
+      "text": "Reduced incident volume by 90% through observability work",
+      "category": "achievement",
+      "assertedLevel": "advanced",
+      "retrievalScores": [],
+      "outcome": "partially_verified"
+    },
+    {
+      "id": "claim_10",
+      "text": "Implemented GDPR erasure for payout records in coordination with legal",
+      "category": "achievement",
+      "assertedLevel": "intermediate",
+      "retrievalScores": [],
+      "outcome": "verified"
+    },
+    {
+      "id": "claim_11",
+      "text": "Advanced PostgreSQL performance tuning at scale",
+      "category": "skill",
+      "assertedLevel": "advanced",
+      "retrievalScores": [],
+      "outcome": "verified"
+    },
+    {
+      "id": "claim_12",
+      "text": "Mentored junior engineers on the Payments team",
+      "category": "scope",
+      "assertedLevel": "advanced",
+      "retrievalScores": [],
+      "outcome": "partially_verified"
+    },
+    {
+      "id": "claim_13",
+      "text": "AWS Certified Solutions Architect - Professional",
+      "category": "credential",
+      "assertedLevel": null,
+      "retrievalScores": [],
+      "outcome": "verified"
+    },
+    {
+      "id": "claim_14",
+      "text": "Kubernetes at production scale",
+      "category": "skill",
+      "assertedLevel": "advanced",
+      "retrievalScores": [],
+      "outcome": "partially_verified"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "status": "verified",
+  "citations": [
+    {
+      "docId": "ev_002",
+      "quote": "Added a partial index on events(tenant_id, created_at) WHERE kind = 'settlement', which cut the report query from 34s to 1.1s"
+    }
+  ],
+  "rationale": "The ticket records the same query, the same index strategy and the same timings."
+}

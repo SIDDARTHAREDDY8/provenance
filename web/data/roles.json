@@ -1,0 +1,105 @@
+[
+  {
+    "id": "role_staff_data_platform",
+    "title": "Staff Engineer, Data Platform",
+    "team": "Data Platform",
+    "level": 5,
+    "requirements": [
+      {
+        "skillId": "stream_processing",
+        "minLevel": "intermediate",
+        "weight": 3,
+        "mustHave": true
+      },
+      {
+        "skillId": "sql_perf",
+        "minLevel": "advanced",
+        "weight": 3
+      },
+      {
+        "skillId": "data_modelling",
+        "minLevel": "advanced",
+        "weight": 3
+      },
+      {
+        "skillId": "migration_execution",
+        "minLevel": "advanced",
+        "weight": 2
+      },
+      {
+        "skillId": "python",
+        "minLevel": "advanced",
+        "weight": 2
+      },
+      {
+        "skillId": "iac",
+        "minLevel": "intermediate",
+        "weight": 2
+      },
+      {
+        "skillId": "observability",
+        "minLevel": "intermediate",
+        "weight": 2
+      },
+      {
+        "skillId": "project_leadership",
+        "minLevel": "intermediate",
+        "weight": 2
+      },
+      {
+        "skillId": "technical_writing",
+        "minLevel": "intermediate",
+        "weight": 1
+      }
+    ]
+  },
+  {
+    "id": "role_senior_backend",
+    "title": "Senior Backend Engineer, Payments",
+    "team": "Payments",
+    "level": 4,
+    "requirements": [
+      {
+        "skillId": "sql_perf",
+        "minLevel": "intermediate",
+        "weight": 3,
+        "mustHave": true
+      },
+      {
+        "skillId": "api_design",
+        "minLevel": "intermediate",
+        "weight": 3
+      },
+      {
+        "skillId": "incident_response",
+        "minLevel": "intermediate",
+        "weight": 2
+      },
+      {
+        "skillId": "compliance",
+        "minLevel": "beginner",
+        "weight": 2
+      },
+      {
+        "skillId": "migration_execution",
+        "minLevel": "intermediate",
+        "weight": 2
+      },
+      {
+        "skillId": "observability",
+        "minLevel": "intermediate",
+        "weight": 2
+      },
+      {
+        "skillId": "mentoring",
+        "minLevel": "beginner",
+        "weight": 1
+      },
+      {
+        "skillId": "technical_writing",
+        "minLevel": "beginner",
+        "weight": 1
+      }
+    ]
+  }
+]

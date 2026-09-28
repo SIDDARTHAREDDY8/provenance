@@ -1,0 +1,62 @@
+{
+  "candidateId": "cand_maya",
+  "note": "Hand-labelled expected verdicts, written from the evidence pack independently of the fixtures.",
+  "verdicts": {
+    "claim_01": {
+      "status": "verified",
+      "text": "Reduced p95 latency on the invoice list endpoint from 1.9s to 240ms"
+    },
+    "claim_02": {
+      "status": "verified",
+      "text": "Cut the settlement report query from 34s to 1.1s by adding a partial index"
+    },
+    "claim_03": {
+      "status": "verified",
+      "text": "Migrated an 890M-row ledger to partitioned tables with zero customer-facing errors"
+    },
+    "claim_04": {
+      "status": "verified",
+      "text": "Designed and shipped the v2 payouts API with idempotency keys and cursor pagination"
+    },
+    "claim_05": {
+      "status": "contradicted",
+      "text": "Led a team of 8 engineers across Payments and Data Platform"
+    },
+    "claim_06": {
+      "status": "unsupported",
+      "text": "Owned the backend hiring loop and ran interview debriefs"
+    },
+    "claim_07": {
+      "status": "contradicted",
+      "text": "Expert-level production experience with Kafka and event streaming"
+    },
+    "claim_08": {
+      "status": "verified",
+      "text": "Primary on-call for payments and resolved a sev1 connection-pool exhaustion in 38 minutes"
+    },
+    "claim_09": {
+      "status": "partially_verified",
+      "text": "Reduced incident volume by 90% through observability work"
+    },
+    "claim_10": {
+      "status": "verified",
+      "text": "Implemented GDPR erasure for payout records in coordination with legal"
+    },
+    "claim_11": {
+      "status": "verified",
+      "text": "Advanced PostgreSQL performance tuning at scale"
+    },
+    "claim_12": {
+      "status": "partially_verified",
+      "text": "Mentored junior engineers on the Payments team"
+    },
+    "claim_13": {
+      "status": "verified",
+      "text": "AWS Certified Solutions Architect - Professional"
+    },
+    "claim_14": {
+      "status": "partially_verified",
+      "text": "Kubernetes at production scale"
+    }
+  }
+}

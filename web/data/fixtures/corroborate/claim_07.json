@@ -1,0 +1,14 @@
+{
+  "status": "contradicted",
+  "citations": [
+    {
+      "docId": "ev_022",
+      "quote": "I do not have production streaming experience, so this RFC is deliberately framed as questions rather than a recommendation"
+    },
+    {
+      "docId": "ev_ref02",
+      "quote": "she has never run a Kafka consumer in production here"
+    }
+  ],
+  "rationale": "Her own RFC and a referee both state she has no production streaming experience."
+}

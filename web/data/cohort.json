@@ -1,0 +1,294 @@
+[
+  {
+    "group": "Group C",
+    "advanced": true
+  },
+  {
+    "group": "Group A",
+    "advanced": false
+  },
+  {
+    "group": "Group B",
+    "advanced": false
+  },
+  {
+    "group": "Group B",
+    "advanced": true
+  },
+  {
+    "group": "Group D",
+    "advanced": false
+  },
+  {
+    "group": "Group B",
+    "advanced": true
+  },
+  {
+    "group": "Group B",
+    "advanced": true
+  },
+  {
+    "group": "Group A",
+    "advanced": false
+  },
+  {
+    "group": "Group B",
+    "advanced": false
+  },
+  {
+    "group": "Group C",
+    "advanced": false
+  },
+  {
+    "group": "Group B",
+    "advanced": false
+  },
+  {
+    "group": "Group A",
+    "advanced": true
+  },
+  {
+    "group": "Group C",
+    "advanced": true
+  },
+  {
+    "group": "Group A",
+    "advanced": false
+  },
+  {
+    "group": "Group A",
+    "advanced": true
+  },
+  {
+    "group": "Group A",
+    "advanced": false
+  },
+  {
+    "group": "Group B",
+    "advanced": true
+  },
+  {
+    "group": "Group A",
+    "advanced": false
+  },
+  {
+    "group": "Group B",
+    "advanced": false
+  },
+  {
+    "group": "Group C",
+    "advanced": true
+  },
+  {
+    "group": "Group B",
+    "advanced": true
+  },
+  {
+    "group": "Group D",
+    "advanced": false
+  },
+  {
+    "group": "Group B",
+    "advanced": true
+  },
+  {
+    "group": "Group A",
+    "advanced": false
+  },
+  {
+    "group": "Group A",
+    "advanced": true
+  },
+  {
+    "group": "Group A",
+    "advanced": true
+  },
+  {
+    "group": "Group B",
+    "advanced": true
+  },
+  {
+    "group": "Group A",
+    "advanced": false
+  },
+  {
+    "group": "Group C",
+    "advanced": false
+  },
+  {
+    "group": "Group C",
+    "advanced": false
+  },
+  {
+    "group": "Group A",
+    "advanced": false
+  },
+  {
+    "group": "Group B",
+    "advanced": false
+  },
+  {
+    "group": "Group C",
+    "advanced": false
+  },
+  {
+    "group": "Group A",
+    "advanced": true
+  },
+  {
+    "group": "Group A",
+    "advanced": false
+  },
+  {
+    "group": "Group A",
+    "advanced": false
+  },
+  {
+    "group": "Group A",
+    "advanced": false
+  },
+  {
+    "group": "Group A",
+    "advanced": true
+  },
+  {
+    "group": "Group B",
+    "advanced": false
+  },
+  {
+    "group": "Group C",
+    "advanced": true
+  },
+  {
+    "group": "Group C",
+    "advanced": false
+  },
+  {
+    "group": "Group A",
+    "advanced": true
+  },
+  {
+    "group": "Group A",
+    "advanced": true
+  },
+  {
+    "group": "Group B",
+    "advanced": false
+  },
+  {
+    "group": "Group C",
+    "advanced": false
+  },
+  {
+    "group": "Group B",
+    "advanced": true
+  },
+  {
+    "group": "Group A",
+    "advanced": true
+  },
+  {
+    "group": "Group D",
+    "advanced": true
+  },
+  {
+    "group": "Group A",
+    "advanced": true
+  },
+  {
+    "group": "Group A",
+    "advanced": true
+  },
+  {
+    "group": "Group C",
+    "advanced": false
+  },
+  {
+    "group": "Group B",
+    "advanced": false
+  },
+  {
+    "group": "Group A",
+    "advanced": true
+  },
+  {
+    "group": "Group A",
+    "advanced": false
+  },
+  {
+    "group": "Group B",
+    "advanced": true
+  },
+  {
+    "group": "Group A",
+    "advanced": false
+  },
+  {
+    "group": "Group A",
+    "advanced": true
+  },
+  {
+    "group": "Group A",
+    "advanced": true
+  },
+  {
+    "group": "Group B",
+    "advanced": false
+  },
+  {
+    "group": "Group C",
+    "advanced": false
+  },
+  {
+    "group": "Group A",
+    "advanced": true
+  },
+  {
+    "group": "Group C",
+    "advanced": true
+  },
+  {
+    "group": "Group B",
+    "advanced": true
+  },
+  {
+    "group": "Group B",
+    "advanced": false
+  },
+  {
+    "group": "Group A",
+    "advanced": true
+  },
+  {
+    "group": "Group A",
+    "advanced": true
+  },
+  {
+    "group": "Group A",
+    "advanced": true
+  },
+  {
+    "group": "Group A",
+    "advanced": false
+  },
+  {
+    "group": "Group C",
+    "advanced": false
+  },
+  {
+    "group": "Group B",
+    "advanced": false
+  },
+  {
+    "group": "Group A",
+    "advanced": true
+  },
+  {
+    "group": "Group B",
+    "advanced": true
+  },
+  {
+    "group": "Group A",
+    "advanced": false
+  }
+]

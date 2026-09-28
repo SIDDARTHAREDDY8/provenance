@@ -1,0 +1,42 @@
+{
+  "name": "claim_risk",
+  "featureVersion": 2,
+  "features": [
+    "has_number",
+    "has_large_number",
+    "has_superlative",
+    "has_scope_verb",
+    "asserts_level",
+    "asserts_top_level",
+    "is_achievement",
+    "is_credential",
+    "word_count_norm",
+    "retrieval_max",
+    "retrieval_mean",
+    "retrieval_count_norm"
+  ],
+  "coefficients": [
+    0.057025,
+    0.089325,
+    3.151946,
+    3.036355,
+    -0.009836,
+    -0.233835,
+    -0.129568,
+    0.0,
+    -0.730316,
+    -0.969669,
+    -1.056487,
+    -0.131863
+  ],
+  "intercept": -0.143965,
+  "trainedAt": "2026-09-28T17:30:12.901215+00:00",
+  "metrics": {
+    "roc_auc": 0.8869,
+    "average_precision": 0.8414,
+    "brier": 0.0994,
+    "n_train": 1800,
+    "n_test": 600,
+    "positive_rate": 0.4267
+  }
+}

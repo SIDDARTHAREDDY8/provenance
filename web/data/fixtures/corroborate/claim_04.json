@@ -1,0 +1,15 @@
+{
+  "status": "verified",
+  "citations": [
+    {
+      "docId": "ev_011",
+      "quote": "Idempotency keys with a 24h replay window, RFC 7807 problem details for errors, and cursor pagination rather than offset"
+    },
+    {
+      "docId": "ev_012",
+      "quote": "Maya's v2 payouts spec was the cleanest interface proposal I have reviewed here"
+    }
+  ],
+  "rationale": "The pull request describes exactly these interface decisions and a peer reference corroborates the design work.",
+  "supportedLevel": "advanced"
+}

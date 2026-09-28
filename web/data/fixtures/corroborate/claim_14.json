@@ -1,0 +1,11 @@
+{
+  "status": "partially_verified",
+  "citations": [
+    {
+      "docId": "ev_016",
+      "quote": "Scaled the payments-api deployment from 6 to 9 replicas ahead of the quarter-end settlement peak"
+    }
+  ],
+  "rationale": "The only Kubernetes evidence is a single replica-count change, which supports beginner rather than advanced.",
+  "supportedLevel": "beginner"
+}

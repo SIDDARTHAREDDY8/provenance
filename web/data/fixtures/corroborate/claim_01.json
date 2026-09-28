@@ -1,0 +1,10 @@
+{
+  "status": "verified",
+  "citations": [
+    {
+      "docId": "ev_001",
+      "quote": "p95 on /v2/invoices went from 1.9s to 240ms on the staging dataset"
+    }
+  ],
+  "rationale": "The pull request states the same endpoint and the same before/after figures."
+}

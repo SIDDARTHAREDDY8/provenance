@@ -1,0 +1,15 @@
+{
+  "status": "partially_verified",
+  "citations": [
+    {
+      "docId": "ev_010",
+      "quote": "Instrumented the settlement pipeline with OpenTelemetry spans"
+    },
+    {
+      "docId": "ev_009",
+      "quote": "Added a Prometheus rule plus a dashboard panel"
+    }
+  ],
+  "rationale": "Substantial instrumentation and alerting work is documented, but nothing in the pack supports the 90% figure.",
+  "supportedLevel": "intermediate"
+}

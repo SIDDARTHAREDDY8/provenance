@@ -1,0 +1,205 @@
+@import "tailwindcss";
+
+/* ===========================================================================
+   Provenance — visual system
+
+   The product adjudicates assertions about people against evidence, and
+   withholds what it must not disclose. So the interface is a case file, not a
+   dashboard: cool filing-paper ground, ink type, hairline rules, citations as
+   the primary content, and redaction drawn rather than described.
+
+   Colour is reserved for meaning. Amber is doubt, crimson is an adverse
+   finding, verdigris is corroboration. Nothing is coloured decoratively.
+   =========================================================================== */
+
+@theme {
+  --color-paper: #eef0f3;
+  --color-sheet: #f8f9fa;
+  --color-sheet-2: #e7eaee;
+  --color-rule: #d4d9df;
+  --color-rule-strong: #b3bbc4;
+
+  --color-ink: #14181d;
+  --color-ink-2: #4d5661;
+  --color-ink-3: #78828e;
+
+  --color-prussian: #1b4a66;
+  --color-prussian-tint: #dfe8ed;
+  --color-amber: #7d570f;
+  --color-amber-tint: #f2e8d5;
+  --color-crimson: #8a2426;
+  --color-crimson-tint: #f2dedd;
+  --color-verdigris: #1f5c4a;
+  --color-verdigris-tint: #dcebe5;
+  --color-redact: #14181d;
+
+  --font-serif: Newsreader, "Iowan Old Style", Charter, Georgia, serif;
+  --font-sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --radius-edge: 3px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-paper: #0d0f12;
+    --color-sheet: #14171b;
+    --color-sheet-2: #1b1f24;
+    --color-rule: #262b31;
+    --color-rule-strong: #3a4149;
+
+    --color-ink: #e8eaed;
+    --color-ink-2: #a3acb6;
+    --color-ink-3: #737d88;
+
+    --color-prussian: #79b3d1;
+    --color-prussian-tint: #132935;
+    --color-amber: #d3a44f;
+    --color-amber-tint: #2e2413;
+    --color-crimson: #dd8b89;
+    --color-crimson-tint: #2f1a1a;
+    --color-verdigris: #6cbfa2;
+    --color-verdigris-tint: #142b24;
+    --color-redact: #39414a;
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-prussian);
+    outline-offset: 2px;
+    border-radius: 1px;
+  }
+}
+
+@layer components {
+  /* Repeated dense patterns earn a name; everything else is utilities. */
+
+  .eyebrow {
+    @apply font-mono text-[10.5px] uppercase tracking-[0.12em] text-ink-3;
+  }
+
+  .title {
+    @apply font-serif font-normal leading-[1.1] tracking-[-0.02em] text-ink;
+    font-size: clamp(26px, 3.2vw, 36px);
+  }
+
+  .standfirst {
+    @apply text-[15px] leading-relaxed text-ink-2 max-w-[62ch];
+  }
+
+  .section-head {
+    @apply flex items-baseline gap-3 mt-11 pb-2 border-b border-ink;
+  }
+  .section-head h2 {
+    @apply text-xs font-semibold uppercase tracking-[0.09em] m-0;
+  }
+  .section-head .count {
+    @apply ml-auto font-mono text-[11px] text-ink-3 tabular-nums;
+  }
+
+  .tag {
+    @apply inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.07em]
+           px-1.5 py-0.5 rounded-[2px] bg-sheet-2 text-ink-2 whitespace-nowrap;
+  }
+  .tag[data-tone="caution"] { @apply bg-amber-tint text-amber; }
+  .tag[data-tone="reject"]  { @apply bg-crimson-tint text-crimson; }
+  .tag[data-tone="good"]    { @apply bg-verdigris-tint text-verdigris; }
+  .tag[data-tone="info"]    { @apply bg-prussian-tint text-prussian; }
+
+  /* The citation. Evidence is the primary content, so it gets the reading face. */
+  .citation {
+    @apply grid grid-cols-[52px_minmax(0,1fr)] gap-3 items-start;
+  }
+  .citation .exhibit {
+    @apply font-mono text-[10.5px] tracking-[0.04em] text-prussian pt-1 tabular-nums;
+  }
+  .citation .body {
+    @apply min-w-0 border-l border-rule pl-3;
+  }
+  .citation q {
+    @apply block font-serif text-[15px] leading-snug text-ink;
+  }
+  .provenance {
+    @apply font-mono text-[10px] uppercase tracking-[0.06em] text-ink-3 mt-1.5;
+  }
+
+  .panel {
+    @apply bg-sheet border border-rule rounded-[3px] p-5;
+  }
+  .panel[data-tone="reject"]  { @apply border-l-2 border-l-crimson; }
+  .panel[data-tone="caution"] { @apply border-l-2 border-l-amber; }
+  .panel[data-tone="note"]    { @apply border-l-2 border-l-prussian; }
+  .panel[data-tone="good"]    { @apply border-l-2 border-l-verdigris; }
+  .panel h3 { @apply text-[13px] font-semibold m-0 mb-1.5; }
+  .panel p  { @apply text-[13px] leading-relaxed text-ink-2 max-w-[68ch] m-0; }
+  .panel p + p { @apply mt-2; }
+  .panel p strong { @apply text-ink font-medium; }
+
+  .btn {
+    @apply inline-block font-medium text-[12.5px] px-3.5 py-1.5 rounded-[3px]
+           border border-rule-strong bg-sheet text-ink cursor-pointer whitespace-nowrap
+           transition-colors hover:bg-sheet-2 hover:border-ink-3 no-underline;
+  }
+  .btn[data-variant="primary"] {
+    @apply bg-prussian border-prussian text-sheet hover:brightness-110 hover:bg-prussian;
+  }
+  .btn[data-variant="danger"] {
+    @apply bg-crimson border-crimson text-sheet hover:brightness-110 hover:bg-crimson;
+  }
+  .btn[data-variant="quiet"] {
+    @apply border-transparent bg-transparent text-ink-2 px-0 hover:bg-transparent hover:text-prussian;
+  }
+  .btn:disabled { @apply opacity-50 cursor-default; }
+
+  .tbl { @apply w-full border-collapse text-[13px]; }
+  .tbl th {
+    @apply text-left font-mono text-[10px] font-medium uppercase tracking-[0.09em]
+           text-ink-3 pr-3.5 pb-2 border-b border-rule-strong;
+  }
+  .tbl td { @apply py-2.5 pr-3.5 border-b border-rule align-middle; }
+  .tbl td:last-child, .tbl th:last-child { @apply pr-0; }
+  .tbl .num { @apply text-right font-mono tabular-nums; }
+
+  /* Redaction: there is nothing underneath the bar. */
+  .redacted {
+    @apply inline-block rounded-[1px] select-none align-middle relative;
+    background: var(--color-redact);
+    color: transparent;
+  }
+  .redacted::after {
+    content: "";
+    @apply absolute inset-0;
+    background-image: repeating-linear-gradient(
+      90deg, transparent 0 3px, rgba(255, 255, 255, 0.07) 3px 4px
+    );
+  }
+}
+
+@layer utilities {
+  .rule-dotted { border-bottom: 1px dotted var(--color-rule); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .stagger > * { animation: rise 0.32s cubic-bezier(0.2, 0, 0.2, 1) backwards; }
+  .stagger > *:nth-child(1) { animation-delay: 0.02s; }
+  .stagger > *:nth-child(2) { animation-delay: 0.06s; }
+  .stagger > *:nth-child(3) { animation-delay: 0.1s; }
+  .stagger > *:nth-child(n + 4) { animation-delay: 0.14s; }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(5px); }
+  to   { opacity: 1; transform: none; }
+}

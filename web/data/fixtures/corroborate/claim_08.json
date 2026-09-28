@@ -1,0 +1,15 @@
+{
+  "status": "verified",
+  "citations": [
+    {
+      "docId": "ev_008",
+      "quote": "I was primary on-call. Diagnosed a connection-pool exhaustion caused by a slow downstream PSP call"
+    },
+    {
+      "docId": "ev_ref01",
+      "quote": "She was primary on-call for payments on a six-week rotation"
+    }
+  ],
+  "rationale": "The incident ticket confirms the role, the failure mode and the duration.",
+  "supportedLevel": "advanced"
+}

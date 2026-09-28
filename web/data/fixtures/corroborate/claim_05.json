@@ -1,0 +1,18 @@
+{
+  "status": "contradicted",
+  "citations": [
+    {
+      "docId": "ev_ref01",
+      "quote": "She did not have direct reports at any point and was not in the management chain"
+    },
+    {
+      "docId": "ev_ref01",
+      "quote": "she coordinated three engineers as the technical lead of that project, which is the largest span she has held"
+    },
+    {
+      "docId": "ev_007",
+      "quote": "She coordinated three engineers across Payments and Data Platform without being asked to"
+    }
+  ],
+  "rationale": "The referee states she was an individual contributor with no direct reports, and that three engineers was her largest span."
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "id": "cand_maya",
+    "name": "Maya Reyes",
+    "headline": "Backend Engineer II · Payments",
+    "location": "London",
+    "privateSkillIds": [
+      "compliance"
+    ]
+  },
+  {
+    "id": "cand_ola",
+    "name": "Ola Sørensen",
+    "headline": "Senior Engineer · Data Platform",
+    "location": "Oslo",
+    "privateSkillIds": []
+  },
+  {
+    "id": "cand_dev",
+    "name": "Devika Nair",
+    "headline": "Staff Engineer · Infrastructure",
+    "location": "Bengaluru",
+    "privateSkillIds": []
+  },
+  {
+    "id": "cand_tom",
+    "name": "Tomás Lindqvist",
+    "headline": "Backend Engineer · Payments",
+    "location": "Stockholm",
+    "privateSkillIds": []
+  }
+]

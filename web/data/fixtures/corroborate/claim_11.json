@@ -1,0 +1,19 @@
+{
+  "status": "verified",
+  "citations": [
+    {
+      "docId": "ev_002",
+      "quote": "Documented why a partial index beats a composite here given the 4% selectivity"
+    },
+    {
+      "docId": "ev_003",
+      "quote": "Rewrote the reconciliation writer in Python to use COPY instead of row-by-row inserts"
+    },
+    {
+      "docId": "ev_ref02",
+      "quote": "On Postgres she is the strongest person on the payments team"
+    }
+  ],
+  "rationale": "Three independent pieces of work plus a staff-engineer reference support advanced-level Postgres.",
+  "supportedLevel": "advanced"
+}

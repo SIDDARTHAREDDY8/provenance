@@ -1,201 +1,191 @@
-# Contribution Graph
+# Provenance
 
-An evidence-linked skills graph and internal-mobility engine. It reads an employee's
-actual work — pull requests, tickets, commits, design docs, written reviews — and
-produces a skill profile where **every claim cites the sentence that proved it**.
-Then it scores that profile against real roles, and turns the gaps into actions bound
-to real openings.
+An agentic runtime for verified hiring. It reads a candidate's evidence pack —
+pull requests, tickets, design docs, reference attestations, certificates — and
+adjudicates every claim their résumé makes against it, one claim at a time, with
+a citation for each verdict or no verdict at all.
 
-Built as a work sample for Astoria AI. It is a small, sharper version of the four
-things Astoria ships: Status Quo, Career Path, AI Mentor and Talent Intelligence.
+Then it produces two numbers: **the score you get if you believe the résumé, and
+the score the evidence supports.** The gap between them is the product.
 
 ```bash
 npm install
-npm run dev     # http://localhost:3210
-npm run eval    # extraction quality gates
+npm run dev        # http://localhost:3210
+npm run eval       # verification quality gates (TypeScript)
+npm run ml:train   # train the classifier and ranker (Python)
+npm run ml:eval    # ML gates + Python↔TypeScript feature parity
+docker compose up  # the whole stack: web + ML service + Postgres + Redis
 ```
 
-No API key required. With `ANTHROPIC_API_KEY` unset the app replays a recorded
-extraction; every step after the model call is the same code, so the offline demo is
-not a different product. Set the key in `.env.local` to run it live.
+Runs with **no API key and no infrastructure**. Files instead of Postgres,
+in-process queue instead of Redis, a local lexical embedder instead of a hosted
+one, and authored fixtures instead of a live model. Every one of those is one
+environment variable away from the real thing, and nothing downstream changes.
 
 ---
 
-## Why this and not a career chatbot
+## Why this
 
-Three claims, each one built rather than asserted.
+Three numbers from the hiring literature, and what each one implies for the build:
 
-### 1. Self-assessment is the wrong input
+**44% of résumés contain fabrications.** So a matching engine that reads the
+résumé is measuring the wrong document. The input has to be evidence, and every
+claim has to be adjudicated against it.
 
-Every talent product in this category asks people to rate themselves, or reads job
-titles out of an HRIS. Both are stale, inflated and inconsistent between teams — and
-then an AI layer gets built on top, so the recommendations inherit the garbage.
+**ATS filters reject 88% of qualified candidates.** So the failure is not that
+screening is too permissive, it is that it screens on unverified text. Raising
+the bar on an unreliable signal removes good candidates faster than bad ones.
 
-Meanwhile every knowledge worker produces a continuous, honest record of what they
-actually did. What changed in the last two years is not that a model can give career
-advice; it is that extracting structure from that record became cheap enough to do
-continuously. **The pipeline is the moat. The mentor is the interface.**
+**Mobley v. Workday, the EU AI Act, FCRA.** So who decided, on what evidence,
+under which rule, has to be answerable six months later — which is a property of
+the architecture, not a report you can generate afterwards.
 
-### 2. A claim without traceable evidence is a defect, not a caveat
+## The four things that make it defensible
 
-The extractor must quote verbatim from a specific artifact. The validator
-(`src/lib/extract/validate.ts`) string-searches every quote against its cited source
-and **discards anything it cannot find**. Rejections are shown in the UI rather than
-silently dropped, because the rejection rate is how you know what the surviving
-claims are worth.
+### 1. A verdict without a resolvable citation does not exist
 
-The fixture corpus contains three deliberate extractor failures — a fabricated quote,
-an off-taxonomy skill, a citation to a nonexistent artifact — so this path is
-exercised on every single run, including in the eval suite.
+`web/src/lib/verify.ts` string-matches every quoted span against the document it
+names. A citation that cannot be found is rejected before scoring, and a
+supportive verdict left with no surviving citation is **downgraded, not kept**.
 
-The load-bearing example: the corpus includes an RFC where the engineer discusses
-Kafka at length and states plainly that she has **no** production streaming
-experience. A keyword-proximity extractor credits her for stream processing. This one
-does not, and `npm run eval` fails the build if it ever starts to.
+The fixture corpus contains a deliberate fabrication — the model claims a
+candidate ran the hiring loop and invents a quote from a performance review to
+prove it. It is caught on every run, including in CI.
 
-### 3. A mentor with no action surface is a demo
+### 2. Four verdicts, because "unsupported" is not "lying"
 
-`src/lib/mentor/plan.ts` will not emit a recommendation unless something in the
-company would actually close the gap — an open ticket that builds the skill, a
-requisition, a named colleague with a pairing slot. Every action carries the measured
-gap that produced it (`because: { skillId, fromLevel, toLevel }`).
+`verified` · `partially_verified` · `unsupported` · `contradicted`
 
-If nothing in the system would close a gap, **no action is offered for it**. Saying
-"develop your stream processing skills" is free to generate and worth nothing, and
-that is most of what this category ships.
+*Unsupported* means nothing in the pack speaks to the claim either way. Collapsing
+that into "unverified" and treating it as a negative is how a verification
+product turns into a defamation product. The demo candidate has one genuinely
+unsupported claim and two contradicted ones, and the system says which is which.
 
-### And underneath: the trust boundary
+### 3. The model never decides
 
-The employer pays; the employee supplies the data. Nobody tells an employer-owned
-mentor they are thinking of leaving, so the visibility split is a product constraint
-rather than a compliance checkbox.
+Two steps call an LLM: splitting the résumé into discrete claims, and
+adjudicating each claim against retrieved evidence. **Scoring and the decision
+are deterministic code** — thresholds in one readable file, reproducible, no
+sampling.
 
-`src/lib/privacy/aggregate.ts` enforces two rules in the aggregation layer, not the
-UI — a rule enforced in the UI leaks through the API on the first integration:
+Every adverse outcome carries `requiresHumanSignoff` and cannot leave the system
+until a named person accepts it, with the disclosable factors listed. A rule that
+lives inside a sampled generation cannot satisfy the EU AI Act's human-oversight
+requirement, and cannot be defended in the litigation this category is now in.
 
-- **Opt-out is absolute.** A skill the employee marked private is excluded from the
-  count, not counted-and-hidden.
-- **k-anonymity (k=5).** A bucket is reported only when at least five people are in
-  it. "One person on your team has thin Kubernetes evidence" is a performance
-  conversation conducted through a dashboard nobody agreed to.
+### 4. Corrections are training data, not database edits
 
-Every inference and every disclosure is appended to an audit log at the point it
-happens. Under the EU AI Act, worker-management systems fall in the high-risk
-category, which carries record-keeping and human-oversight obligations. Logging at
-the point of inference is cheap; reconstructing who saw what six months later is not
-possible at all. In DACH enterprise sales this is also what gets you past a works
-council.
-
----
+Any reviewer can disagree with a verdict. The change, the reason and the reviewer
+are recorded, and the case is promoted into the eval set. A disagreement the
+system never measures again is one it will repeat next quarter — and on an
+adverse verdict, repeating it costs somebody a job.
 
 ## What you are looking at
 
 | Screen | What it shows |
 |---|---|
-| **Evidence** (`/`) | 22 artifacts → 42 raw claims → 15 merged skills, 3 rejected. Every claim expands to its source quotes. |
-| **Where you could go** (`/paths`) | Four roles scored with partial credit. Thin-evidence skills do not count toward a requirement. |
-| **Mentor** (`/mentor`) | Gaps turned into bound, requestable actions, ranked by expected closure. |
-| **Org view** (`/org`) | The employer's aggregate view, with 12 of 20 skills suppressed below k. |
-| **Audit log** (`/audit`) | Every inference and disclosure, appended as it happens. |
+| **Queue** `/` | Every application with claimed vs verified fit, ordered by a learned review-priority score |
+| **Assessment** `/applications/[id]` | 14 claims, each with a verdict, its citations, its confidence, and a correction form |
+| **Trace** `/applications/[id]/trace` | All four agent steps with the gates each ran on its own output, and the retrieval behind every claim |
+| **Compliance** `/compliance` | Adverse-impact monitor against the four-fifths rule, with k-anonymity suppression |
+| **Corrections** `/corrections` | The human override log, and what it feeds |
+| **Audit** `/audit` | Every inference and disclosure, written where it happens |
 
 ## Evals
 
+Two suites, because the failure modes are different.
+
+**`npm run eval`** — verification quality:
+
 ```
-$ npm run eval
+Pipeline steps
+  extract        ok    1 call   · 2/2 checks
+  corroborate    ok    14 calls · 3/3 checks
+  score          ok    0 calls  · 2/2 checks
+  adjudicate     ok    0 calls  · 3/3 checks
 
-Detection
-  precision                      100.0%       15/15 claimed skills correct
-  recall                         100.0%       15/15 gold skills found
-Calibration
-  exact level match              93.3%        14/15
-  within one level               100.0%       15/15
-Grounding
-  raw claims from model          42           merged into 15 skills
-  rejected by validator          3            unknown_skill=1 unknown_artifact=1 quote_not_found=1
-  ungrounded survivors           0            none
-
-PASS — all gates met
+Verdict accuracy     100.0%   14/14
+Adverse precision    100.0%   3/3 adverse calls correct
+Adverse recall       100.0%   3/3 adverse claims caught
+Grounding            1 citation rejected (quote_not_found), 0 survived
+Claimed fit 60%  ·  Verified fit 35%  ·  Inflation 25 points
 ```
 
-Three axes, because they fail independently: **detection** (did we find the skills a
-human found), **calibration** (did we get the level right), **grounding** (did we
-invent anything, and did the validator stop it). Grounding is a hard gate — one
-ungrounded claim reaching a profile fails the run. Gold labels are hand-written in
-`data/gold/extraction.json`, independently of the recording, which is why calibration
-is 93% and not a suspicious 100%.
+Adverse **precision** is gated above recall on purpose: a false adverse verdict
+is a person not hired for a reason that was not true. Missing one is a worse
+candidate experience; inventing one is a wrong that cannot be undone.
 
-The clock is pinned in the eval: confidence decays with artifact age, so a wall-clock
-date would make the thin/not-thin boundary drift and the suite flake months from now.
+**`npm run ml:eval`** — model quality and training/serving skew:
 
-## Design decisions worth arguing about
+```
+Held-out synthetic (n=800)   roc_auc 0.865
+Real fixture claims (n=14)   roc_auc 1.000
+Feature parity vs TypeScript 14 cases, 0 mismatches
+```
 
-- **Confidence is derived, not asserted.** Models are bad at self-reported
-  confidence. `src/lib/extract/confidence.ts` computes it from evidence volume,
-  artifact-kind weight, source independence and recency, then caps it at 0.95 —
-  nothing inferred from text is certain.
-- **A written review outweighs a commit message** (1.0 vs 0.45). Weighting them
-  equally is how you rate someone "advanced at Kubernetes" because they once bumped a
-  replica count. The demo contains exactly that commit, and the pipeline correctly
-  returns *beginner, thin evidence*.
-- **The evidence ceiling overrides the model.** However confident the extractor is,
-  one commit cannot support an "advanced" claim. `capLevel()` enforces it.
-- **Partial credit in role matching.** One level short of an advanced requirement is
-  genuinely closer than never having touched the skill; a binary met/unmet score
-  hides exactly the information a career product exists to surface.
-- **Batching is a correctness knob, not just a cost one.** Long contexts encourage
-  misattributing quotes to the wrong artifact id. The validator catches those, but
-  catching fewer is better than catching more.
-- **Extraction is sequential, not fanned out.** A rate-limit failure halfway through a
-  parallel fan-out yields a silently partial profile, which is worse than a slower
-  complete one.
+That third line is the one that matters. Features are computed in TypeScript at
+serving time and in Python at training time; the suite asserts the two
+implementations agree feature for feature. Silent skew does not show up in
+accuracy numbers, it shows up as quietly worse verification a quarter later.
+
+## The stack, and why each piece is there
+
+| Layer | Choice | Swap |
+|---|---|---|
+| App | Next.js 16, App Router, server components/actions, TypeScript strict | — |
+| Styling | Tailwind v4, CSS-first `@theme` tokens | — |
+| Agent runtime | Typed steps, retries with backoff, per-step output gates, full trace | `web/src/lib/agents/runtime.ts` |
+| LLM | Forced tool use, `temperature: 0` | `ANTHROPIC_API_KEY` → live; absent → authored fixtures |
+| Retrieval | Chunking, IDF-weighted lexical embedder, cosine + MMR | `EMBEDDING_PROVIDER=openai` |
+| ML | scikit-learn training in Python, coefficients exported, inference in TypeScript | `ml/` |
+| Storage | File store | `DATABASE_URL` → Postgres (`db/schema.sql`) |
+| Queue | In-process, at-least-once, bounded retries | `REDIS_URL` → reliable-queue on Redis |
+| Billing | Metered per completed run, idempotent on application id | `STRIPE_SECRET_KEY` |
+
+**Why ML at all when there is an LLM?** Because the classifier answers a
+different question: *before* spending a model call per claim, which claims are
+likely to fail verification? That is triage, it runs on twelve features and a dot
+product, and using a language model for it would be slower, dearer and less
+inspectable. It orders work; it never touches a verdict.
+
+**Why Python and TypeScript?** Training, metrics and the feature contract belong
+where scikit-learn lives. Serving a logistic regression does not need a model
+server — it is a dot product, so the exported coefficients are read directly by
+the app. `ml/` also serves entity resolution and batch scoring over HTTP for
+anything that wants a Python runtime.
 
 ## Honest limits
 
-- **One live corpus.** Only Maya Reyes has artifacts. The seven colleagues in the org
-  view are seeded profiles (`data/peer-profiles.json`), there to make k-anonymity
-  suppression real rather than decorative. They are not extracted.
-- **Fixtures are synthetic.** Written to be realistic and to contain the specific hard
-  cases (the Kafka RFC, the replica-count commit), not sampled from a real company.
-- **File-backed persistence.** Seed data is read-only JSON; derived state is written
-  under `.data/`. Everything goes through `src/lib/repo.ts`, so Postgres is a one-file
-  swap — see `ARCHITECTURE.md`.
-- **No auth.** The visibility split is modelled and enforced in the aggregation layer,
-  but there is no login; "employee view" and "employer view" are just routes.
-- **Level calibration is the weakest axis.** 93% exact agreement on 15 skills is a
-  small sample. Real deployment needs a few hundred labelled profiles and per-skill
-  rubrics, not one taxonomy-wide prompt.
+- **The fixtures are authored, not captured.** `web/data/fixtures/` was written by
+  hand, including its deliberate failure. It is labelled as such in
+  `web/src/lib/llm/fixture.ts`. Set `ANTHROPIC_API_KEY` and the same pipeline
+  runs live against the same prompts.
+- **Training data is synthetic**, from a generator documented in `ml/app/synth.py`.
+  The reported metrics are a statement about that process, not about the world.
+  The 14 real fixture claims are a smoke test, not a measurement — n=14.
+- **One candidate has a real evidence pack.** The other three applications are
+  seeded so the queue, the ranker and the aggregate view have a population.
+- **The cohort on `/compliance` is seeded** so the monitor has something to
+  measure, with one group deliberately below threshold — a monitor that never
+  fires is indistinguishable from one that does not work.
+- **Retrieval is lexical, not semantic.** Honest about what it is: it will not
+  match paraphrase. `EMBEDDING_PROVIDER=openai` fixes that; at corpus scale the
+  index belongs in pgvector, and `db/schema.sql` says where.
+- **No authentication.** Reviewer identity is typed into a form. The visibility
+  and signoff rules are modelled and enforced in the layers that own them, but
+  there is no login.
 
 ## What I would build next, in order
 
-1. **Real connectors** — GitHub, Jira, Google Docs — with incremental extraction, so
-   the profile updates continuously instead of on a button press.
-2. **Per-skill rubrics.** One prompt defining "advanced" across twenty skills is the
-   main source of calibration error. Advanced at SQL and advanced at mentoring are not
-   the same evidentiary bar.
-3. **Employee-facing correction.** Let people dispute a claim, and treat disputes as
-   training signal. It is also the only version of this that survives a GDPR Article
-   22 conversation about automated decision-making.
-4. **Manager-side demand signal.** Today roles are static JSON. The interesting graph
-   is bidirectional: which skills the company is short of, weighted by what it is
-   actually trying to build next quarter.
-
----
-
-## Interface
-
-Designed as a case file rather than a dashboard, because that is what it is: assertions
-about a person, each carrying a citation, some deliberately withheld.
-
-- **Stable exhibit numbers.** Every artifact gets a fixed `E-nn` assigned chronologically
-  once (`src/lib/exhibits.ts`), so a citation reads the same on every screen.
-- **Levels are ordinal steppers, not coloured badges.** Levels are ranked; a badge throws
-  away the ordering that is the whole value.
-- **Redaction is drawn, not described.** Suppressed aggregates render as actual blackout
-  bars in the column where the number would be — the k-anonymity rule made visible.
-- Colour is reserved for meaning: amber for thin evidence, crimson for rejection,
-  verdigris for a completed action. Nothing is coloured for decoration.
-
-Stack: Next.js 16 (App Router, server components, server actions), TypeScript strict,
-zero runtime dependencies beyond React and Next. No component library, no state library,
-no CSS framework — five routes and one stylesheet. Fonts load by `<link>` rather than
-`next/font` so the project still builds and degrades gracefully without network access.
+1. **Candidate-side disclosure.** Today the adverse factors are computed and shown
+   to the reviewer. Under GDPR Article 22 and FCRA adverse-action rules they
+   belong in front of the candidate, with a route to contest — which is the same
+   correction loop, pointed the other way.
+2. **Evidence-pack ingestion.** GitHub, Jira and Google Docs connectors with
+   incremental extraction and content-hash caching, so re-assessment costs
+   nothing for unchanged history.
+3. **Per-claim-type adjudication rubrics.** One prompt defining four verdicts
+   across five claim categories is the largest remaining source of error. A
+   credential and a scope claim are not judged the same way.
+4. **pgvector, and a reranker.** Lexical retrieval is the weakest link in the
+   chain; a claim that retrieves nothing is unsupported regardless of the truth.

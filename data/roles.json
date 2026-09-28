@@ -1,0 +1,62 @@
+[
+  {
+    "id": "role_senior_backend",
+    "title": "Senior Backend Engineer",
+    "track": "individual_contributor",
+    "level": 4,
+    "requirements": [
+      { "skillId": "python", "minLevel": "advanced", "weight": 3 },
+      { "skillId": "sql_perf", "minLevel": "intermediate", "weight": 3 },
+      { "skillId": "api_design", "minLevel": "intermediate", "weight": 2 },
+      { "skillId": "testing", "minLevel": "intermediate", "weight": 2 },
+      { "skillId": "incident_response", "minLevel": "intermediate", "weight": 2 },
+      { "skillId": "technical_writing", "minLevel": "beginner", "weight": 1 }
+    ]
+  },
+  {
+    "id": "role_staff_data_platform",
+    "title": "Staff Engineer, Data Platform",
+    "track": "individual_contributor",
+    "level": 5,
+    "requirements": [
+      { "skillId": "sql_perf", "minLevel": "advanced", "weight": 3 },
+      { "skillId": "data_modelling", "minLevel": "advanced", "weight": 3 },
+      { "skillId": "stream_processing", "minLevel": "intermediate", "weight": 3 },
+      { "skillId": "python", "minLevel": "advanced", "weight": 2 },
+      { "skillId": "iac", "minLevel": "intermediate", "weight": 2 },
+      { "skillId": "observability", "minLevel": "intermediate", "weight": 2 },
+      { "skillId": "migration_execution", "minLevel": "advanced", "weight": 2 },
+      { "skillId": "project_leadership", "minLevel": "intermediate", "weight": 2 },
+      { "skillId": "technical_writing", "minLevel": "intermediate", "weight": 1 }
+    ]
+  },
+  {
+    "id": "role_eng_manager",
+    "title": "Engineering Manager, Payments",
+    "track": "management",
+    "level": 5,
+    "requirements": [
+      { "skillId": "mentoring", "minLevel": "advanced", "weight": 3 },
+      { "skillId": "performance_management", "minLevel": "intermediate", "weight": 3 },
+      { "skillId": "hiring", "minLevel": "intermediate", "weight": 3 },
+      { "skillId": "project_leadership", "minLevel": "advanced", "weight": 3 },
+      { "skillId": "stakeholder_comms", "minLevel": "advanced", "weight": 2 },
+      { "skillId": "payments_domain", "minLevel": "intermediate", "weight": 2 },
+      { "skillId": "python", "minLevel": "intermediate", "weight": 1 }
+    ]
+  },
+  {
+    "id": "role_platform_reliability",
+    "title": "Senior Engineer, Platform Reliability",
+    "track": "individual_contributor",
+    "level": 4,
+    "requirements": [
+      { "skillId": "observability", "minLevel": "advanced", "weight": 3 },
+      { "skillId": "incident_response", "minLevel": "advanced", "weight": 3 },
+      { "skillId": "kubernetes", "minLevel": "intermediate", "weight": 3 },
+      { "skillId": "iac", "minLevel": "intermediate", "weight": 2 },
+      { "skillId": "python", "minLevel": "intermediate", "weight": 2 },
+      { "skillId": "sql_perf", "minLevel": "beginner", "weight": 1 }
+    ]
+  }
+]

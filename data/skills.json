@@ -1,0 +1,22 @@
+[
+  { "id": "sql_perf", "label": "SQL & query optimisation", "dimension": "technical", "aliases": ["postgres", "postgresql", "query tuning", "database optimisation", "sql"] },
+  { "id": "python", "label": "Python", "dimension": "technical", "aliases": ["python3", "py"] },
+  { "id": "typescript", "label": "TypeScript", "dimension": "technical", "aliases": ["ts", "javascript", "node"] },
+  { "id": "stream_processing", "label": "Stream processing", "dimension": "technical", "aliases": ["kafka", "flink", "kinesis", "event streaming", "streaming"] },
+  { "id": "iac", "label": "Infrastructure as code", "dimension": "technical", "aliases": ["terraform", "pulumi", "cloudformation", "infra as code"] },
+  { "id": "kubernetes", "label": "Kubernetes", "dimension": "technical", "aliases": ["k8s", "helm", "eks"] },
+  { "id": "api_design", "label": "API design", "dimension": "technical", "aliases": ["rest", "graphql", "openapi", "interface design"] },
+  { "id": "observability", "label": "Observability", "dimension": "technical", "aliases": ["tracing", "metrics", "prometheus", "opentelemetry", "monitoring"] },
+  { "id": "data_modelling", "label": "Data modelling", "dimension": "technical", "aliases": ["schema design", "normalisation", "dimensional modelling"] },
+  { "id": "payments_domain", "label": "Payments domain", "dimension": "domain", "aliases": ["settlement", "reconciliation", "psp", "card networks"] },
+  { "id": "compliance", "label": "Regulatory compliance", "dimension": "domain", "aliases": ["gdpr", "pci", "audit", "sox"] },
+  { "id": "incident_response", "label": "Incident response", "dimension": "delivery", "aliases": ["on-call", "oncall", "postmortem", "sev1", "outage"] },
+  { "id": "testing", "label": "Automated testing", "dimension": "delivery", "aliases": ["unit tests", "integration tests", "test coverage", "pytest"] },
+  { "id": "migration_execution", "label": "Large-scale migration", "dimension": "delivery", "aliases": ["backfill", "cutover", "zero-downtime migration"] },
+  { "id": "technical_writing", "label": "Technical writing", "dimension": "delivery", "aliases": ["design doc", "rfc", "documentation"] },
+  { "id": "mentoring", "label": "Mentoring", "dimension": "leadership", "aliases": ["coaching", "onboarding buddy", "pairing"] },
+  { "id": "hiring", "label": "Hiring & interviewing", "dimension": "leadership", "aliases": ["interviewing", "debrief", "loop"] },
+  { "id": "project_leadership", "label": "Project leadership", "dimension": "leadership", "aliases": ["tech lead", "driving a project", "cross-team coordination"] },
+  { "id": "performance_management", "label": "Performance management", "dimension": "leadership", "aliases": ["reviews", "calibration", "pip", "feedback cycle"] },
+  { "id": "stakeholder_comms", "label": "Stakeholder communication", "dimension": "leadership", "aliases": ["exec update", "customer comms", "steering committee"] }
+]

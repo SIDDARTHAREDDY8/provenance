@@ -1,0 +1,10 @@
+[
+  { "id": "p_maya",  "name": "Maya Reyes",      "title": "Backend Engineer II", "team": "Payments",             "privateSkillIds": ["compliance"] },
+  { "id": "p_priya", "name": "Priya Ramanathan","title": "Staff Engineer",      "team": "Data Platform",        "privateSkillIds": [] },
+  { "id": "p_tomas", "name": "Tomás Lindqvist", "title": "Backend Engineer II", "team": "Payments",             "privateSkillIds": [] },
+  { "id": "p_ade",   "name": "Ade Balogun",     "title": "Senior Engineer",     "team": "Platform Reliability", "privateSkillIds": [] },
+  { "id": "p_hana",  "name": "Hana Sato",       "title": "Backend Engineer I",  "team": "Payments",             "privateSkillIds": [] },
+  { "id": "p_gil",   "name": "Gil Moreau",      "title": "Senior Engineer",     "team": "Data Platform",        "privateSkillIds": [] },
+  { "id": "p_nour",  "name": "Nour Haddad",     "title": "Engineering Manager", "team": "Payments",             "privateSkillIds": [] },
+  { "id": "p_evan",  "name": "Evan Whitfield",  "title": "Backend Engineer I",  "team": "Data Platform",        "privateSkillIds": [] }
+]

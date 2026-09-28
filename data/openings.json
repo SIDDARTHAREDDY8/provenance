@@ -1,0 +1,62 @@
+[
+  {
+    "id": "op_eng1204",
+    "kind": "ticket",
+    "title": "ENG-1204 — backfill the settlement event pipeline onto Kafka",
+    "team": "Data Platform",
+    "buildsSkillIds": ["stream_processing", "migration_execution"],
+    "availableFrom": "2026-10-06"
+  },
+  {
+    "id": "op_req12",
+    "kind": "requisition",
+    "roleId": "role_staff_data_platform",
+    "title": "Req #12 — Staff Engineer, Data Platform",
+    "team": "Data Platform",
+    "buildsSkillIds": [],
+    "availableFrom": "2027-01-05"
+  },
+  {
+    "id": "op_terraform_migration",
+    "kind": "project",
+    "title": "Q4 project — move payments infra from hand-rolled scripts to Terraform",
+    "team": "Payments",
+    "buildsSkillIds": ["iac", "kubernetes"],
+    "availableFrom": "2026-10-13"
+  },
+  {
+    "id": "op_pair_priya",
+    "kind": "mentor_pairing",
+    "title": "Pairing slot — Priya Ramanathan (Staff, Data Platform)",
+    "team": "Data Platform",
+    "buildsSkillIds": ["stream_processing", "data_modelling"],
+    "availableFrom": "2026-09-29",
+    "personId": "p_priya"
+  },
+  {
+    "id": "op_interview_loop",
+    "kind": "project",
+    "title": "Join the backend hiring loop as a shadow interviewer",
+    "team": "Payments",
+    "buildsSkillIds": ["hiring"],
+    "availableFrom": "2026-10-01"
+  },
+  {
+    "id": "op_onboard_hana",
+    "kind": "mentor_pairing",
+    "title": "Onboarding buddy for Hana Sato (Backend Engineer I)",
+    "team": "Payments",
+    "buildsSkillIds": ["mentoring"],
+    "availableFrom": "2026-09-30",
+    "personId": "p_hana"
+  },
+  {
+    "id": "op_req18",
+    "kind": "requisition",
+    "roleId": "role_platform_reliability",
+    "title": "Req #18 — Senior Engineer, Platform Reliability",
+    "team": "Platform Reliability",
+    "buildsSkillIds": [],
+    "availableFrom": "2026-11-03"
+  }
+]

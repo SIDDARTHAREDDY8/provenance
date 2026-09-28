@@ -1,0 +1,201 @@
+[
+  {
+    "id": "art_001",
+    "personId": "p_maya",
+    "kind": "pull_request",
+    "source": "payments-api",
+    "title": "PR #211 — replace N+1 in invoice loader with a lateral join",
+    "body": "The invoice list endpoint was issuing one query per line item. I replaced the N+1 in the invoice loader with a lateral join and pushed the aggregation into Postgres. p95 on /v2/invoices went from 1.9s to 240ms on the staging dataset (2.4M rows). Added an EXPLAIN ANALYZE regression test so this cannot silently come back.",
+    "occurredAt": "2025-08-14",
+    "url": "https://example.internal/payments-api/pull/211"
+  },
+  {
+    "id": "art_002",
+    "personId": "p_maya",
+    "kind": "ticket",
+    "source": "ENG board",
+    "title": "ENG-884 — settlement report times out for large merchants",
+    "body": "Root cause was a missing index. Added a partial index on events(tenant_id, created_at) WHERE kind = 'settlement', which cut the report query from 34s to 1.1s for our largest merchant. Documented why a partial index beats a composite here given the 4% selectivity.",
+    "occurredAt": "2025-09-02"
+  },
+  {
+    "id": "art_003",
+    "personId": "p_maya",
+    "kind": "commit",
+    "source": "payments-api",
+    "title": "perf: batch the payout reconciliation writes",
+    "body": "Rewrote the reconciliation writer in Python to use COPY instead of row-by-row inserts. 40k payouts now reconcile in 9s rather than 6 minutes.",
+    "occurredAt": "2025-09-19"
+  },
+  {
+    "id": "art_004",
+    "personId": "p_maya",
+    "kind": "document",
+    "source": "Engineering docs",
+    "title": "Design doc — zero-downtime migration of the ledger to partitioned tables",
+    "body": "Proposal to move the ledger_entries table (890M rows) to declarative partitioning by month. Covers the dual-write window, the backfill ordering, how we verify parity with a checksum job, and the rollback path at each of the five cutover stages. Reviewed by Priya and Gil; approved with one change to the verification step.",
+    "occurredAt": "2025-10-07"
+  },
+  {
+    "id": "art_005",
+    "personId": "p_maya",
+    "kind": "pull_request",
+    "source": "payments-api",
+    "title": "PR #260 — dual-write ledger entries behind a flag",
+    "body": "First stage of the partitioning migration. Dual-writes to both the old and new ledger tables behind LEDGER_PARTITION_DUALWRITE, with a shadow-read comparator that logs divergence instead of failing the request. 11 integration tests covering the divergence paths.",
+    "occurredAt": "2025-10-21"
+  },
+  {
+    "id": "art_006",
+    "personId": "p_maya",
+    "kind": "pull_request",
+    "source": "payments-api",
+    "title": "PR #288 — backfill job for 890M ledger rows",
+    "body": "Chunked backfill with resumable checkpoints, throttled against replica lag. Ran over nine nights with zero customer-facing errors; I held the pager for each window. Parity checksum matched on all 890M rows before we flipped reads.",
+    "occurredAt": "2025-11-18"
+  },
+  {
+    "id": "art_007",
+    "personId": "p_maya",
+    "kind": "review",
+    "source": "Performance review cycle H2 2025",
+    "title": "Manager feedback — Nour Haddad",
+    "body": "Maya led the ledger partitioning end to end: the design doc, the staged rollout and the comms to the merchant-support team. She coordinated three engineers across Payments and Data Platform without being asked to, and the migration landed with no incidents. Growth area: she is still reluctant to hand work off, and took on the backfill nights herself rather than sharing the rota.",
+    "occurredAt": "2025-12-12"
+  },
+  {
+    "id": "art_008",
+    "personId": "p_maya",
+    "kind": "ticket",
+    "source": "INC board",
+    "title": "INC-412 — sev1: payout webhooks stalled for 38 minutes",
+    "body": "I was primary on-call. Diagnosed a connection-pool exhaustion caused by a slow downstream PSP call holding transactions open. Mitigated by moving the PSP call outside the transaction boundary and shipping a pool-saturation alert. Wrote the postmortem and drove all four action items to done.",
+    "occurredAt": "2026-01-09"
+  },
+  {
+    "id": "art_009",
+    "personId": "p_maya",
+    "kind": "document",
+    "source": "Engineering docs",
+    "title": "Postmortem — INC-412 payout webhook stall",
+    "body": "Timeline, contributing factors and corrections. Key finding: we had no alert on connection-pool saturation despite it being the failure mode of the previous two sev2s. Added a Prometheus rule plus a dashboard panel, and added the saturation metric to the payments service SLO review.",
+    "occurredAt": "2026-01-14"
+  },
+  {
+    "id": "art_010",
+    "personId": "p_maya",
+    "kind": "commit",
+    "source": "payments-api",
+    "title": "obs: add OpenTelemetry spans across the settlement path",
+    "body": "Instrumented the settlement pipeline with OpenTelemetry spans so we can attribute latency between our code and the PSP. Trace-based p99 attribution now shows 71% of settlement latency is downstream.",
+    "occurredAt": "2026-02-03"
+  },
+  {
+    "id": "art_011",
+    "personId": "p_maya",
+    "kind": "pull_request",
+    "source": "payments-api",
+    "title": "PR #341 — v2 payouts API with idempotency keys",
+    "body": "Designed and shipped the v2 payouts interface. Idempotency keys with a 24h replay window, RFC 7807 problem details for errors, and cursor pagination rather than offset. Wrote the OpenAPI spec first and generated the client from it so the mobile team was unblocked before the server landed.",
+    "occurredAt": "2026-02-24"
+  },
+  {
+    "id": "art_012",
+    "personId": "p_maya",
+    "kind": "review",
+    "source": "Design review",
+    "title": "Peer feedback — Priya Ramanathan",
+    "body": "Maya's v2 payouts spec was the cleanest interface proposal I have reviewed here. She pushed back on my suggestion to expose the internal settlement state machine and she was right to; the resulting API is much harder to misuse.",
+    "occurredAt": "2026-03-02"
+  },
+  {
+    "id": "art_013",
+    "personId": "p_maya",
+    "kind": "ticket",
+    "source": "ENG board",
+    "title": "ENG-1019 — reconciliation mismatch with card network file format",
+    "body": "Card network changed the fixed-width layout of the daily settlement file without notice. Wrote a tolerant parser with explicit column versioning, plus a reconciliation report that flags unmatched rows by reason code rather than dumping them into one bucket.",
+    "occurredAt": "2026-03-20"
+  },
+  {
+    "id": "art_014",
+    "personId": "p_maya",
+    "kind": "document",
+    "source": "Engineering docs",
+    "title": "Data model — merchant payout aggregates",
+    "body": "Dimensional model for merchant payout reporting: a daily grain fact table, three conformed dimensions, and late-arriving-fact handling for settlements that land after the reporting window closes. Chose a Type 2 dimension for merchant risk tier because finance needs to reproduce historical reports exactly.",
+    "occurredAt": "2026-04-08"
+  },
+  {
+    "id": "art_015",
+    "personId": "p_maya",
+    "kind": "commit",
+    "source": "payments-api",
+    "title": "test: property-based tests for the currency rounding helpers",
+    "body": "Replaced 40 hand-written example tests with a Python Hypothesis property suite. It immediately found a half-cent rounding drift on JPY, which has no minor unit.",
+    "occurredAt": "2026-04-22"
+  },
+  {
+    "id": "art_016",
+    "personId": "p_maya",
+    "kind": "pull_request",
+    "source": "payments-infra",
+    "title": "bump replica count for payments-api",
+    "body": "Scaled the payments-api deployment from 6 to 9 replicas ahead of the quarter-end settlement peak.",
+    "occurredAt": "2026-05-06"
+  },
+  {
+    "id": "art_017",
+    "personId": "p_maya",
+    "kind": "ticket",
+    "source": "ENG board",
+    "title": "ENG-1102 — GDPR erasure request handling for payout records",
+    "body": "Implemented erasure for personal fields on payout records while retaining the financial record required for our seven-year retention obligation. Worked with legal to agree which fields are personal data and which are transaction records. Added an audit entry for every erasure so we can evidence compliance.",
+    "occurredAt": "2026-05-28"
+  },
+  {
+    "id": "art_018",
+    "personId": "p_maya",
+    "kind": "review",
+    "source": "Performance review cycle H1 2026",
+    "title": "Manager feedback — Nour Haddad",
+    "body": "Another strong half. Maya is the person the team routes hard database and correctness problems to. She has started reviewing Hana's pull requests carefully and explaining the reasoning rather than just approving, which Hana has told me is the most useful onboarding she has had. Next step for Maya is scope beyond Payments: she has not yet worked on anything streaming or event-driven, which is where most of our platform investment is going.",
+    "occurredAt": "2026-06-15"
+  },
+  {
+    "id": "art_019",
+    "personId": "p_maya",
+    "kind": "pull_request",
+    "source": "payments-api",
+    "title": "PR #402 — make the settlement importer resumable",
+    "body": "The Python importer previously restarted from zero on failure. Now it checkpoints per file chunk in Postgres and resumes. Cut a recurring 3am page down to an automatic recovery.",
+    "occurredAt": "2026-07-01"
+  },
+  {
+    "id": "art_020",
+    "personId": "p_maya",
+    "kind": "commit",
+    "source": "payments-api",
+    "title": "docs: runbook for settlement file ingestion failures",
+    "body": "Wrote the runbook the on-call actually needs: the four failure modes we have seen, how to tell them apart from the dashboard, and the exact remediation for each.",
+    "occurredAt": "2026-07-17"
+  },
+  {
+    "id": "art_021",
+    "personId": "p_maya",
+    "kind": "ticket",
+    "source": "INC board",
+    "title": "INC-501 — sev2: duplicate payouts to 214 merchants",
+    "body": "Shadowed on-call for this one. Traced duplicates to a retry without an idempotency key in an internal batch tool, not the v2 API. Wrote the reversal script and reconciled all 214 accounts. Then removed the entire class of bug by making the internal tool go through the v2 idempotent endpoint.",
+    "occurredAt": "2026-08-11"
+  },
+  {
+    "id": "art_022",
+    "personId": "p_maya",
+    "kind": "document",
+    "source": "Engineering docs",
+    "title": "RFC — should Payments own its settlement event stream?",
+    "body": "I do not have production streaming experience, so this RFC is deliberately framed as questions rather than a recommendation. Lays out three options for getting settlement events to Data Platform, the ordering guarantees each would give us, and what I would need to learn to own option two. Asking for a reviewer from Data Platform.",
+    "occurredAt": "2026-09-09"
+  }
+]

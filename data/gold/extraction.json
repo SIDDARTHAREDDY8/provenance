@@ -1,0 +1,29 @@
+{
+  "personId": "p_maya",
+  "labelledBy": "hand-labelled from the same 22 artifacts, independently of the recording",
+  "expected": {
+    "sql_perf": "advanced",
+    "python": "advanced",
+    "testing": "advanced",
+    "payments_domain": "advanced",
+    "migration_execution": "advanced",
+    "technical_writing": "advanced",
+    "data_modelling": "advanced",
+    "incident_response": "advanced",
+    "observability": "advanced",
+    "api_design": "advanced",
+    "project_leadership": "intermediate",
+    "stakeholder_comms": "intermediate",
+    "mentoring": "intermediate",
+    "compliance": "intermediate",
+    "kubernetes": "beginner"
+  },
+  "mustNotClaim": [
+    "stream_processing",
+    "iac",
+    "hiring",
+    "performance_management",
+    "typescript"
+  ],
+  "note": "stream_processing is the load-bearing negative: art_022 discusses Kafka at length while stating she has no production streaming experience. An extractor that claims it from topical adjacency fails here."
+}

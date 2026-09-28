@@ -1,0 +1,471 @@
+{
+  "model": "claude-sonnet-5",
+  "recordedAt": "2026-09-27T00:00:00Z",
+  "note": "Recorded extraction. Includes three deliberate failures (fabricated quote, off-taxonomy skill, nonexistent artifact) so the validator is exercised on every run.",
+  "claimsByArtifact": {
+    "art_001": [
+      {
+        "skill": "sql_perf",
+        "level": "advanced",
+        "evidence": [
+          {
+            "artifactId": "art_001",
+            "quote": "replaced the N+1 in the invoice loader with a lateral join and pushed the aggregation into Postgres"
+          }
+        ]
+      },
+      {
+        "skill": "testing",
+        "level": "intermediate",
+        "evidence": [
+          {
+            "artifactId": "art_001",
+            "quote": "Added an EXPLAIN ANALYZE regression test so this cannot silently come back"
+          }
+        ]
+      }
+    ],
+    "art_002": [
+      {
+        "skill": "sql_perf",
+        "level": "advanced",
+        "evidence": [
+          {
+            "artifactId": "art_002",
+            "quote": "Added a partial index on events(tenant_id, created_at) WHERE kind = 'settlement'"
+          }
+        ]
+      }
+    ],
+    "art_003": [
+      {
+        "skill": "sql_perf",
+        "level": "advanced",
+        "evidence": [
+          {
+            "artifactId": "art_003",
+            "quote": "Rewrote the reconciliation writer in Python to use COPY instead of row-by-row inserts"
+          }
+        ]
+      },
+      {
+        "skill": "python",
+        "level": "intermediate",
+        "evidence": [
+          {
+            "artifactId": "art_003",
+            "quote": "Rewrote the reconciliation writer in Python to use COPY"
+          }
+        ]
+      },
+      {
+        "skill": "payments_domain",
+        "level": "intermediate",
+        "evidence": [
+          {
+            "artifactId": "art_003",
+            "quote": "40k payouts now reconcile in 9s rather than 6 minutes"
+          }
+        ]
+      }
+    ],
+    "art_004": [
+      {
+        "skill": "migration_execution",
+        "level": "advanced",
+        "evidence": [
+          {
+            "artifactId": "art_004",
+            "quote": "Proposal to move the ledger_entries table (890M rows) to declarative partitioning by month"
+          }
+        ]
+      },
+      {
+        "skill": "technical_writing",
+        "level": "advanced",
+        "evidence": [
+          {
+            "artifactId": "art_004",
+            "quote": "Covers the dual-write window, the backfill ordering, how we verify parity with a checksum job, and the rollback path"
+          }
+        ]
+      },
+      {
+        "skill": "data_modelling",
+        "level": "intermediate",
+        "evidence": [
+          {
+            "artifactId": "art_004",
+            "quote": "move the ledger_entries table (890M rows) to declarative partitioning by month"
+          }
+        ]
+      }
+    ],
+    "art_005": [
+      {
+        "skill": "migration_execution",
+        "level": "advanced",
+        "evidence": [
+          {
+            "artifactId": "art_005",
+            "quote": "Dual-writes to both the old and new ledger tables behind LEDGER_PARTITION_DUALWRITE"
+          }
+        ]
+      },
+      {
+        "skill": "testing",
+        "level": "intermediate",
+        "evidence": [
+          {
+            "artifactId": "art_005",
+            "quote": "11 integration tests covering the divergence paths"
+          }
+        ]
+      }
+    ],
+    "art_006": [
+      {
+        "skill": "migration_execution",
+        "level": "advanced",
+        "evidence": [
+          {
+            "artifactId": "art_006",
+            "quote": "Chunked backfill with resumable checkpoints, throttled against replica lag"
+          }
+        ]
+      },
+      {
+        "skill": "incident_response",
+        "level": "intermediate",
+        "evidence": [
+          {
+            "artifactId": "art_006",
+            "quote": "I held the pager for each window"
+          }
+        ]
+      }
+    ],
+    "art_007": [
+      {
+        "skill": "project_leadership",
+        "level": "advanced",
+        "evidence": [
+          {
+            "artifactId": "art_007",
+            "quote": "Maya led the ledger partitioning end to end: the design doc, the staged rollout and the comms to the merchant-support team"
+          }
+        ]
+      },
+      {
+        "skill": "stakeholder_comms",
+        "level": "intermediate",
+        "evidence": [
+          {
+            "artifactId": "art_007",
+            "quote": "the comms to the merchant-support team"
+          }
+        ]
+      },
+      {
+        "skill": "Ownership mindset",
+        "level": "advanced",
+        "evidence": [
+          {
+            "artifactId": "art_007",
+            "quote": "coordinated three engineers across Payments and Data Platform"
+          }
+        ]
+      }
+    ],
+    "art_008": [
+      {
+        "skill": "incident_response",
+        "level": "advanced",
+        "evidence": [
+          {
+            "artifactId": "art_008",
+            "quote": "Diagnosed a connection-pool exhaustion caused by a slow downstream PSP call holding transactions open"
+          }
+        ]
+      },
+      {
+        "skill": "observability",
+        "level": "intermediate",
+        "evidence": [
+          {
+            "artifactId": "art_008",
+            "quote": "shipping a pool-saturation alert"
+          }
+        ]
+      }
+    ],
+    "art_009": [
+      {
+        "skill": "technical_writing",
+        "level": "advanced",
+        "evidence": [
+          {
+            "artifactId": "art_009",
+            "quote": "Timeline, contributing factors and corrections"
+          }
+        ]
+      },
+      {
+        "skill": "observability",
+        "level": "intermediate",
+        "evidence": [
+          {
+            "artifactId": "art_009",
+            "quote": "Added a Prometheus rule plus a dashboard panel"
+          }
+        ]
+      },
+      {
+        "skill": "incident_response",
+        "level": "advanced",
+        "evidence": [
+          {
+            "artifactId": "art_009",
+            "quote": "we had no alert on connection-pool saturation despite it being the failure mode of the previous two sev2s"
+          }
+        ]
+      }
+    ],
+    "art_010": [
+      {
+        "skill": "observability",
+        "level": "advanced",
+        "evidence": [
+          {
+            "artifactId": "art_010",
+            "quote": "Instrumented the settlement pipeline with OpenTelemetry spans"
+          }
+        ]
+      }
+    ],
+    "art_011": [
+      {
+        "skill": "api_design",
+        "level": "advanced",
+        "evidence": [
+          {
+            "artifactId": "art_011",
+            "quote": "Idempotency keys with a 24h replay window, RFC 7807 problem details for errors, and cursor pagination rather than offset"
+          }
+        ]
+      },
+      {
+        "skill": "technical_writing",
+        "level": "intermediate",
+        "evidence": [
+          {
+            "artifactId": "art_011",
+            "quote": "Wrote the OpenAPI spec first and generated the client from it"
+          }
+        ]
+      }
+    ],
+    "art_012": [
+      {
+        "skill": "api_design",
+        "level": "advanced",
+        "evidence": [
+          {
+            "artifactId": "art_012",
+            "quote": "Maya's v2 payouts spec was the cleanest interface proposal I have reviewed here"
+          }
+        ]
+      }
+    ],
+    "art_013": [
+      {
+        "skill": "payments_domain",
+        "level": "advanced",
+        "evidence": [
+          {
+            "artifactId": "art_013",
+            "quote": "Card network changed the fixed-width layout of the daily settlement file without notice"
+          }
+        ]
+      }
+    ],
+    "art_014": [
+      {
+        "skill": "data_modelling",
+        "level": "advanced",
+        "evidence": [
+          {
+            "artifactId": "art_014",
+            "quote": "a daily grain fact table, three conformed dimensions, and late-arriving-fact handling"
+          }
+        ]
+      },
+      {
+        "skill": "payments_domain",
+        "level": "advanced",
+        "evidence": [
+          {
+            "artifactId": "art_014",
+            "quote": "Chose a Type 2 dimension for merchant risk tier because finance needs to reproduce historical reports exactly"
+          }
+        ]
+      }
+    ],
+    "art_015": [
+      {
+        "skill": "testing",
+        "level": "advanced",
+        "evidence": [
+          {
+            "artifactId": "art_015",
+            "quote": "Replaced 40 hand-written example tests with a Python Hypothesis property suite"
+          }
+        ]
+      },
+      {
+        "skill": "python",
+        "level": "advanced",
+        "evidence": [
+          {
+            "artifactId": "art_015",
+            "quote": "Replaced 40 hand-written example tests with a Python Hypothesis property suite"
+          }
+        ]
+      }
+    ],
+    "art_016": [
+      {
+        "skill": "kubernetes",
+        "level": "beginner",
+        "evidence": [
+          {
+            "artifactId": "art_016",
+            "quote": "Scaled the payments-api deployment from 6 to 9 replicas ahead of the quarter-end settlement peak"
+          }
+        ]
+      }
+    ],
+    "art_017": [
+      {
+        "skill": "compliance",
+        "level": "intermediate",
+        "evidence": [
+          {
+            "artifactId": "art_017",
+            "quote": "Implemented erasure for personal fields on payout records while retaining the financial record"
+          }
+        ]
+      }
+    ],
+    "art_018": [
+      {
+        "skill": "mentoring",
+        "level": "intermediate",
+        "evidence": [
+          {
+            "artifactId": "art_018",
+            "quote": "She has started reviewing Hana's pull requests carefully and explaining the reasoning rather than just approving"
+          }
+        ]
+      },
+      {
+        "skill": "hiring",
+        "level": "intermediate",
+        "evidence": [
+          {
+            "artifactId": "art_999",
+            "quote": "ran the backend hiring loop for two quarters"
+          }
+        ]
+      }
+    ],
+    "art_019": [
+      {
+        "skill": "migration_execution",
+        "level": "advanced",
+        "evidence": [
+          {
+            "artifactId": "art_019",
+            "quote": "Now it checkpoints per file chunk in Postgres and resumes"
+          }
+        ]
+      },
+      {
+        "skill": "python",
+        "level": "intermediate",
+        "evidence": [
+          {
+            "artifactId": "art_019",
+            "quote": "The Python importer previously restarted from zero on failure"
+          }
+        ]
+      }
+    ],
+    "art_020": [
+      {
+        "skill": "technical_writing",
+        "level": "intermediate",
+        "evidence": [
+          {
+            "artifactId": "art_020",
+            "quote": "Wrote the runbook the on-call actually needs"
+          }
+        ]
+      },
+      {
+        "skill": "incident_response",
+        "level": "intermediate",
+        "evidence": [
+          {
+            "artifactId": "art_020",
+            "quote": "the four failure modes we have seen, how to tell them apart from the dashboard"
+          }
+        ]
+      }
+    ],
+    "art_021": [
+      {
+        "skill": "incident_response",
+        "level": "advanced",
+        "evidence": [
+          {
+            "artifactId": "art_021",
+            "quote": "Traced duplicates to a retry without an idempotency key in an internal batch tool"
+          }
+        ]
+      },
+      {
+        "skill": "payments_domain",
+        "level": "advanced",
+        "evidence": [
+          {
+            "artifactId": "art_021",
+            "quote": "Wrote the reversal script and reconciled all 214 accounts"
+          }
+        ]
+      }
+    ],
+    "art_022": [
+      {
+        "skill": "technical_writing",
+        "level": "intermediate",
+        "evidence": [
+          {
+            "artifactId": "art_022",
+            "quote": "Lays out three options for getting settlement events to Data Platform"
+          }
+        ]
+      },
+      {
+        "skill": "stream_processing",
+        "level": "advanced",
+        "evidence": [
+          {
+            "artifactId": "art_022",
+            "quote": "designed and operated the Kafka settlement event stream in production for eighteen months"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,8 +1,8 @@
 {
-  "name": "contribution-graph",
+  "name": "provenance-web",
   "version": "0.1.0",
   "private": true,
-  "description": "Evidence-linked skills graph and internal mobility engine",
+  "description": "Verified-hiring runtime: evidence-grounded claim adjudication, scoring and policy",
   "scripts": {
     "dev": "next dev -p 3210",
     "build": "next build",

@@ -11,3 +11,7 @@ __pycache__
 ml/.venv
 ml/models/*.json
 !ml/models/.gitkeep
+
+# Local editor/agent tooling, not part of the project
+.claude/
+.vscode/

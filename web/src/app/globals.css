@@ -18,10 +18,11 @@
   --color-sheet-2: #e7eaee;
   --color-rule: #d4d9df;
   --color-rule-strong: #b3bbc4;
-  /* Section dividers. Ink-weight on paper, but it must not invert to near-white
-     on a dark ground — a rule that reads as "firm" at 15% contrast becomes a
-     glare at 90%. Tracks the ground, not the text. */
-  --color-rule-emphasis: #14181d;
+  /* Section dividers. Firmer than a hairline, quieter than type — a full-width
+     rule at text contrast reads as a bar across the table, not as structure.
+     Tracks the ground rather than the text so it does not invert to a glare in
+     dark mode. */
+  --color-rule-emphasis: #97a1ac;
 
   --color-ink: #14181d;
   --color-ink-2: #4d5661;
@@ -188,13 +189,9 @@
     background: var(--color-redact);
     color: transparent;
   }
-  .redacted::after {
-    content: "";
-    @apply absolute inset-0;
-    background-image: repeating-linear-gradient(
-      90deg, transparent 0 3px, rgba(255, 255, 255, 0.07) 3px 4px
-    );
-  }
+  /* No texture. A solid block is what redaction looks like, and a hatch at this
+     size reads as a dotted line — as though something were still showing
+     through, which is the one impression it must not give. */
 }
 
 @layer utilities {

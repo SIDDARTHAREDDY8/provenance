@@ -24,6 +24,8 @@ export interface StoredAssessment {
   retrieval: Record<string, { docId: string; score: number }[]>;
   indexSize: number;
   embedder: string;
+  /** Size of the evidence pack this was computed against, for reuse staleness. */
+  evidenceCount?: number;
 }
 
 /**

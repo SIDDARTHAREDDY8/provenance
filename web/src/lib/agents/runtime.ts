@@ -123,6 +123,29 @@ export class Runner {
     this.run.totalModelCalls = this.llm.calls;
   }
 
+  /**
+   * Record a step that was deliberately not run.
+   *
+   * A skipped step belongs in the trace as loudly as an executed one: "this
+   * cost nothing because the work already existed" is a claim a reader should
+   * be able to check, not take on faith.
+   */
+  skip(agent: string, label: string, reason: string): void {
+    this.run.steps.push({
+      id: `step_${this.run.steps.length + 1}`,
+      agent,
+      label,
+      status: "skipped",
+      attempts: 0,
+      startedAt: new Date().toISOString(),
+      finishedAt: new Date().toISOString(),
+      latencyMs: 0,
+      modelCalls: 0,
+      checks: [{ name: "reused prior result", passed: true, detail: reason }],
+      output: reason,
+    });
+  }
+
   complete(status: "complete" | "failed"): AgentRun {
     this.run.status = status;
     this.run.finishedAt = new Date().toISOString();

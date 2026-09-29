@@ -195,6 +195,13 @@ accuracy numbers, it shows up as quietly worse verification a quarter later.
 | Queue | In-process, at-least-once, bounded retries | `REDIS_URL` → reliable-queue on Redis |
 | Billing | Metered per completed run, idempotent on application id | `STRIPE_SECRET_KEY` |
 
+**Cost shape.** Corroboration is per candidate; scoring is per role. One
+candidate applying to two roles costs 19 model calls, then 0 — the second run
+reuses the verdicts and only re-scores, and its trace says `extract:skipped
+corroborate:skipped`. This was a README claim before it was working code; a live
+run showed 19 calls both times, which is the sort of thing a project about
+unverified claims should not be shipping.
+
 **Why ML at all when there is an LLM?** Because the classifier answers a
 different question: *before* spending a model call per claim, which claims are
 likely to fail verification? That is triage, it runs on twelve features and a dot

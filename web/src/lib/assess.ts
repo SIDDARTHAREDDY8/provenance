@@ -1,6 +1,7 @@
 import { runAssessment } from "@/lib/agents/pipeline";
 import { record } from "@/lib/audit";
 import { store, type StoredAssessment } from "@/lib/store";
+import type { ReusableCorroboration } from "@/lib/agents/pipeline";
 import { extractFeatures } from "@/lib/ml/features";
 import { claimRisk } from "@/lib/ml/infer";
 
@@ -36,8 +37,13 @@ export async function assessApplication(
     detail: { roleId: role.id, evidenceDocs: docs.length },
   });
 
-  await progress("Extracting and corroborating claims");
-  const result = await runAssessment({ application, role, resume, docs, skills });
+  // Corroboration is a property of the candidate and their evidence, not of the
+  // job. If this person has been assessed before against the same evidence pack,
+  // reuse those verdicts and only re-score — one candidate applying to four
+  // roles should cost one corroboration, not four.
+  const reuse = await findReusableCorroboration(application.candidateId, docs.length);
+  await progress(reuse ? "Reusing prior corroboration, re-scoring for this role" : "Extracting and corroborating claims");
+  const result = await runAssessment({ application, role, resume, docs, skills, reuse });
 
   const stored: StoredAssessment = {
     applicationId,
@@ -50,6 +56,7 @@ export async function assessApplication(
     retrieval: result.retrieval,
     indexSize: result.indexSize,
     embedder: result.embedder,
+    evidenceCount: docs.length,
   };
 
   await progress("Persisting results");
@@ -94,6 +101,44 @@ export async function assessApplication(
   }
 
   return stored;
+}
+
+/**
+ * Prior corroboration for this candidate, if any assessment already covered the
+ * same evidence pack.
+ *
+ * The pack size is the staleness check: add a reference or a certificate and the
+ * verdicts have to be recomputed, because new evidence can overturn one. It is a
+ * coarse check — a document edited in place would slip through — and a real
+ * system would hash the pack. Named here rather than left as a silent
+ * assumption.
+ */
+async function findReusableCorroboration(
+  candidateId: string,
+  evidenceCount: number,
+): Promise<ReusableCorroboration | undefined> {
+  const db = store();
+  const applications = await db.applications();
+  const siblings = applications.filter((a) => a.candidateId === candidateId);
+
+  for (const sibling of siblings) {
+    const prior = await db.getAssessment(sibling.id);
+    if (!prior || prior.claims.length === 0) continue;
+    if (prior.indexSize === 0) continue;
+    // Any human override makes the prior verdicts more trustworthy, not less,
+    // so corrected verdicts propagate to the candidate's other applications.
+    const stale = prior.evidenceCount !== undefined && prior.evidenceCount !== evidenceCount;
+    if (stale) continue;
+    return {
+      claims: prior.claims,
+      verdicts: prior.verdicts,
+      fabricated: prior.fabricated,
+      retrieval: prior.retrieval,
+      indexSize: prior.indexSize,
+      embedder: prior.embedder,
+    };
+  }
+  return undefined;
 }
 
 /**

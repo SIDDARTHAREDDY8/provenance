@@ -92,9 +92,14 @@ its own ratio.
 ## Cost shape
 
 Corroboration is **per candidate**; scoring is **per role**. A second application
-from the same person reuses the verdicts and costs zero model calls. At fourteen
-claims and one call each, that is the difference between assessing a candidate
-once and assessing them once per job they apply to.
+from the same person reuses the verdicts and costs zero model calls — the trace
+records both skipped steps rather than quietly omitting them, because "this was
+free" is a claim a reader should be able to check.
+
+Staleness is keyed on the size of the evidence pack: add a reference and the
+verdicts are recomputed, because new evidence can overturn one. That is coarse —
+a document edited in place slips through — and a real system would hash the
+pack. It is named in `findReusableCorroboration` rather than left implicit.
 
 ## What would change at scale
 

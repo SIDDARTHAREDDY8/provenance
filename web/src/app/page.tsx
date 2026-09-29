@@ -43,6 +43,10 @@ export default async function QueuePage() {
     applications.map(async (app) => {
       const assessed = await db.getAssessment(app.id);
       const seed = seeded.find((s) => s.applicationId === app.id);
+      // Only candidates with an evidence pack can be assessed. The rest carry
+      // seeded scores so the queue, the ranker and the aggregate view have a
+      // population — offering a button that cannot work is worse than saying so.
+      const evidenceCount = (await db.evidence(app.candidateId)).length;
 
       const scores = assessed
         ? {
@@ -82,7 +86,7 @@ export default async function QueuePage() {
           })
         : null;
 
-      return { app, scores, priority };
+      return { app, scores, priority, evidenceCount };
     }),
   );
 
@@ -120,7 +124,7 @@ export default async function QueuePage() {
           </tr>
         </thead>
         <tbody>
-          {rows.map(({ app, scores, priority }) => {
+          {rows.map(({ app, scores, priority, evidenceCount }) => {
             const candidate = candidateById.get(app.candidateId);
             const role = roleById.get(app.roleId);
             const gap = scores ? Math.max(0, scores.claimed - scores.verified) : 0;
@@ -148,7 +152,9 @@ export default async function QueuePage() {
                   )}
                 </td>
                 <td>
-                  {!scores ? (
+                  {evidenceCount === 0 ? (
+                    <Tag>No evidence pack</Tag>
+                  ) : !scores ? (
                     <Tag>Not assessed</Tag>
                   ) : !scores.live ? (
                     <Tag tone="info">Seeded</Tag>
@@ -166,6 +172,8 @@ export default async function QueuePage() {
                     <Link href={`/applications/${app.id}`} className="btn" data-variant="quiet">
                       Open →
                     </Link>
+                  ) : evidenceCount === 0 ? (
+                    <span className="text-[12px] text-ink-3">seeded score only</span>
                   ) : (
                     <RunAssessment applicationId={app.id} label="Assess" variant="default" />
                   )}

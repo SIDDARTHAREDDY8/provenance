@@ -50,6 +50,8 @@ export default async function TracePage({ params }: { params: Promise<{ id: stri
                   <Tag tone="info">
                     {step.modelCalls} model call{step.modelCalls === 1 ? "" : "s"}
                   </Tag>
+                ) : step.status === "skipped" ? (
+                  <Tag>reused</Tag>
                 ) : (
                   <Tag>deterministic</Tag>
                 )}

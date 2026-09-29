@@ -36,6 +36,7 @@ export default async function ApplicationPage({ params }: { params: Promise<{ id
   const skillLabel = new Map(skills.map((s) => [s.id, s.label]));
 
   if (!assessment) {
+    const assessable = docs.length > 0;
     return (
       <>
         <header>
@@ -44,20 +45,38 @@ export default async function ApplicationPage({ params }: { params: Promise<{ id
           </p>
           <h1 className="title mt-2.5">{candidate?.name}</h1>
           <p className="standfirst mt-3">
-            {role?.title} · evidence pack of {docs.length} documents, not yet assessed.
+            {role?.title} ·{" "}
+            {assessable
+              ? `evidence pack of ${docs.length} documents, not yet assessed.`
+              : "no evidence pack on file."}
           </p>
         </header>
-        <div className="panel mt-7" data-tone="note">
-          <h3>No assessment on file</h3>
-          <p>
-            The run indexes the evidence pack, splits the résumé into discrete claims, adjudicates
-            each one against retrieved evidence, then scores and applies policy. Four steps, one
-            model call per claim.
-          </p>
-          <div className="mt-4">
-            <RunAssessment applicationId={id} />
+        {assessable ? (
+          <div className="panel mt-7" data-tone="note">
+            <h3>No assessment on file</h3>
+            <p>
+              The run indexes the evidence pack, splits the résumé into discrete claims, adjudicates
+              each one against retrieved evidence, then scores and applies policy. Four steps, one
+              model call per claim.
+            </p>
+            <div className="mt-4">
+              <RunAssessment applicationId={id} />
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="panel mt-7" data-tone="caution">
+            <h3>Nothing to verify against</h3>
+            <p>
+              This candidate has no evidence pack, so there is no assessment to run. An empty pack
+              would mark every claim unsupported, which reads as a finding about the person and is
+              really a finding about the pipeline having been handed nothing.
+            </p>
+            <p>
+              Their score in the queue is seeded, so the review ranker and the aggregate view have a
+              population to work with. Only Maya Reyes carries a real evidence pack in this demo.
+            </p>
+          </div>
+        )}
       </>
     );
   }

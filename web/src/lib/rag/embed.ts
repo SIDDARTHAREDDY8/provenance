@@ -92,6 +92,7 @@ class OpenAiEmbedder implements EmbeddingProvider {
   ) {}
 
   async embed(texts: string[]): Promise<Float32Array[]> {
+    if (texts.length === 0) return [];
     const res = await fetch("https://api.openai.com/v1/embeddings", {
       method: "POST",
       headers: { "content-type": "application/json", authorization: `Bearer ${this.apiKey}` },
@@ -124,6 +125,7 @@ class LocalSemanticEmbedder implements EmbeddingProvider {
   private extractor: ((texts: string[], opts: object) => Promise<{ tolist(): number[][] }>) | null = null;
 
   async embed(texts: string[]): Promise<Float32Array[]> {
+    if (texts.length === 0) return [];
     if (!this.extractor) {
       const { pipeline } = await import("@huggingface/transformers");
       this.extractor = (await pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2")) as never;

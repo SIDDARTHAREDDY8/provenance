@@ -31,6 +31,21 @@ export async function assessApplication(
     db.evidence(application.candidateId),
   ]);
 
+  // Refuse rather than degrade. Assessing a candidate with no evidence would
+  // return "everything unsupported", which reads as a finding about the person
+  // and is really a finding about the pipeline having been handed nothing.
+  if (docs.length === 0 || resume.trim().length === 0) {
+    const missing = [
+      docs.length === 0 ? "evidence pack" : null,
+      resume.trim().length === 0 ? "résumé" : null,
+    ].filter(Boolean).join(" or ");
+    throw new Error(
+      `This candidate has no ${missing} on file, so there is nothing to verify against. ` +
+        `An empty pack would mark every claim unsupported, which would read as a finding ` +
+        `about the person and is really a finding about the pipeline having been handed nothing.`,
+    );
+  }
+
   await progress(`Indexing ${docs.length} evidence documents`);
   await record("run_started", "system", `Assessment started for ${applicationId}`, {
     subjectId: application.candidateId,

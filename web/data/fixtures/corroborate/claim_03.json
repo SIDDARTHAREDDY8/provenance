@@ -1,5 +1,6 @@
 {
   "status": "unsupported",
   "citations": [],
-  "rationale": "The retrieved documents describe work on payouts, ledger partitioning, on-call and mentoring, but none of them states the Backend Engineer II title, the Payments Engineering team as a formal employment record, or the 2019–2026 dates, so the claim can be neither confirmed nor refuted from this evidence."
+  "supportedLevel": "none",
+  "rationale": "The retrieved evidence shows work on the payments team in 2025 and 2026, but none of it states the Backend Engineer II title or a 2019 start date, so those details are neither confirmed nor contradicted."
 }

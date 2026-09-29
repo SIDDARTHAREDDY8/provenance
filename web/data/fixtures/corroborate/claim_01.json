@@ -1,6 +1,5 @@
 {
   "status": "unsupported",
   "citations": [],
-  "supportedLevel": "none",
-  "rationale": "The retrieved evidence shows current payments work (ledger partitioning, payouts spec, payments on-call) but gives no start date, tenure or work history, so it neither confirms nor rules out seven years."
+  "rationale": "The retrieved evidence shows payments work (on-call rotation, ledger partitioning, payouts spec, reconciliation writes) but none of it states how long the candidate has worked in payments infrastructure, so the seven-year duration can be neither confirmed nor ruled out."
 }

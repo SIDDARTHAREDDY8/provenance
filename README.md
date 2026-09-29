@@ -191,7 +191,7 @@ accuracy numbers, it shows up as quietly worse verification a quarter later.
 | LLM | Forced tool use, `temperature: 0` | `ANTHROPIC_API_KEY` → API; `LLM_PROVIDER=claude-code` → CLI login; absent → replayed fixtures |
 | Retrieval | Chunking, local sentence-transformer, cosine + MMR, attested evidence included not ranked | `EMBEDDING_PROVIDER=openai` / `=lexical` |
 | ML | scikit-learn training in Python, coefficients exported, inference in TypeScript | `ml/` |
-| Storage | File store | `DATABASE_URL` → Postgres (`db/schema.sql`) |
+| Storage | File store, mtime-revalidated; audit log append-only JSONL | `DATABASE_URL` → Postgres (`db/schema.sql`) |
 | Queue | In-process, at-least-once, bounded retries | `REDIS_URL` → reliable-queue on Redis |
 | Billing | Metered per completed run, idempotent on application id | `STRIPE_SECRET_KEY` |
 

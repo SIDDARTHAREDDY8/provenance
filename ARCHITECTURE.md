@@ -66,7 +66,14 @@ every attestation enters the context.
 `corroborate.ts` then gates on it — a verdict may only cite what retrieval
 returned for that claim.
 
-**`store/`** — the only module that touches persistence. `FileStore` and
+**`store/`** — the only module that touches persistence. The file driver
+revalidates its read cache on mtime, and the audit log is append-only JSONL
+rather than a rewritten array. Both were bugs first: a dev server and a CLI
+script each holding a stale copy read-modify-wrote over each other, and an
+entire assessment's audit trail vanished. A log with a read-modify-write cycle
+is not a log.
+
+ `FileStore` and
 `PostgresStore` implement one interface; nothing outside the directory knows
 which is live. Both singletons are pinned to `globalThis`, because Next bundles
 route handlers, server actions and pages separately and a plain module singleton

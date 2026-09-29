@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { appendFile, mkdir, readFile, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import type { Store, StoredAssessment } from "./types";
 import type {
@@ -24,17 +24,40 @@ const MUTABLE = path.join(process.cwd(), ".data");
 export class FileStore implements Store {
   readonly driver = "file";
   private memory = new Map<string, unknown>();
+  /** mtimeMs of each cached file, so another process's writes are noticed. */
+  private cachedAt = new Map<string, number>();
   private writable = true;
 
   private async seed<T>(file: string): Promise<T> {
     return JSON.parse(await readFile(path.join(SEED, file), "utf8")) as T;
   }
 
+  /**
+   * Read-through cache that revalidates on mtime.
+   *
+   * Without the mtime check this cache is a data-loss bug rather than an
+   * optimisation: a dev server and a CLI script both holding a stale copy will
+   * read-modify-write over each other, and the last writer silently wins. That
+   * is how the audit log lost an entire assessment run during testing.
+   */
   private async read<T>(file: string, fallback: T): Promise<T> {
-    if (this.memory.has(file)) return this.memory.get(file) as T;
+    const full = path.join(MUTABLE, file);
+    let mtime: number | null = null;
     try {
-      const parsed = JSON.parse(await readFile(path.join(MUTABLE, file), "utf8")) as T;
+      mtime = (await stat(full)).mtimeMs;
+    } catch {
+      mtime = null;
+    }
+
+    if (this.memory.has(file) && this.cachedAt.get(file) === mtime) {
+      return this.memory.get(file) as T;
+    }
+    if (mtime === null) return fallback;
+
+    try {
+      const parsed = JSON.parse(await readFile(full, "utf8")) as T;
       this.memory.set(file, parsed);
+      this.cachedAt.set(file, mtime);
       return parsed;
     } catch {
       return fallback;
@@ -46,7 +69,9 @@ export class FileStore implements Store {
     if (!this.writable) return;
     try {
       await mkdir(MUTABLE, { recursive: true });
-      await writeFile(path.join(MUTABLE, file), JSON.stringify(value, null, 2), "utf8");
+      const full = path.join(MUTABLE, file);
+      await writeFile(full, JSON.stringify(value, null, 2), "utf8");
+      this.cachedAt.set(file, (await stat(full)).mtimeMs);
     } catch {
       this.writable = false;
     }
@@ -100,14 +125,35 @@ export class FileStore implements Store {
     await this.write("assessments.json", all);
   }
 
+  /**
+   * The audit log is append-only, one JSON object per line.
+   *
+   * It was a JSON array rewritten in full on every append, which meant every
+   * write could truncate the file to whatever that process last read. An audit
+   * log with a read-modify-write cycle is not an audit log. Appending a line is
+   * also the only form of concurrent write that survives two processes without
+   * a lock.
+   */
   async audit(limit = 200): Promise<AuditEntry[]> {
-    const log = await this.read<AuditEntry[]>("audit.json", []);
-    return log.slice(0, limit);
+    try {
+      const raw = await readFile(path.join(MUTABLE, "audit.jsonl"), "utf8");
+      const entries = raw
+        .split("\n")
+        .filter((line) => line.trim().length > 0)
+        .map((line) => JSON.parse(line) as AuditEntry);
+      return entries.reverse().slice(0, limit);
+    } catch {
+      return [];
+    }
   }
 
   async appendAudit(entry: AuditEntry): Promise<void> {
-    const log = await this.read<AuditEntry[]>("audit.json", []);
-    log.unshift(entry);
-    await this.write("audit.json", log.slice(0, 500));
+    if (!this.writable) return;
+    try {
+      await mkdir(MUTABLE, { recursive: true });
+      await appendFile(path.join(MUTABLE, "audit.jsonl"), JSON.stringify(entry) + "\n", "utf8");
+    } catch {
+      this.writable = false;
+    }
   }
 }

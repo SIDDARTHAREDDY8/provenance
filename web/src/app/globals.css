@@ -105,7 +105,10 @@
   }
 
   .section-head {
-    @apply flex items-baseline gap-3 mt-11 pb-2 border-b border-rule-emphasis;
+    /* mb matters: without it the divider lands directly on the column header
+       row beneath, and two rules two pixels apart read as a printing error
+       rather than a hierarchy. */
+    @apply flex items-baseline gap-3 mt-11 mb-4 pb-2 border-b border-rule-emphasis;
   }
   .section-head h2 {
     @apply text-xs font-semibold uppercase tracking-[0.09em] m-0;
@@ -170,8 +173,10 @@
 
   .tbl { @apply w-full border-collapse text-[13px]; }
   .tbl th {
+    /* The column header is a label, not a section break: a hairline is enough
+       to anchor the columns once the section rule above has room to breathe. */
     @apply text-left font-mono text-[10px] font-medium uppercase tracking-[0.09em]
-           text-ink-3 pr-3.5 pb-2 border-b border-rule-strong;
+           text-ink-3 pr-3.5 pb-2.5 border-b border-rule;
   }
   .tbl td { @apply py-2.5 pr-3.5 border-b border-rule align-middle; }
   .tbl td:last-child, .tbl th:last-child { @apply pr-0; }

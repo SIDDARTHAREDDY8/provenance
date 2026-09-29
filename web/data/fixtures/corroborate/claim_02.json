@@ -3,11 +3,11 @@
   "citations": [
     {
       "docId": "ev_ref02",
-      "quote": "On Postgres she is the strongest person on the payments team and I have taken her review on partitioning decisions for my own work."
+      "quote": "On Postgres she is the strongest person on the payments team"
     },
     {
       "docId": "ev_003",
-      "quote": "Rewrote the reconciliation writer in Python to use COPY instead of row-by-row inserts. 40k payouts now reconcile in 9s rather than 6 minutes."
+      "quote": "Rewrote the reconciliation writer in Python to use COPY instead of row-by-row inserts."
     },
     {
       "docId": "ev_015",
@@ -19,5 +19,5 @@
     }
   ],
   "supportedLevel": "advanced",
-  "rationale": "The evidence directly supports Postgres, Python and payments-correctness work, but it contains nothing that shows distributed-systems work beyond a ledger migration design doc, and a referee reports no experience running streaming or event infrastructure in production."
+  "rationale": "The evidence strongly supports the Postgres, Python and money-correctness parts of the claim, but it shows no distributed-systems work beyond a ledger migration design doc, and the referee states there is no production experience with streaming or event infrastructure."
 }

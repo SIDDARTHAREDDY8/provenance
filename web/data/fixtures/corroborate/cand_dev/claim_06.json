@@ -1,0 +1,15 @@
+{
+  "status": "verified",
+  "citations": [
+    {
+      "docId": "ev_d06",
+      "quote": "All 40 services are now provisioned through the module library. Hand-rolled deploy scripts deleted."
+    },
+    {
+      "docId": "ev_d04",
+      "quote": "Plan to move 40 services off hand-rolled deploy scripts onto a shared Terraform module library."
+    }
+  ],
+  "supportedLevel": "advanced",
+  "rationale": "The PLAT-388 ticket records all 40 services moved onto the Terraform module library with the hand-rolled deploy scripts deleted, which matches the claim as written, and the migration plan and first-tranche PR are consistent with it."
+}

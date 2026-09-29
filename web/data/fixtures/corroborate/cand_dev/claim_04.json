@@ -1,0 +1,23 @@
+{
+  "status": "partially_verified",
+  "citations": [
+    {
+      "docId": "ev_d20",
+      "quote": "On infrastructure she is the person I would want on any Kubernetes or Terraform problem, and the drain controller was genuinely clever work."
+    },
+    {
+      "docId": "ev_d05",
+      "quote": "Twelve services now provision through the shared modules with per-environment state."
+    },
+    {
+      "docId": "ev_d01",
+      "quote": "Cloud spend for the platform estate fell from $2.41M to $1.49M over the fiscal year, a 38% reduction."
+    },
+    {
+      "docId": "ev_d11",
+      "quote": "Median time to recovery across platform incidents moved from 45 minutes to 22 over the half."
+    }
+  ],
+  "supportedLevel": "advanced",
+  "rationale": "The evidence supports Kubernetes, Terraform and cost engineering (a 38% spend reduction, 180 pod specs rightsized, a referee endorsement) and shows reliability work such as failover game days, but the reliability results are credited mainly to a runbook index and direct team paging rather than to this candidate, and the CKA certification has expired, so the claim is supported in part rather than in full."
+}

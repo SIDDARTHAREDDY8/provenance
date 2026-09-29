@@ -249,5 +249,225 @@
     "occurredAt": "2026-09-17",
     "title": "Structured reference check — Priya Ramanathan",
     "body": "Asked specifically about streaming and event infrastructure. Maya has not worked on our streaming systems. She wrote a thoughtful RFC asking what it would take to own one, which is how I know she understands the problem, but she has never run a Kafka consumer in production here. On Postgres she is the strongest person on the payments team and I have taken her review on partitioning decisions for my own work."
+  },
+  {
+    "id": "ev_d01",
+    "candidateId": "cand_dev",
+    "kind": "document",
+    "source": "Platform docs",
+    "title": "Q3 cost review — platform estate",
+    "body": "Cloud spend for the platform estate fell from $2.41M to $1.49M over the fiscal year, a 38% reduction. The largest single contributor was moving stateless workloads to spot capacity with a drain controller, followed by rightsizing 180 over-provisioned pod specs and deleting 31 idle load balancers. Devika owned this programme end to end.",
+    "occurredAt": "2025-10-14",
+    "attested": false
+  },
+  {
+    "id": "ev_d02",
+    "candidateId": "cand_dev",
+    "kind": "pull_request",
+    "source": "platform-infra",
+    "title": "PR #88 — spot capacity with a drain controller",
+    "body": "Moves stateless workloads onto spot instances behind a drain controller that cordons and reschedules on the two-minute interruption notice. Tested against simulated reclaim at 5x normal rate with no dropped requests.",
+    "occurredAt": "2025-07-22",
+    "attested": false
+  },
+  {
+    "id": "ev_d03",
+    "candidateId": "cand_dev",
+    "kind": "ticket",
+    "source": "PLAT board",
+    "title": "PLAT-207 — rightsize over-provisioned pod specs",
+    "body": "Audited every deployment against 30-day p95 utilisation and corrected 180 pod specs. Requests were on average 3.4x actual usage. No latency regression on any service after rollout.",
+    "occurredAt": "2025-08-19",
+    "attested": false
+  },
+  {
+    "id": "ev_d04",
+    "candidateId": "cand_dev",
+    "kind": "document",
+    "source": "Platform docs",
+    "title": "Terraform module library — migration plan",
+    "body": "Plan to move 40 services off hand-rolled deploy scripts onto a shared Terraform module library. Covers module boundaries, state layout per environment, and the sequencing so no service is half-migrated across a release.",
+    "occurredAt": "2025-02-06",
+    "attested": false
+  },
+  {
+    "id": "ev_d05",
+    "candidateId": "cand_dev",
+    "kind": "pull_request",
+    "source": "platform-infra",
+    "title": "PR #142 — terraform module library, first 12 services",
+    "body": "First tranche of the migration. Twelve services now provision through the shared modules with per-environment state. Drift detection runs nightly and opens a ticket rather than auto-applying.",
+    "occurredAt": "2025-03-18",
+    "attested": false
+  },
+  {
+    "id": "ev_d06",
+    "candidateId": "cand_dev",
+    "kind": "ticket",
+    "source": "PLAT board",
+    "title": "PLAT-388 — terraform migration complete",
+    "body": "All 40 services are now provisioned through the module library. Hand-rolled deploy scripts deleted. Mean time to stand up a new service environment went from two days to under an hour.",
+    "occurredAt": "2025-06-30",
+    "attested": false
+  },
+  {
+    "id": "ev_d07",
+    "candidateId": "cand_dev",
+    "kind": "document",
+    "source": "Platform docs",
+    "title": "Service inventory — production estate",
+    "body": "Canonical inventory, regenerated nightly from the service registry. The estate currently comprises 43 production services across 7 teams. Counting every ephemeral preview environment would inflate this number considerably, which is why this document counts registered production services only.",
+    "occurredAt": "2026-01-09",
+    "attested": false
+  },
+  {
+    "id": "ev_d08",
+    "candidateId": "cand_dev",
+    "kind": "document",
+    "source": "Platform docs",
+    "title": "Design — multi-region failover for the payments estate",
+    "body": "Author: Arjun Desai. Reviewers: Devika Nair, Priyanka Iyer. Proposes active-passive failover across two regions with a controlled promotion path and a documented data-loss budget. Devika's review raised the split-brain risk during partial network partition, which changed the promotion design.",
+    "occurredAt": "2025-05-11",
+    "attested": false
+  },
+  {
+    "id": "ev_d09",
+    "candidateId": "cand_dev",
+    "kind": "pull_request",
+    "source": "platform-infra",
+    "title": "PR #201 — game day harness for region failover",
+    "body": "Harness to run quarterly failover game days: severs inter-region traffic, drives promotion, measures recovery. Devika ran the first three game days and wrote up each one.",
+    "occurredAt": "2025-09-02",
+    "attested": false
+  },
+  {
+    "id": "ev_d10",
+    "candidateId": "cand_dev",
+    "kind": "pull_request",
+    "source": "platform-gateway",
+    "title": "PR #96 — connection pooling in the API gateway",
+    "body": "Adds keep-alive connection pooling between the gateway and upstream services. p99 on the gateway went from 420ms to 273ms under production replay. Further gains would need upstream changes we do not own.",
+    "occurredAt": "2025-04-15",
+    "attested": false
+  },
+  {
+    "id": "ev_d11",
+    "candidateId": "cand_dev",
+    "kind": "document",
+    "source": "Platform docs",
+    "title": "Incident review — H2 2025 platform reliability",
+    "body": "Median time to recovery across platform incidents moved from 45 minutes to 22 over the half. The largest contributors were the runbook index and paging the owning team directly rather than routing everything through platform on-call.",
+    "occurredAt": "2026-01-20",
+    "attested": false
+  },
+  {
+    "id": "ev_d12",
+    "candidateId": "cand_dev",
+    "kind": "ticket",
+    "source": "INC board",
+    "title": "INC-618 — sev1: control plane unavailable for 26 minutes",
+    "body": "Devika was incident commander. Root cause was etcd disk saturation on two of three control plane nodes after a log-level change shipped without review. Mitigated by raising the disk tier and adding a pre-merge check on log-level changes.",
+    "occurredAt": "2025-11-28",
+    "attested": false
+  },
+  {
+    "id": "ev_d13",
+    "candidateId": "cand_dev",
+    "kind": "document",
+    "source": "Platform docs",
+    "title": "Internal developer platform — adoption review",
+    "body": "The internal developer platform has been adopted by three of the five engineering teams. Payments and Growth are still on the legacy pipeline; Payments has a migration scheduled, Growth has not committed. Adoption stalled on the lack of a migration path for services with custom build steps.",
+    "occurredAt": "2025-12-08",
+    "attested": false
+  },
+  {
+    "id": "ev_d14",
+    "candidateId": "cand_dev",
+    "kind": "pull_request",
+    "source": "platform-idp",
+    "title": "PR #57 — golden path service scaffold",
+    "body": "One command to scaffold a service with CI, observability, deploy config and an on-call rota entry already wired. Reduced the new-service checklist from 23 manual steps to 3.",
+    "occurredAt": "2025-10-02",
+    "attested": false
+  },
+  {
+    "id": "ev_d15",
+    "candidateId": "cand_dev",
+    "kind": "commit",
+    "source": "platform-infra",
+    "title": "obs: SLO burn-rate alerts for every tier-1 service",
+    "body": "Replaces threshold alerts with multi-window burn-rate alerts on the published SLOs. Paging volume on tier-1 services dropped by roughly half with no increase in missed incidents.",
+    "occurredAt": "2025-08-05",
+    "attested": false
+  },
+  {
+    "id": "ev_d16",
+    "candidateId": "cand_dev",
+    "kind": "ticket",
+    "source": "PLAT board",
+    "title": "PLAT-451 — Python tooling for drift reconciliation",
+    "body": "Wrote the reconciler in Python: diffs live cloud state against Terraform state, classifies drift as benign or material, and files a ticket for material drift with the offending resource and owner.",
+    "occurredAt": "2025-09-24",
+    "attested": false
+  },
+  {
+    "id": "ev_d17",
+    "candidateId": "cand_dev",
+    "kind": "commit",
+    "source": "platform-infra",
+    "title": "go: rewrite the drain controller hot path",
+    "body": "Rewrote the drain controller's reconcile loop in Go after the Python prototype could not keep up with reclaim bursts. Handles 400 evictions per minute with headroom.",
+    "occurredAt": "2025-07-30",
+    "attested": false
+  },
+  {
+    "id": "ev_d18",
+    "candidateId": "cand_dev",
+    "kind": "certificate",
+    "source": "Cloud Native Computing Foundation",
+    "title": "Certified Kubernetes Administrator (CKA)",
+    "body": "Certification record. Devika Nair passed Certified Kubernetes Administrator on 14 March 2021. This certification was valid through 14 March 2024 and has since expired. It has not been renewed. Verification ID CKA-2021-0314-DN.",
+    "occurredAt": "2021-03-14",
+    "attested": true
+  },
+  {
+    "id": "ev_d19",
+    "candidateId": "cand_dev",
+    "kind": "reference",
+    "source": "Referee — Rahul Menon, Director of Engineering",
+    "title": "Structured reference check — Rahul Menon",
+    "body": "Asked to confirm scope and ownership. Devika is a staff individual contributor. She led the platform working group, which is six engineers drawn from three teams — a working group, not a reporting line; nobody reports to her. The cost programme was hers outright and the numbers in the Q3 review are correct. I would want to be precise about the multi-region failover: that design was Arjun's. Devika reviewed it, and her review changed the promotion path, and she ran the game days. She did not architect it.",
+    "occurredAt": "2026-02-18",
+    "attested": true
+  },
+  {
+    "id": "ev_d20",
+    "candidateId": "cand_dev",
+    "kind": "reference",
+    "source": "Referee — Priyanka Iyer, Staff Engineer",
+    "title": "Structured reference check — Priyanka Iyer",
+    "body": "Asked specifically about data and streaming work. Devika has not worked on our streaming or analytics systems at all — that is a different team and she has never been on it. On infrastructure she is the person I would want on any Kubernetes or Terraform problem, and the drain controller was genuinely clever work.",
+    "occurredAt": "2026-02-20",
+    "attested": true
+  },
+  {
+    "id": "ev_d21",
+    "candidateId": "cand_dev",
+    "kind": "document",
+    "source": "Platform docs",
+    "title": "Working group charter — platform enablement",
+    "body": "The platform working group is six engineers seconded part-time from three teams, chaired by Devika Nair. It has no reporting line and no budget; it sets platform standards and reviews platform-adjacent designs.",
+    "occurredAt": "2025-01-15",
+    "attested": false
+  },
+  {
+    "id": "ev_d22",
+    "candidateId": "cand_dev",
+    "kind": "ticket",
+    "source": "PLAT board",
+    "title": "PLAT-502 — decommission 31 idle load balancers",
+    "body": "Identified load balancers with no traffic for 90 days and removed them after owner sign-off. Saved roughly $7.4k per month.",
+    "occurredAt": "2025-09-11",
+    "attested": false
   }
 ]

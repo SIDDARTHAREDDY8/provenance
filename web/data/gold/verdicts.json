@@ -1,93 +1,190 @@
 {
-  "candidateId": "cand_maya",
-  "note": "Hand-labelled from the evidence pack against the claims a live model actually extracted. Labelled before comparing with the model's verdicts, so a disagreement is a measurement rather than a formatting mismatch. expectedEvidence names the document that ought to decide each claim, so retrieval recall is measured separately from adjudication quality.",
-  "verdicts": {
-    "claim_01": {
-      "status": "unsupported",
-      "text": "Backend engineer with seven years in payments infrastructure."
+  "note": "Hand-labelled from each candidate's evidence pack, against the claims a live model actually extracted, and written before comparing with the model's verdicts. expectedEvidence names the document that ought to decide a claim, so retrieval recall is scored separately from adjudication quality.",
+  "applications": {
+    "app_001": {
+      "candidateId": "cand_maya",
+      "verdicts": {
+        "claim_01": {
+          "status": "unsupported",
+          "text": "Backend engineer with seven years in payments infrastructure."
+        },
+        "claim_02": {
+          "status": "verified",
+          "text": "Postgres, Python,\ndistributed systems and the unglamorous correctness work that keeps money moving.",
+          "expectedEvidence": "ev_003"
+        },
+        "claim_03": {
+          "status": "unsupported",
+          "text": "Payments Engineering — Backend Engineer II (2019–2026)"
+        },
+        "claim_04": {
+          "status": "verified",
+          "text": "Reduced p95 latency on the invoice list endpoint from 1.9s to 240ms",
+          "expectedEvidence": "ev_001"
+        },
+        "claim_05": {
+          "status": "verified",
+          "text": "Cut the settlement report query from 34s to 1.1s by adding a partial index",
+          "expectedEvidence": "ev_002"
+        },
+        "claim_06": {
+          "status": "verified",
+          "text": "Migrated an 890M-row ledger to partitioned tables with zero customer-facing errors",
+          "expectedEvidence": "ev_004"
+        },
+        "claim_07": {
+          "status": "verified",
+          "text": "Designed and shipped the v2 payouts API with idempotency keys and cursor pagination",
+          "expectedEvidence": "ev_011"
+        },
+        "claim_08": {
+          "status": "contradicted",
+          "text": "Led a team of 8 engineers across Payments and Data Platform",
+          "expectedEvidence": "ev_ref01"
+        },
+        "claim_09": {
+          "status": "unsupported",
+          "text": "Owned the backend hiring loop and ran interview debriefs"
+        },
+        "claim_10": {
+          "status": "verified",
+          "text": "Primary on-call for payments",
+          "expectedEvidence": "ev_ref01"
+        },
+        "claim_11": {
+          "status": "verified",
+          "text": "resolved a sev1 connection-pool exhaustion in 38 minutes",
+          "expectedEvidence": "ev_008"
+        },
+        "claim_12": {
+          "status": "partially_verified",
+          "text": "Reduced incident volume by 90% through observability work",
+          "expectedEvidence": "ev_010"
+        },
+        "claim_13": {
+          "status": "verified",
+          "text": "Implemented GDPR erasure for payout records in coordination with legal",
+          "expectedEvidence": "ev_017"
+        },
+        "claim_14": {
+          "status": "partially_verified",
+          "text": "Mentored junior engineers on the Payments team",
+          "expectedEvidence": "ev_018"
+        },
+        "claim_15": {
+          "status": "contradicted",
+          "text": "Expert-level production experience with Kafka and event streaming",
+          "expectedEvidence": "ev_ref02"
+        },
+        "claim_16": {
+          "status": "verified",
+          "text": "Advanced PostgreSQL performance tuning at scale",
+          "expectedEvidence": "ev_002"
+        },
+        "claim_17": {
+          "status": "partially_verified",
+          "text": "Kubernetes at production scale",
+          "expectedEvidence": "ev_016"
+        },
+        "claim_18": {
+          "status": "verified",
+          "text": "AWS Certified Solutions Architect - Professional",
+          "expectedEvidence": "ev_cert01"
+        }
+      }
     },
-    "claim_02": {
-      "status": "verified",
-      "text": "Postgres, Python,\ndistributed systems and the unglamorous correctness work that keeps money moving.",
-      "expectedEvidence": "ev_003"
-    },
-    "claim_03": {
-      "status": "unsupported",
-      "text": "Payments Engineering — Backend Engineer II (2019–2026)"
-    },
-    "claim_04": {
-      "status": "verified",
-      "text": "Reduced p95 latency on the invoice list endpoint from 1.9s to 240ms",
-      "expectedEvidence": "ev_001"
-    },
-    "claim_05": {
-      "status": "verified",
-      "text": "Cut the settlement report query from 34s to 1.1s by adding a partial index",
-      "expectedEvidence": "ev_002"
-    },
-    "claim_06": {
-      "status": "verified",
-      "text": "Migrated an 890M-row ledger to partitioned tables with zero customer-facing errors",
-      "expectedEvidence": "ev_004"
-    },
-    "claim_07": {
-      "status": "verified",
-      "text": "Designed and shipped the v2 payouts API with idempotency keys and cursor pagination",
-      "expectedEvidence": "ev_011"
-    },
-    "claim_08": {
-      "status": "contradicted",
-      "text": "Led a team of 8 engineers across Payments and Data Platform",
-      "expectedEvidence": "ev_ref01"
-    },
-    "claim_09": {
-      "status": "unsupported",
-      "text": "Owned the backend hiring loop and ran interview debriefs"
-    },
-    "claim_10": {
-      "status": "verified",
-      "text": "Primary on-call for payments",
-      "expectedEvidence": "ev_ref01"
-    },
-    "claim_11": {
-      "status": "verified",
-      "text": "resolved a sev1 connection-pool exhaustion in 38 minutes",
-      "expectedEvidence": "ev_008"
-    },
-    "claim_12": {
-      "status": "partially_verified",
-      "text": "Reduced incident volume by 90% through observability work",
-      "expectedEvidence": "ev_010"
-    },
-    "claim_13": {
-      "status": "verified",
-      "text": "Implemented GDPR erasure for payout records in coordination with legal",
-      "expectedEvidence": "ev_017"
-    },
-    "claim_14": {
-      "status": "partially_verified",
-      "text": "Mentored junior engineers on the Payments team",
-      "expectedEvidence": "ev_018"
-    },
-    "claim_15": {
-      "status": "contradicted",
-      "text": "Expert-level production experience with Kafka and event streaming",
-      "expectedEvidence": "ev_ref02"
-    },
-    "claim_16": {
-      "status": "verified",
-      "text": "Advanced PostgreSQL performance tuning at scale",
-      "expectedEvidence": "ev_002"
-    },
-    "claim_17": {
-      "status": "partially_verified",
-      "text": "Kubernetes at production scale",
-      "expectedEvidence": "ev_016"
-    },
-    "claim_18": {
-      "status": "verified",
-      "text": "AWS Certified Solutions Architect - Professional",
-      "expectedEvidence": "ev_cert01"
+    "app_004": {
+      "candidateId": "cand_dev",
+      "verdicts": {
+        "claim_01": {
+          "status": "verified",
+          "text": "Staff Engineer, Infrastructure"
+        },
+        "claim_02": {
+          "status": "unsupported",
+          "text": "Platform Engineering — Staff Engineer (2021–2026)"
+        },
+        "claim_03": {
+          "status": "verified",
+          "text": "Staff infrastructure engineer."
+        },
+        "claim_04": {
+          "status": "partially_verified",
+          "text": "Kubernetes, Terraform, cost engineering and the\nreliability work that stops platforms waking people up at night."
+        },
+        "claim_05": {
+          "status": "verified",
+          "text": "Cut cloud spend by 38% across the platform estate in one fiscal year",
+          "expectedEvidence": "ev_d01"
+        },
+        "claim_06": {
+          "status": "verified",
+          "text": "Migrated 40 services from hand-rolled deploy scripts to Terraform modules",
+          "expectedEvidence": "ev_d06"
+        },
+        "claim_07": {
+          "status": "verified",
+          "text": "Migrated 40 services from hand-rolled deploy scripts to Terraform modules"
+        },
+        "claim_08": {
+          "status": "contradicted",
+          "text": "Architected the multi-region failover design for the payments estate",
+          "expectedEvidence": "ev_d19"
+        },
+        "claim_09": {
+          "status": "contradicted",
+          "text": "Managed a platform estate of 400+ microservices",
+          "expectedEvidence": "ev_d07"
+        },
+        "claim_10": {
+          "status": "verified",
+          "text": "Led the platform working group of 6 engineers",
+          "expectedEvidence": "ev_d21"
+        },
+        "claim_11": {
+          "status": "partially_verified",
+          "text": "Reduced p99 API gateway latency by 60% through connection pooling",
+          "expectedEvidence": "ev_d10"
+        },
+        "claim_12": {
+          "status": "contradicted",
+          "text": "Drove median time to recovery from 45 minutes to 12",
+          "expectedEvidence": "ev_d11"
+        },
+        "claim_13": {
+          "status": "contradicted",
+          "text": "Built the internal developer platform used by every engineering team",
+          "expectedEvidence": "ev_d13"
+        },
+        "claim_14": {
+          "status": "verified",
+          "text": "Expert Kubernetes and Terraform at production scale",
+          "expectedEvidence": "ev_d05"
+        },
+        "claim_15": {
+          "status": "partially_verified",
+          "text": "Expert Kubernetes and Terraform at production scale"
+        },
+        "claim_16": {
+          "status": "contradicted",
+          "text": "Production experience with Kafka and stream processing",
+          "expectedEvidence": "ev_d20"
+        },
+        "claim_17": {
+          "status": "contradicted",
+          "text": "Advanced data modelling for analytics workloads",
+          "expectedEvidence": "ev_d20"
+        },
+        "claim_18": {
+          "status": "verified",
+          "text": "Python and Go"
+        },
+        "claim_19": {
+          "status": "partially_verified",
+          "text": "Certified Kubernetes Administrator (CKA)",
+          "expectedEvidence": "ev_d18"
+        }
+      }
     }
   }
 }

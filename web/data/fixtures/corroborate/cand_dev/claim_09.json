@@ -1,0 +1,19 @@
+{
+  "status": "contradicted",
+  "citations": [
+    {
+      "docId": "ev_d07",
+      "quote": "The estate currently comprises 43 production services across 7 teams."
+    },
+    {
+      "docId": "ev_d06",
+      "quote": "All 40 services are now provisioned through the module library."
+    },
+    {
+      "docId": "ev_d21",
+      "quote": "It has no reporting line and no budget; it sets platform standards and reviews platform-adjacent designs."
+    }
+  ],
+  "supportedLevel": "none",
+  "rationale": "The canonical service inventory lists 43 production services, not 400+, and the platform working group chaired by the candidate sets standards and reviews designs without a reporting line or budget, so the evidence does not support managing an estate of that size."
+}

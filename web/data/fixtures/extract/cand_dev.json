@@ -1,0 +1,114 @@
+{
+  "claims": [
+    {
+      "text": "Staff Engineer, Infrastructure",
+      "category": "employment",
+      "section": "HEADER"
+    },
+    {
+      "text": "Platform Engineering — Staff Engineer (2021–2026)",
+      "category": "employment",
+      "section": "EXPERIENCE"
+    },
+    {
+      "text": "Staff infrastructure engineer.",
+      "category": "employment",
+      "section": "SUMMARY"
+    },
+    {
+      "text": "Kubernetes, Terraform, cost engineering and the\nreliability work that stops platforms waking people up at night.",
+      "category": "skill",
+      "section": "SUMMARY"
+    },
+    {
+      "text": "Cut cloud spend by 38% across the platform estate in one fiscal year",
+      "category": "achievement",
+      "section": "EXPERIENCE"
+    },
+    {
+      "text": "Migrated 40 services from hand-rolled deploy scripts to Terraform modules",
+      "category": "achievement",
+      "section": "EXPERIENCE",
+      "skill": "migration_execution"
+    },
+    {
+      "text": "Migrated 40 services from hand-rolled deploy scripts to Terraform modules",
+      "category": "achievement",
+      "section": "EXPERIENCE",
+      "skill": "iac"
+    },
+    {
+      "text": "Architected the multi-region failover design for the payments estate",
+      "category": "achievement",
+      "section": "EXPERIENCE",
+      "skill": "payments_domain"
+    },
+    {
+      "text": "Managed a platform estate of 400+ microservices",
+      "category": "scope",
+      "section": "EXPERIENCE"
+    },
+    {
+      "text": "Led the platform working group of 6 engineers",
+      "category": "scope",
+      "section": "EXPERIENCE",
+      "skill": "project_leadership"
+    },
+    {
+      "text": "Reduced p99 API gateway latency by 60% through connection pooling",
+      "category": "achievement",
+      "section": "EXPERIENCE"
+    },
+    {
+      "text": "Drove median time to recovery from 45 minutes to 12",
+      "category": "achievement",
+      "section": "EXPERIENCE",
+      "skill": "incident_response"
+    },
+    {
+      "text": "Built the internal developer platform used by every engineering team",
+      "category": "achievement",
+      "section": "EXPERIENCE"
+    },
+    {
+      "text": "Expert Kubernetes and Terraform at production scale",
+      "category": "skill",
+      "section": "SKILLS",
+      "skill": "kubernetes",
+      "level": "expert"
+    },
+    {
+      "text": "Expert Kubernetes and Terraform at production scale",
+      "category": "skill",
+      "section": "SKILLS",
+      "skill": "iac",
+      "level": "expert"
+    },
+    {
+      "text": "Production experience with Kafka and stream processing",
+      "category": "skill",
+      "section": "SKILLS",
+      "skill": "stream_processing",
+      "level": "intermediate"
+    },
+    {
+      "text": "Advanced data modelling for analytics workloads",
+      "category": "skill",
+      "section": "SKILLS",
+      "skill": "data_modelling",
+      "level": "advanced"
+    },
+    {
+      "text": "Python and Go",
+      "category": "skill",
+      "section": "SKILLS",
+      "skill": "python"
+    },
+    {
+      "text": "Certified Kubernetes Administrator (CKA)",
+      "category": "credential",
+      "section": "CERTIFICATIONS",
+      "skill": "kubernetes"
+    }
+  ]
+}

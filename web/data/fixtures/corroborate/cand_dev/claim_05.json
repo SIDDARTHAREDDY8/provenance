@@ -1,0 +1,15 @@
+{
+  "status": "verified",
+  "citations": [
+    {
+      "docId": "ev_d01",
+      "quote": "Cloud spend for the platform estate fell from $2.41M to $1.49M over the fiscal year, a 38% reduction."
+    },
+    {
+      "docId": "ev_d19",
+      "quote": "The cost programme was hers outright and the numbers in the Q3 review are correct."
+    }
+  ],
+  "supportedLevel": "none",
+  "rationale": "The Q3 cost review records platform-estate cloud spend falling from $2.41M to $1.49M (38%) over the fiscal year, and the referee confirms the cost programme was owned by the candidate and the review's numbers are correct."
+}

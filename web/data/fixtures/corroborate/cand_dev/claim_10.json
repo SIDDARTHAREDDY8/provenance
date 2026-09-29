@@ -1,0 +1,15 @@
+{
+  "status": "verified",
+  "citations": [
+    {
+      "docId": "ev_d19",
+      "quote": "She led the platform working group, which is six engineers drawn from three teams — a working group, not a reporting line; nobody reports to her."
+    },
+    {
+      "docId": "ev_d21",
+      "quote": "The platform working group is six engineers seconded part-time from three teams, chaired by Devika Nair."
+    }
+  ],
+  "supportedLevel": "none",
+  "rationale": "The evidence confirms you led a platform working group of six engineers, and the claim as written does not imply a reporting line, which the referee and charter both describe as a working-group arrangement."
+}

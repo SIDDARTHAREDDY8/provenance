@@ -1,0 +1,15 @@
+{
+  "status": "verified",
+  "citations": [
+    {
+      "docId": "ev_d17",
+      "quote": "Rewrote the drain controller's reconcile loop in Go after the Python prototype could not keep up with reclaim bursts. Handles 400 evictions per minute with headroom."
+    },
+    {
+      "docId": "ev_d16",
+      "quote": "Wrote the reconciler in Python: diffs live cloud state against Terraform state, classifies drift as benign or material, and files a ticket for material drift with the offending resource and owner."
+    }
+  ],
+  "supportedLevel": "intermediate",
+  "rationale": "The evidence shows production work in both languages: a Go rewrite of the drain controller's reconcile loop and a Python drift-reconciliation tool, which supports the claim as written."
+}

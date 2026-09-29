@@ -1,0 +1,11 @@
+{
+  "status": "contradicted",
+  "citations": [
+    {
+      "docId": "ev_d20",
+      "quote": "Devika has not worked on our streaming or analytics systems at all — that is a different team and she has never been on it."
+    }
+  ],
+  "supportedLevel": "none",
+  "rationale": "The referee, asked specifically about data and analytics work, states that this work was never done on their team, and no other retrieved document shows data modelling for analytics workloads (the infrastructure, cost and failover documents cover other areas)."
+}

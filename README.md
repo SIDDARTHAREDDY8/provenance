@@ -131,23 +131,30 @@ adverse verdict, repeating it costs somebody a job.
 
 Two suites, because the failure modes are different.
 
-**`npm run eval`** — verification quality:
+**`npm run eval`** — verification quality, scored per application and gated on
+the pooled result. A harness tuned on one corpus mostly tells you about that
+corpus, so the second candidate exists to disagree with the first:
 
 ```
-Pipeline steps
-  extract        ok     1 call  · 2/2 checks
-  corroborate    ok    18 calls · 4/4 checks
-  score          ok     0 calls · 2/2 checks
-  adjudicate     ok     0 calls · 3/3 checks
+── app_001 · cand_maya ──   18 claims · 19 model calls
+  verdict accuracy    94.4%   17/18
+  adverse precision  100.0%    5/5
+  retrieval recall   100.0%   15/15
+  claimed → verified  60.0% → 35.0%   reject
 
-Verdict accuracy     94.4%   17/18   (one honest disagreement, see below)
-Adverse precision   100.0%    5/5 adverse calls correct
-Adverse recall      100.0%    5/5 adverse claims caught
-Retrieval recall    100.0%   15/15 deciding documents retrieved
-Grounding                    31 citations, all from retrieved evidence
-Adversarial probe            fabricated quote, phantom document and
-                             out-of-context quote all rejected
-Claimed fit 60%  ·  Verified fit 35%  ·  Inflation 25 points
+── app_004 · cand_dev ──    19 claims · 20 model calls
+  verdict accuracy    94.7%   18/19
+  adverse precision   87.5%    7/8
+  retrieval recall   100.0%   12/12
+  claimed → verified  70.0% → 26.7%   reject
+
+── pooled ──
+  verdict accuracy    94.6%   35/37 claims
+  adverse precision   92.3%   12/13 adverse calls correct
+  adverse recall     100.0%   12/12 adverse claims caught
+  retrieval recall   100.0%   27/27 deciding documents
+  adversarial probe           fabricated quote, phantom document and
+                              out-of-context quote all rejected
 ```
 
 These are measurements, not a fixture agreeing with itself. The verdicts come
@@ -172,8 +179,8 @@ candidate experience; inventing one is a wrong that cannot be undone.
 
 ```
 Held-out synthetic (n=800)   roc_auc 0.865
-Real fixture claims (n=18)   roc_auc 0.908
-Feature parity vs TypeScript 18 cases, 0 mismatches
+Real fixture claims (n=37)   roc_auc 0.760
+Feature parity vs TypeScript 37 cases, 0 mismatches
 ```
 
 That third line is the one that matters. Features are computed in TypeScript at
@@ -224,8 +231,11 @@ anything that wants a Python runtime.
 - **Training data is synthetic**, from a generator documented in `ml/app/synth.py`.
   The reported metrics are a statement about that process, not about the world.
   The 14 real fixture claims are a smoke test, not a measurement — n=14.
-- **One candidate has a real evidence pack.** The other three applications are
-  seeded so the queue, the ranker and the aggregate view have a population.
+- **Two candidates have real evidence packs**, with deliberately different failure
+  profiles: one résumé carries two inflated claims, the other is padded with
+  borrowed credit, stale numbers and a lapsed certificate. The two remaining
+  applications are seeded so the ranker and the aggregate view have a population,
+  and the queue says so rather than offering a button that cannot work.
 - **The cohort on `/compliance` is seeded** so the monitor has something to
   measure, with one group deliberately below threshold — a monitor that never
   fires is indistinguishable from one that does not work.

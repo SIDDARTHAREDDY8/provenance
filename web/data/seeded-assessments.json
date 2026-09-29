@@ -11,19 +11,6 @@
     "distinctSources": 5
   },
   {
-    "applicationId": "app_004",
-    "candidateId": "cand_dev",
-    "roleId": "role_staff_data_platform",
-    "claimedScore": 0.95,
-    "verifiedScore": 0.54,
-    "blockers": [
-      "stream_processing"
-    ],
-    "contradicted": 1,
-    "attestedRatio": 0.11,
-    "distinctSources": 3
-  },
-  {
     "applicationId": "app_005",
     "candidateId": "cand_tom",
     "roleId": "role_senior_backend",

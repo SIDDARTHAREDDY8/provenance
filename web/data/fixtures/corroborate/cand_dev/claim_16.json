@@ -1,0 +1,11 @@
+{
+  "status": "contradicted",
+  "citations": [
+    {
+      "docId": "ev_d20",
+      "quote": "Devika has not worked on our streaming or analytics systems at all — that is a different team and she has never been on it."
+    }
+  ],
+  "supportedLevel": "none",
+  "rationale": "The referee, asked specifically about data and streaming work, states that the candidate has never worked on their streaming or analytics systems, and no other retrieved document mentions Kafka or stream processing; this covers that employer's systems only, so experience elsewhere would need separate evidence."
+}

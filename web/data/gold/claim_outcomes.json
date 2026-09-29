@@ -1,9 +1,9 @@
 {
   "claims": [
     {
-      "id": "claim_01",
+      "id": "app_001/claim_01",
       "text": "Backend engineer with seven years in payments infrastructure.",
-      "category": "scope",
+      "category": "employment",
       "assertedLevel": null,
       "retrievalScores": [
         0.3733,
@@ -11,13 +11,15 @@
         0.3423,
         0.3007,
         0.2494,
-        0.2369
+        0.2369,
+        0.3572,
+        0.2803
       ],
       "outcome": "unsupported"
     },
     {
-      "id": "claim_02",
-      "text": "Postgres, Python,\ndistributed systems and the unglamorous correctness work that keeps money moving.",
+      "id": "app_001/claim_02",
+      "text": "Postgres, Python, distributed systems and the unglamorous correctness work that keeps money moving.",
       "category": "skill",
       "assertedLevel": null,
       "retrievalScores": [
@@ -26,12 +28,14 @@
         0.3865,
         0.3444,
         0.3236,
-        0.3616
+        0.3616,
+        0.272,
+        0.312
       ],
       "outcome": "verified"
     },
     {
-      "id": "claim_03",
+      "id": "app_001/claim_03",
       "text": "Payments Engineering — Backend Engineer II (2019–2026)",
       "category": "employment",
       "assertedLevel": null,
@@ -41,12 +45,14 @@
         0.3461,
         0.3114,
         0.309,
-        0.2724
+        0.2724,
+        0.3984,
+        0.3273
       ],
       "outcome": "unsupported"
     },
     {
-      "id": "claim_04",
+      "id": "app_001/claim_04",
       "text": "Reduced p95 latency on the invoice list endpoint from 1.9s to 240ms",
       "category": "achievement",
       "assertedLevel": null,
@@ -56,12 +62,14 @@
         0.5285,
         0.5678,
         0.3681,
-        0.3375
+        0.3375,
+        0.306,
+        0.1948
       ],
       "outcome": "verified"
     },
     {
-      "id": "claim_05",
+      "id": "app_001/claim_05",
       "text": "Cut the settlement report query from 34s to 1.1s by adding a partial index",
       "category": "achievement",
       "assertedLevel": null,
@@ -71,12 +79,14 @@
         0.5454,
         0.3153,
         0.315,
-        0.3102
+        0.3102,
+        0.3228,
+        0.2515
       ],
       "outcome": "verified"
     },
     {
-      "id": "claim_06",
+      "id": "app_001/claim_06",
       "text": "Migrated an 890M-row ledger to partitioned tables with zero customer-facing errors",
       "category": "achievement",
       "assertedLevel": null,
@@ -86,12 +96,14 @@
         0.5659,
         0.388,
         0.3333,
-        0.3625
+        0.3625,
+        0.4752,
+        0.2992
       ],
       "outcome": "verified"
     },
     {
-      "id": "claim_07",
+      "id": "app_001/claim_07",
       "text": "Designed and shipped the v2 payouts API with idempotency keys and cursor pagination",
       "category": "achievement",
       "assertedLevel": null,
@@ -101,12 +113,14 @@
         0.3733,
         0.3712,
         0.4157,
-        0.3126
+        0.3126,
+        0.3076,
+        0.3489
       ],
       "outcome": "verified"
     },
     {
-      "id": "claim_08",
+      "id": "app_001/claim_08",
       "text": "Led a team of 8 engineers across Payments and Data Platform",
       "category": "scope",
       "assertedLevel": null,
@@ -116,12 +130,14 @@
         0.3996,
         0.333,
         0.3154,
-        0.3013
+        0.3013,
+        0.3577,
+        0.2898
       ],
       "outcome": "contradicted"
     },
     {
-      "id": "claim_09",
+      "id": "app_001/claim_09",
       "text": "Owned the backend hiring loop and ran interview debriefs",
       "category": "scope",
       "assertedLevel": null,
@@ -131,12 +147,14 @@
         0.178,
         0.1681,
         0.1148,
-        0.1123
+        0.1123,
+        0.333,
+        0.2979
       ],
       "outcome": "unsupported"
     },
     {
-      "id": "claim_10",
+      "id": "app_001/claim_10",
       "text": "Primary on-call for payments",
       "category": "scope",
       "assertedLevel": null,
@@ -146,12 +164,14 @@
         0.2526,
         0.2243,
         0.2048,
-        0.011
+        0.011,
+        0.388,
+        0.3292
       ],
       "outcome": "verified"
     },
     {
-      "id": "claim_11",
+      "id": "app_001/claim_11",
       "text": "resolved a sev1 connection-pool exhaustion in 38 minutes",
       "category": "achievement",
       "assertedLevel": null,
@@ -161,12 +181,14 @@
         0.5331,
         0.5365,
         0.3812,
-        0.2939
+        0.2939,
+        0.2819,
+        0.3232
       ],
       "outcome": "verified"
     },
     {
-      "id": "claim_12",
+      "id": "app_001/claim_12",
       "text": "Reduced incident volume by 90% through observability work",
       "category": "achievement",
       "assertedLevel": null,
@@ -176,12 +198,14 @@
         0.2899,
         0.2488,
         0.2375,
-        0.2277
+        0.2277,
+        0.2281,
+        0.1811
       ],
       "outcome": "partially_verified"
     },
     {
-      "id": "claim_13",
+      "id": "app_001/claim_13",
       "text": "Implemented GDPR erasure for payout records in coordination with legal",
       "category": "achievement",
       "assertedLevel": null,
@@ -191,12 +215,14 @@
         0.5391,
         0.4218,
         0.4145,
-        0.3756
+        0.3756,
+        0.3643,
+        0.2879
       ],
       "outcome": "verified"
     },
     {
-      "id": "claim_14",
+      "id": "app_001/claim_14",
       "text": "Mentored junior engineers on the Payments team",
       "category": "scope",
       "assertedLevel": null,
@@ -206,12 +232,14 @@
         0.2626,
         0.2605,
         0.2482,
-        0.2407
+        0.2407,
+        0.2178,
+        0.3477
       ],
       "outcome": "partially_verified"
     },
     {
-      "id": "claim_15",
+      "id": "app_001/claim_15",
       "text": "Expert-level production experience with Kafka and event streaming",
       "category": "skill",
       "assertedLevel": "expert",
@@ -221,12 +249,14 @@
         0.3021,
         0.1664,
         0.2079,
-        0.1555
+        0.1555,
+        0.1712,
+        0.1433
       ],
       "outcome": "contradicted"
     },
     {
-      "id": "claim_16",
+      "id": "app_001/claim_16",
       "text": "Advanced PostgreSQL performance tuning at scale",
       "category": "skill",
       "assertedLevel": "advanced",
@@ -236,12 +266,14 @@
         0.2608,
         0.2428,
         0.1852,
-        0.2243
+        0.2243,
+        0.1505,
+        0.1123
       ],
       "outcome": "verified"
     },
     {
-      "id": "claim_17",
+      "id": "app_001/claim_17",
       "text": "Kubernetes at production scale",
       "category": "skill",
       "assertedLevel": null,
@@ -251,12 +283,14 @@
         0.1693,
         0.1393,
         0.233,
-        0.1268
+        0.1268,
+        0.1372,
+        0.18
       ],
       "outcome": "partially_verified"
     },
     {
-      "id": "claim_18",
+      "id": "app_001/claim_18",
       "text": "AWS Certified Solutions Architect - Professional",
       "category": "credential",
       "assertedLevel": null,
@@ -266,9 +300,334 @@
         0.241,
         0.2242,
         0.1989,
-        0.19
+        0.19,
+        0.3142,
+        0.1666
       ],
       "outcome": "verified"
+    },
+    {
+      "id": "app_004/claim_01",
+      "text": "Staff Engineer, Infrastructure",
+      "category": "employment",
+      "assertedLevel": null,
+      "retrievalScores": [
+        0.3165,
+        0.2769,
+        0.1857,
+        0.4284,
+        0.2725,
+        0.2627,
+        0.2555,
+        0.3165
+      ],
+      "outcome": "verified"
+    },
+    {
+      "id": "app_004/claim_02",
+      "text": "Platform Engineering — Staff Engineer (2021–2026)",
+      "category": "employment",
+      "assertedLevel": null,
+      "retrievalScores": [
+        0.2828,
+        0.243,
+        0.138,
+        0.5905,
+        0.4705,
+        0.3657,
+        0.3113,
+        0.2091
+      ],
+      "outcome": "unsupported"
+    },
+    {
+      "id": "app_004/claim_03",
+      "text": "Staff infrastructure engineer.",
+      "category": "employment",
+      "assertedLevel": null,
+      "retrievalScores": [
+        0.3212,
+        0.3205,
+        0.1981,
+        0.3985,
+        0.2123,
+        0.2547,
+        0.1968,
+        0.1749
+      ],
+      "outcome": "verified"
+    },
+    {
+      "id": "app_004/claim_04",
+      "text": "Kubernetes, Terraform, cost engineering and the\nreliability work that stops platforms waking people up at night.",
+      "category": "skill",
+      "assertedLevel": null,
+      "retrievalScores": [
+        0.3613,
+        0.4098,
+        0.423,
+        0.2809,
+        0.2641,
+        0.3296,
+        0.2139,
+        0.2355
+      ],
+      "outcome": "partially_verified"
+    },
+    {
+      "id": "app_004/claim_05",
+      "text": "Cut cloud spend by 38% across the platform estate in one fiscal year",
+      "category": "achievement",
+      "assertedLevel": null,
+      "retrievalScores": [
+        0.1912,
+        0.6745,
+        0.2983,
+        0.2876,
+        0.2105,
+        0.2469,
+        0.277,
+        0.1992
+      ],
+      "outcome": "verified"
+    },
+    {
+      "id": "app_004/claim_06",
+      "text": "Migrated 40 services from hand-rolled deploy scripts to Terraform modules",
+      "category": "achievement",
+      "assertedLevel": null,
+      "retrievalScores": [
+        0.1717,
+        0.8285,
+        0.7814,
+        0.6645,
+        0.3394,
+        0.3484,
+        0.3375,
+        0.3774
+      ],
+      "outcome": "verified"
+    },
+    {
+      "id": "app_004/claim_07",
+      "text": "Migrated 40 services from hand-rolled deploy scripts to Terraform modules",
+      "category": "achievement",
+      "assertedLevel": null,
+      "retrievalScores": [
+        0.1717,
+        0.8285,
+        0.7814,
+        0.6645,
+        0.3394,
+        0.3484,
+        0.3375,
+        0.3774
+      ],
+      "outcome": "verified"
+    },
+    {
+      "id": "app_004/claim_08",
+      "text": "Architected the multi-region failover design for the payments estate",
+      "category": "achievement",
+      "assertedLevel": null,
+      "retrievalScores": [
+        0.4433,
+        0.8618,
+        0.3461,
+        0.3024,
+        0.3866,
+        0.2724,
+        0.3284,
+        0.2118
+      ],
+      "outcome": "contradicted"
+    },
+    {
+      "id": "app_004/claim_09",
+      "text": "Managed a platform estate of 400+ microservices",
+      "category": "scope",
+      "assertedLevel": null,
+      "retrievalScores": [
+        0.1932,
+        0.1663,
+        0.113,
+        0.5274,
+        0.4997,
+        0.3531,
+        0.3307,
+        0.2969
+      ],
+      "outcome": "contradicted"
+    },
+    {
+      "id": "app_004/claim_10",
+      "text": "Led the platform working group of 6 engineers",
+      "category": "scope",
+      "assertedLevel": null,
+      "retrievalScores": [
+        0.4053,
+        0.2173,
+        0.0856,
+        0.6546,
+        0.3499,
+        0.3469,
+        0.3198,
+        0.2827
+      ],
+      "outcome": "verified"
+    },
+    {
+      "id": "app_004/claim_11",
+      "text": "Reduced p99 API gateway latency by 60% through connection pooling",
+      "category": "achievement",
+      "assertedLevel": null,
+      "retrievalScores": [
+        0.1932,
+        0.7617,
+        0.4321,
+        0.2817,
+        0.1956,
+        0.1923,
+        0.1234,
+        0.1675
+      ],
+      "outcome": "partially_verified"
+    },
+    {
+      "id": "app_004/claim_12",
+      "text": "Drove median time to recovery from 45 minutes to 12",
+      "category": "achievement",
+      "assertedLevel": null,
+      "retrievalScores": [
+        0.137,
+        0.481,
+        0.2017,
+        0.1809,
+        0.1767,
+        0.163,
+        0.2328,
+        0.0872
+      ],
+      "outcome": "contradicted"
+    },
+    {
+      "id": "app_004/claim_13",
+      "text": "Built the internal developer platform used by every engineering team",
+      "category": "achievement",
+      "assertedLevel": null,
+      "retrievalScores": [
+        0.2968,
+        0.6994,
+        0.5063,
+        0.2498,
+        0.2561,
+        0.2287,
+        0.1782,
+        0.2212
+      ],
+      "outcome": "contradicted"
+    },
+    {
+      "id": "app_004/claim_14",
+      "text": "Expert Kubernetes and Terraform at production scale",
+      "category": "skill",
+      "assertedLevel": "expert",
+      "retrievalScores": [
+        0.4425,
+        0.4696,
+        0.3711,
+        0.3073,
+        0.3451,
+        0.4676,
+        0.3301,
+        0.2723
+      ],
+      "outcome": "verified"
+    },
+    {
+      "id": "app_004/claim_15",
+      "text": "Expert Kubernetes and Terraform at production scale",
+      "category": "skill",
+      "assertedLevel": "expert",
+      "retrievalScores": [
+        0.4425,
+        0.4696,
+        0.3711,
+        0.3073,
+        0.3451,
+        0.4676,
+        0.3301,
+        0.2723
+      ],
+      "outcome": "partially_verified"
+    },
+    {
+      "id": "app_004/claim_16",
+      "text": "Production experience with Kafka and stream processing",
+      "category": "skill",
+      "assertedLevel": "intermediate",
+      "retrievalScores": [
+        0.413,
+        0.2343,
+        0.2224,
+        0.2235,
+        0.2579,
+        0.2088,
+        0.2299,
+        0.2152
+      ],
+      "outcome": "contradicted"
+    },
+    {
+      "id": "app_004/claim_17",
+      "text": "Advanced data modelling for analytics workloads",
+      "category": "skill",
+      "assertedLevel": "advanced",
+      "retrievalScores": [
+        0.3227,
+        0.2987,
+        0.1886,
+        0.1601,
+        0.1941,
+        0.1548,
+        0.1541,
+        0.133
+      ],
+      "outcome": "contradicted"
+    },
+    {
+      "id": "app_004/claim_18",
+      "text": "Python and Go",
+      "category": "skill",
+      "assertedLevel": null,
+      "retrievalScores": [
+        0.0733,
+        0.3918,
+        0.2319,
+        0.1729,
+        0.1045,
+        0.0714,
+        0.1091,
+        0.1412
+      ],
+      "outcome": "verified"
+    },
+    {
+      "id": "app_004/claim_19",
+      "text": "Certified Kubernetes Administrator (CKA)",
+      "category": "credential",
+      "assertedLevel": null,
+      "retrievalScores": [
+        0.8261,
+        0.2124,
+        0.1809,
+        0.2977,
+        0.2934,
+        0.2205,
+        0.2359,
+        0.1636
+      ],
+      "outcome": "partially_verified"
     }
   ]
 }

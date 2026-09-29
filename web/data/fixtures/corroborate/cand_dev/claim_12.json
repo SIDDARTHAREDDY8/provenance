@@ -1,0 +1,11 @@
+{
+  "status": "contradicted",
+  "citations": [
+    {
+      "docId": "ev_d11",
+      "quote": "Median time to recovery across platform incidents moved from 45 minutes to 22 over the half."
+    }
+  ],
+  "supportedLevel": "none",
+  "rationale": "The incident review records median time to recovery falling from 45 minutes to 22, not to 12, and it attributes the improvement to the runbook index and direct paging rather than to any individual, so the 12-minute figure and the personal attribution are not supported by the evidence."
+}

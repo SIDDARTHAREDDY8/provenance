@@ -96,6 +96,12 @@ suppressed figure by accident. The reference rate for the four-fifths ratio is
 computed over reportable groups only, or a suppressed group's rate leaks through
 its own ratio.
 
+**Cache keys are namespaced by candidate.** Corroboration is cached as
+`corroborate/<candidateId>/<claimId>`. It was keyed on the claim id alone, and
+claim ids restart at `claim_01` for every person — so capturing a second
+candidate silently overwrote the first, and a live system would have served one
+person's verdicts for another. Found by adding a second candidate.
+
 ## Cost shape
 
 Corroboration is **per candidate**; scoring is **per role**. A second application

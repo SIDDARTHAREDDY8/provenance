@@ -1,0 +1,11 @@
+{
+  "status": "partially_verified",
+  "citations": [
+    {
+      "docId": "ev_d10",
+      "quote": "p99 on the gateway went from 420ms to 273ms under production replay."
+    }
+  ],
+  "supportedLevel": "intermediate",
+  "rationale": "The PR shows connection pooling in the gateway reduced p99 from 420ms to 273ms, which is about a 35% reduction, so the claimed 60% is larger than the evidence supports."
+}

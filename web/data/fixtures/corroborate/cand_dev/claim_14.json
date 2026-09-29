@@ -1,0 +1,23 @@
+{
+  "status": "verified",
+  "citations": [
+    {
+      "docId": "ev_d20",
+      "quote": "On infrastructure she is the person I would want on any Kubernetes or Terraform problem, and the drain controller was genuinely clever work."
+    },
+    {
+      "docId": "ev_d03",
+      "quote": "Audited every deployment against 30-day p95 utilisation and corrected 180 pod specs."
+    },
+    {
+      "docId": "ev_d05",
+      "quote": "Twelve services now provision through the shared modules with per-environment state."
+    },
+    {
+      "docId": "ev_d07",
+      "quote": "The estate currently comprises 43 production services across 7 teams."
+    }
+  ],
+  "supportedLevel": "expert",
+  "rationale": "The evidence shows Kubernetes work (180 pod specs rightsized) and Terraform work (a shared module library with per-environment state, drift detection, and a drift reconciler) on a 43-service production estate, and a staff-engineer referee describes this as top-tier capability; the CKA certification lapsed in March 2024, but that does not conflict with the claim."
+}

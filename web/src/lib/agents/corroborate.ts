@@ -144,7 +144,11 @@ export const corroborate: StepDef<CorroborateInput, CorroborateOutput> = {
         supportedLevel?: string;
         rationale: string;
       }>({
-        cacheKey: `corroborate/${claim.id}`,
+        // Namespaced by candidate. Claim ids restart at claim_01 for every
+        // person, so a flat key made two candidates share a cache slot — the
+        // second capture silently overwrote the first, and in a live system
+        // would have served one person's verdicts for another.
+        cacheKey: `corroborate/${claim.candidateId}/${claim.id}`,
         system: SYSTEM,
         prompt: `CLAIM (${claim.category}, from "${claim.section}")
 "${claim.text}"

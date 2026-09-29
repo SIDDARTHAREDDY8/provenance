@@ -1,0 +1,15 @@
+{
+  "status": "partially_verified",
+  "citations": [
+    {
+      "docId": "ev_d18",
+      "quote": "This certification was valid through 14 March 2024 and has since expired. It has not been renewed."
+    },
+    {
+      "docId": "ev_d18",
+      "quote": "Devika Nair passed Certified Kubernetes Administrator on 14 March 2021."
+    }
+  ],
+  "supportedLevel": "intermediate",
+  "rationale": "The CNCF record confirms the CKA was earned on 14 March 2021, but it also states the certification expired on 14 March 2024 and has not been renewed, so it is not a current certification."
+}

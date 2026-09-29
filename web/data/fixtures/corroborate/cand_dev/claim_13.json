@@ -1,0 +1,15 @@
+{
+  "status": "contradicted",
+  "citations": [
+    {
+      "docId": "ev_d13",
+      "quote": "The internal developer platform has been adopted by three of the five engineering teams. Payments and Growth are still on the legacy pipeline; Payments has a migration scheduled, Growth has not committed."
+    },
+    {
+      "docId": "ev_d21",
+      "quote": "The platform working group is six engineers seconded part-time from three teams, chaired by Devika Nair."
+    }
+  ],
+  "supportedLevel": "intermediate",
+  "rationale": "The evidence shows the platform is used by three of five engineering teams, not every team, and that the candidate chaired a six-person working group that sets platform standards, so the claims of building it and of universal adoption are not supported as written."
+}

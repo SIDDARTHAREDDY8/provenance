@@ -1,0 +1,15 @@
+{
+  "status": "contradicted",
+  "citations": [
+    {
+      "docId": "ev_d19",
+      "quote": "I would want to be precise about the multi-region failover: that design was Arjun's."
+    },
+    {
+      "docId": "ev_d08",
+      "quote": "Author: Arjun Desai. Reviewers: Devika Nair, Priyanka Iyer."
+    }
+  ],
+  "supportedLevel": "none",
+  "rationale": "The design document lists Arjun Desai as its author and Devika Nair as a reviewer, and the referee states the failover design was Arjun's, so the evidence does not support the claim of architecting it (the record does show a review that changed the promotion path and game days run by Devika Nair)."
+}

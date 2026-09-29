@@ -1,0 +1,14 @@
+{
+  "status": "verified",
+  "citations": [
+    {
+      "docId": "ev_d19",
+      "quote": "Devika is a staff individual contributor."
+    },
+    {
+      "docId": "ev_d20",
+      "quote": "On infrastructure she is the person I would want on any Kubernetes or Terraform problem, and the drain controller was genuinely clever work."
+    }
+  ],
+  "rationale": "The Director of Engineering confirms a staff individual-contributor level, and a staff-engineer referee describes infrastructure work (Kubernetes, Terraform, a drain controller) as the area where the candidate is strongest, which together support the title as written."
+}

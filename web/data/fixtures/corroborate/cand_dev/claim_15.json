@@ -1,0 +1,19 @@
+{
+  "status": "partially_verified",
+  "citations": [
+    {
+      "docId": "ev_d05",
+      "quote": "Twelve services now provision through the shared modules with per-environment state. Drift detection runs nightly and opens a ticket rather than auto-applying."
+    },
+    {
+      "docId": "ev_d03",
+      "quote": "Audited every deployment against 30-day p95 utilisation and corrected 180 pod specs."
+    },
+    {
+      "docId": "ev_d18",
+      "quote": "This certification was valid through 14 March 2024 and has since expired. It has not been renewed."
+    }
+  ],
+  "supportedLevel": "advanced",
+  "rationale": "The evidence shows substantial hands-on Kubernetes and Terraform work across a 43-service production estate (a 12-service module migration, drift detection, and rightsizing 180 pod specs), which supports advanced-level use at production scale, but the CKA certification has expired and nothing in the evidence directly establishes the 'expert' level the claim states."
+}

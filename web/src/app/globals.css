@@ -18,6 +18,10 @@
   --color-sheet-2: #e7eaee;
   --color-rule: #d4d9df;
   --color-rule-strong: #b3bbc4;
+  /* Section dividers. Ink-weight on paper, but it must not invert to near-white
+     on a dark ground — a rule that reads as "firm" at 15% contrast becomes a
+     glare at 90%. Tracks the ground, not the text. */
+  --color-rule-emphasis: #14181d;
 
   --color-ink: #14181d;
   --color-ink-2: #4d5661;
@@ -47,6 +51,7 @@
     --color-sheet-2: #1b1f24;
     --color-rule: #262b31;
     --color-rule-strong: #3a4149;
+    --color-rule-emphasis: #525d6a;
 
     --color-ink: #e8eaed;
     --color-ink-2: #a3acb6;
@@ -100,7 +105,7 @@
   }
 
   .section-head {
-    @apply flex items-baseline gap-3 mt-11 pb-2 border-b border-ink;
+    @apply flex items-baseline gap-3 mt-11 pb-2 border-b border-rule-emphasis;
   }
   .section-head h2 {
     @apply text-xs font-semibold uppercase tracking-[0.09em] m-0;

@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const config: NextConfig = {
-  experimental: { typedRoutes: true },
+  typedRoutes: true,
   // Next writes AGENTS.md/CLAUDE.md into the app dir on dev; this repo keeps its
   // guidance in README.md and ARCHITECTURE.md rather than generated stubs.
   agentRules: false,

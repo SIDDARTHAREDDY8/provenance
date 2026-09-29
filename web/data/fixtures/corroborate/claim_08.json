@@ -1,11 +1,14 @@
 {
-  "status": "verified",
+  "status": "contradicted",
   "citations": [
     {
-      "docId": "ev_008",
-      "quote": "I was primary on-call. Diagnosed a connection-pool exhaustion caused by a slow downstream PSP call"
+      "docId": "ev_ref01",
+      "quote": "he did not have direct reports at any point and was not in the management chain. On the ledger partitioning she coordinated three engineers as the technical lead of that project, which is the largest span she has held."
+    },
+    {
+      "docId": "ev_007",
+      "quote": "She coordinated three engineers across Payments and Data Platform without being asked to, and the migration landed with no incidents."
     }
   ],
-  "rationale": "The incident ticket confirms the role, the failure mode and the duration.",
-  "supportedLevel": "advanced"
+  "rationale": "The evidence shows technical leadership of a three-engineer effort spanning Payments and Data Platform, and the manager states there were no direct reports and that three is the largest span held, which is incompatible with leading a team of 8 engineers."
 }

@@ -1,11 +1,6 @@
 {
-  "status": "partially_verified",
-  "citations": [
-    {
-      "docId": "ev_009",
-      "quote": "Added a Prometheus rule plus a dashboard panel"
-    }
-  ],
-  "rationale": "Substantial instrumentation and alerting work is documented, but nothing in the pack supports the 90% figure.",
-  "supportedLevel": "intermediate"
+  "status": "unsupported",
+  "citations": [],
+  "supportedLevel": "none",
+  "rationale": "None of the retrieved evidence mentions owning a backend hiring loop, conducting interviews or running debriefs; the closest items (reviewing a junior engineer's pull requests, coordinating engineers on a migration) describe different activities, so this claim is neither supported nor contradicted."
 }

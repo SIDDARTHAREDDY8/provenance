@@ -2,14 +2,10 @@
   "status": "verified",
   "citations": [
     {
-      "docId": "ev_011",
-      "quote": "Idempotency keys with a 24h replay window, RFC 7807 problem details for errors, and cursor pagination rather than offset"
-    },
-    {
-      "docId": "ev_012",
-      "quote": "Maya's v2 payouts spec was the cleanest interface proposal I have reviewed here"
+      "docId": "ev_001",
+      "quote": "p95 on /v2/invoices went from 1.9s to 240ms on the staging dataset (2.4M rows)."
     }
   ],
-  "rationale": "The pull request describes exactly these interface decisions and a peer reference corroborates the design work.",
-  "supportedLevel": "advanced"
+  "supportedLevel": "advanced",
+  "rationale": "PR #211 directly documents the p95 reduction from 1.9s to 240ms on the invoice list endpoint after replacing an N+1 query with a lateral join, though the measurement was taken on the staging dataset rather than production."
 }

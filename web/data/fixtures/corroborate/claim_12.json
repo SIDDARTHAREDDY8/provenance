@@ -2,14 +2,14 @@
   "status": "partially_verified",
   "citations": [
     {
-      "docId": "ev_018",
-      "quote": "She has started reviewing Hana's pull requests carefully and explaining the reasoning rather than just approving"
+      "docId": "ev_009",
+      "quote": "Added a Prometheus rule plus a dashboard panel, and added the saturation metric to the payments service SLO review."
     },
     {
-      "docId": "ev_ref01",
-      "quote": "She reviewed pull requests for one junior engineer, Hana, over about six months"
+      "docId": "ev_010",
+      "quote": "Instrumented the settlement pipeline with OpenTelemetry spans so we can attribute latency between our code and the PSP."
     }
   ],
-  "rationale": "Documented mentoring of one junior engineer over roughly six months; the plural overstates the scope.",
-  "supportedLevel": "beginner"
+  "supportedLevel": "intermediate",
+  "rationale": "The evidence shows real observability work (a pool-saturation alert and dashboard panel, plus OpenTelemetry tracing of the settlement path), but none of the retrieved documents give incident counts or show a 90% reduction, so the magnitude is not supported."
 }

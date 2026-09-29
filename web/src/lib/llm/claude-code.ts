@@ -1,14 +1,31 @@
 import { execFile } from "node:child_process";
+import { mkdtempSync } from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import { promisify } from "node:util";
 import type { LlmProvider, StructuredRequest } from "./provider";
 
 const run = promisify(execFile);
+
+/**
+ * An empty working directory, created once per process.
+ *
+ * The CLI loads whatever project context it finds where it runs. Invoked inside
+ * this repo it billed 86k cached input tokens per call for CLAUDE.md, settings
+ * and MCP definitions that an adjudication call has no use for. Running from an
+ * empty directory with settings and MCP servers switched off took the same call
+ * from $0.69 to $0.06 — twelve times cheaper for identical output.
+ */
+const NEUTRAL_CWD = mkdtempSync(path.join(os.tmpdir(), "provenance-llm-"));
 
 interface CliResult {
   is_error?: boolean;
   result?: string;
   total_cost_usd?: number;
 }
+
+/** Running total for the capture script, so a run reports what it cost. */
+export let claudeCodeSpendUsd = 0;
 
 /**
  * Claude Code in headless mode as the model provider.
@@ -61,19 +78,31 @@ ${schema}`;
       // filesystem could answer from the fixtures instead of the evidence.
       "--disallowedTools",
       "Bash,Read,Write,Edit,Glob,Grep,WebFetch,WebSearch",
+      // Nothing about the host environment should reach a hiring decision, and
+      // every byte of it is billed on each call. See NEUTRAL_CWD.
+      "--setting-sources",
+      "",
+      "--strict-mcp-config",
+      "--mcp-config",
+      '{"mcpServers":{}}',
     ];
     if (req.system) args.push("--append-system-prompt", req.system);
 
-    // The nested CLI must not inherit this process's Anthropic transport
-    // settings, or it authenticates as the parent session and is rejected.
+    // The nested CLI must not inherit the parent's Anthropic transport settings
+    // or session token. When it does, it authenticates as the parent session
+    // rather than from the CLI's own stored credentials and the API rejects it
+    // with "401 Invalid bearer token" — which looks exactly like being logged
+    // out, and is not.
     const env = { ...process.env };
     delete env.ANTHROPIC_BASE_URL;
     delete env.ANTHROPIC_AUTH_TOKEN;
+    delete env.CLAUDE_CODE_OAUTH_TOKEN;
 
     let stdout: string;
     try {
       ({ stdout } = await run("claude", args, {
         env,
+        cwd: NEUTRAL_CWD,
         maxBuffer: 16 * 1024 * 1024,
         timeout: 180_000,
       }));
@@ -84,6 +113,7 @@ ${schema}`;
     }
 
     const envelope = JSON.parse(stdout) as CliResult;
+    claudeCodeSpendUsd += envelope.total_cost_usd ?? 0;
     if (envelope.is_error || typeof envelope.result !== "string") {
       throw new Error(`claude CLI error for "${req.cacheKey}": ${envelope.result ?? "no result"}`);
     }

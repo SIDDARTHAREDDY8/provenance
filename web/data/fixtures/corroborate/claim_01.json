@@ -1,10 +1,6 @@
 {
-  "status": "verified",
-  "citations": [
-    {
-      "docId": "ev_001",
-      "quote": "p95 on /v2/invoices went from 1.9s to 240ms on the staging dataset"
-    }
-  ],
-  "rationale": "The pull request states the same endpoint and the same before/after figures."
+  "status": "unsupported",
+  "citations": [],
+  "supportedLevel": "none",
+  "rationale": "The retrieved evidence shows current payments work (ledger partitioning, payouts spec, payments on-call) but gives no start date, tenure or work history, so it neither confirms nor rules out seven years."
 }

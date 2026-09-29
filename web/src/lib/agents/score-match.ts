@@ -42,10 +42,21 @@ export const scoreMatch: StepDef<MatchInput, MatchResult> = {
     for (const req of input.role.requirements) {
       const relevant = input.claims.filter((c) => c.skillId === req.skillId);
 
-      const claimed = relevant.reduce<SkillLevel>(
+      // The claimed side models what a keyword-matching ATS does: the skill
+      // appears on the résumé, so the requirement counts as met. Where the
+      // résumé states a level outright ("Expert-level Kafka") that is used
+      // instead, but an unstated level is not inferred from prose.
+      //
+      // An earlier version asked the model for a level on every claim and
+      // scored on the answer. Running it live exposed that: the model declined
+      // to assign one on 16 of 18 claims, correctly, because the résumé does
+      // not state one. Scoring on an invented seniority level would have been
+      // the same unfounded inference this pipeline exists to catch.
+      const stated = relevant.reduce<SkillLevel>(
         (max, c) => (levelValue(c.assertedLevel ?? "none") > levelValue(max) ? c.assertedLevel ?? max : max),
         "none",
       );
+      const claimed: SkillLevel = levelValue(stated) > 0 ? stated : relevant.length > 0 ? req.minLevel : "none";
 
       const verified = relevant.reduce<SkillLevel>((max, c) => {
         const v = verdictByClaim.get(c.id);

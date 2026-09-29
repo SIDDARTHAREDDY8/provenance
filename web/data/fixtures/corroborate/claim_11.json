@@ -2,18 +2,17 @@
   "status": "verified",
   "citations": [
     {
-      "docId": "ev_002",
-      "quote": "Documented why a partial index beats a composite here given the 4% selectivity"
+      "docId": "ev_008",
+      "quote": "INC-412 — sev1: payout webhooks stalled for 38 minutes"
     },
     {
-      "docId": "ev_003",
-      "quote": "Rewrote the reconciliation writer in Python to use COPY instead of row-by-row inserts"
+      "docId": "ev_008",
+      "quote": "I was primary on-call. Diagnosed a connection-pool exhaustion caused by a slow downstream PSP call holding transactions open."
     },
     {
-      "docId": "ev_ref02",
-      "quote": "On Postgres she is the strongest person on the payments team"
+      "docId": "ev_008",
+      "quote": "Mitigated by moving the PSP call outside the transaction boundary and shipping a pool-saturation alert."
     }
   ],
-  "rationale": "Three independent pieces of work plus a staff-engineer reference support advanced-level Postgres.",
-  "supportedLevel": "advanced"
+  "rationale": "The INC-412 ticket records a sev1 connection-pool exhaustion that stalled payouts for 38 minutes, and says you were primary on-call, diagnosed it and mitigated it, which matches the claim as written."
 }

@@ -1,10 +1,23 @@
 {
-  "status": "verified",
+  "status": "partially_verified",
   "citations": [
     {
-      "docId": "ev_002",
-      "quote": "Added a partial index on events(tenant_id, created_at) WHERE kind = 'settlement', which cut the report query from 34s to 1.1s"
+      "docId": "ev_ref02",
+      "quote": "On Postgres she is the strongest person on the payments team"
+    },
+    {
+      "docId": "ev_003",
+      "quote": "Rewrote the reconciliation writer in Python to use COPY instead of row-by-row inserts."
+    },
+    {
+      "docId": "ev_015",
+      "quote": "It immediately found a half-cent rounding drift on JPY, which has no minor unit."
+    },
+    {
+      "docId": "ev_ref02",
+      "quote": "Maya has not worked on our streaming systems."
     }
   ],
-  "rationale": "The ticket records the same query, the same index strategy and the same timings."
+  "supportedLevel": "advanced",
+  "rationale": "The evidence strongly supports the Postgres, Python and money-correctness parts of the claim, but it shows no distributed-systems work beyond a ledger migration design doc, and the referee states there is no production experience with streaming or event infrastructure."
 }

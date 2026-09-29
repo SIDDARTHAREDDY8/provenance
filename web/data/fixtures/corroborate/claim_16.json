@@ -1,0 +1,23 @@
+{
+  "status": "verified",
+  "citations": [
+    {
+      "docId": "ev_001",
+      "quote": "p95 on /v2/invoices went from 1.9s to 240ms on the staging dataset (2.4M rows)."
+    },
+    {
+      "docId": "ev_004",
+      "quote": "Proposal to move the ledger_entries table (890M rows) to declarative partitioning by month."
+    },
+    {
+      "docId": "ev_002",
+      "quote": "Documented why a partial index beats a composite here given the 4% selectivity."
+    },
+    {
+      "docId": "ev_ref02",
+      "quote": "On Postgres she is the strongest person on the payments team and I have taken her review on partitioning decisions for my own work."
+    }
+  ],
+  "supportedLevel": "advanced",
+  "rationale": "The evidence shows query rewrites, index design and a partitioning plan for an 890M-row table, and an attested referee statement describes the strongest Postgres skill on the payments team, which supports advanced PostgreSQL performance tuning at scale."
+}

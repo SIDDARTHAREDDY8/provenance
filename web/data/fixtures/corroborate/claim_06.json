@@ -2,9 +2,18 @@
   "status": "verified",
   "citations": [
     {
-      "docId": "ev_018",
-      "quote": "Maya ran the backend hiring loop for two consecutive quarters and led every debrief"
+      "docId": "ev_006",
+      "quote": "Ran over nine nights with zero customer-facing errors; I held the pager for each window. Parity checksum matched on all 890M rows before we flipped reads."
+    },
+    {
+      "docId": "ev_004",
+      "quote": "Proposal to move the ledger_entries table (890M rows) to declarative partitioning by month."
+    },
+    {
+      "docId": "ev_007",
+      "quote": "the migration landed with no incidents."
     }
   ],
-  "rationale": "The performance review describes her running the hiring loop."
+  "supportedLevel": "advanced",
+  "rationale": "The backfill PR states the 890M-row migration ran with zero customer-facing errors and matched parity on every row, and the design doc and manager feedback are consistent with that."
 }

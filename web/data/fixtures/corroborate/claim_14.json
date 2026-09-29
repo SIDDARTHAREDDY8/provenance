@@ -2,10 +2,14 @@
   "status": "partially_verified",
   "citations": [
     {
-      "docId": "ev_016",
-      "quote": "Scaled the payments-api deployment from 6 to 9 replicas ahead of the quarter-end settlement peak"
+      "docId": "ev_ref01",
+      "quote": "She reviewed pull requests for one junior engineer, Hana, over about six months."
+    },
+    {
+      "docId": "ev_018",
+      "quote": "She has started reviewing Hana's pull requests carefully and explaining the reasoning rather than just approving, which Hana has told me is the most useful onboarding she has had."
     }
   ],
-  "rationale": "The only Kubernetes evidence is a single replica-count change, which supports beginner rather than advanced.",
-  "supportedLevel": "beginner"
+  "supportedLevel": "beginner",
+  "rationale": "The evidence shows code-review mentoring of one junior engineer, Hana, over about six months, which supports mentoring in a limited form but not mentoring of multiple junior engineers as the plural claim implies."
 }

@@ -1,15 +1,5 @@
 {
-  "status": "verified",
-  "citations": [
-    {
-      "docId": "ev_004",
-      "quote": "Proposal to move the ledger_entries table (890M rows) to declarative partitioning by month"
-    },
-    {
-      "docId": "ev_007",
-      "quote": "the migration landed with no incidents"
-    }
-  ],
-  "rationale": "The design doc, the dual-write PR and the backfill PR together document the migration and the zero-error outcome.",
-  "supportedLevel": "advanced"
+  "status": "unsupported",
+  "citations": [],
+  "rationale": "The retrieved documents describe work on payouts, ledger partitioning, on-call and mentoring, but none of them states the Backend Engineer II title, the Payments Engineering team as a formal employment record, or the 2019–2026 dates, so the claim can be neither confirmed nor refuted from this evidence."
 }

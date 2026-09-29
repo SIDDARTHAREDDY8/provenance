@@ -3,14 +3,17 @@ import path from "node:path";
 import type { LlmProvider, StructuredRequest } from "./provider";
 
 /**
- * Replays authored fixtures so the runtime, its retries, its checks and the
+ * Replays captured model output so the runtime, its retries, its checks and the
  * eval suite all run with no key and no network.
  *
- * These fixtures are HAND-AUTHORED, not captured model output. They are written
- * to include the failure modes a real extractor exhibits — fabricated quotes,
- * off-taxonomy skills, citations to documents that do not exist — so the
- * validation path is exercised on every run. Set ANTHROPIC_API_KEY to replace
- * this with a live model; nothing downstream changes.
+ * These fixtures are REAL responses, captured by `npm run capture` and committed
+ * verbatim. Nothing in them is edited — an edited fixture stops being evidence
+ * of anything. The capture script replays what it wrote and fails if any verdict
+ * differs, so what ships here is exactly what the model said.
+ *
+ * The citation validator is therefore exercised by an adversarial probe in the
+ * eval rather than by a planted fabrication: with honest captured output, "zero
+ * rejections" would say nothing about whether the gate works.
  */
 export class FixtureProvider implements LlmProvider {
   readonly name = "fixture";

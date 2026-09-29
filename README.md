@@ -135,18 +135,34 @@ Two suites, because the failure modes are different.
 
 ```
 Pipeline steps
-  extract        ok    1 call   · 2/2 checks
-  corroborate    ok    14 calls · 3/3 checks
-  score          ok    0 calls  · 2/2 checks
-  adjudicate     ok    0 calls  · 3/3 checks
+  extract        ok     1 call  · 2/2 checks
+  corroborate    ok    18 calls · 4/4 checks
+  score          ok     0 calls · 2/2 checks
+  adjudicate     ok     0 calls · 3/3 checks
 
-Verdict accuracy     100.0%   14/14
-Adverse precision    100.0%   3/3 adverse calls correct
-Adverse recall       100.0%   3/3 adverse claims caught
-Grounding            21 citations, all from retrieved evidence
-                     1 rejected (quote_not_found), 0 survived
+Verdict accuracy     94.4%   17/18   (one honest disagreement, see below)
+Adverse precision   100.0%    5/5 adverse calls correct
+Adverse recall      100.0%    5/5 adverse claims caught
+Retrieval recall    100.0%   15/15 deciding documents retrieved
+Grounding                    31 citations, all from retrieved evidence
+Adversarial probe            fabricated quote, phantom document and
+                             out-of-context quote all rejected
 Claimed fit 60%  ·  Verified fit 35%  ·  Inflation 25 points
 ```
+
+These are measurements, not a fixture agreeing with itself. The verdicts come
+from a real model run; the gold labels were written by hand from the evidence
+pack before comparing. The one residual disagreement is claim_02, where the
+model reads the résumé's skills summary as partially verified and I read it as
+verified — which is the kind of thing a rubric has to settle, not a prompt.
+
+**Retrieval recall is scored separately on purpose.** An adjudicator cannot be
+better than its context, and without that axis "the model judged badly" and "the
+model was never shown the deciding document" both surface as a verdict error
+while needing opposite fixes. That distinction was not theoretical: the first
+live run produced an adverse verdict that was correct given its context and
+wrong given the full pack, because the one document showing the claimed effect
+never made the cut. The fix was `k = 6 → 8`, not a better prompt.
 
 Adverse **precision** is gated above recall on purpose: a false adverse verdict
 is a person not hired for a reason that was not true. Missing one is a worse
@@ -156,8 +172,8 @@ candidate experience; inventing one is a wrong that cannot be undone.
 
 ```
 Held-out synthetic (n=800)   roc_auc 0.865
-Real fixture claims (n=14)   roc_auc 1.000
-Feature parity vs TypeScript 14 cases, 0 mismatches
+Real fixture claims (n=18)   roc_auc 0.908
+Feature parity vs TypeScript 18 cases, 0 mismatches
 ```
 
 That third line is the one that matters. Features are computed in TypeScript at
@@ -193,13 +209,11 @@ anything that wants a Python runtime.
 
 ## Honest limits
 
-- **The fixtures are authored, not captured.** `web/data/fixtures/` was written by
-  hand, including its deliberate failure, and is labelled as such in
-  `web/src/lib/llm/fixture.ts`. `npm run capture` replaces them with genuine
-  model output — via the API, or via the Claude Code CLI's own login if you have
-  a subscription but no API credit. It writes each response verbatim, then
-  replays from what it wrote and fails if any verdict differs, because a fixture
-  that does not reproduce is not a fixture.
+- **The committed fixtures are real captured output**, written verbatim by
+  `npm run capture` and replay-verified. What is synthetic is the *corpus* — the
+  résumé and evidence pack are written, not sampled from a real candidate.
+- **The gold labels are mine**, hand-written from the evidence pack. Eighteen
+  claims is a smoke test, not a benchmark.
 - **Training data is synthetic**, from a generator documented in `ml/app/synth.py`.
   The reported metrics are a statement about that process, not about the world.
   The 14 real fixture claims are a smoke test, not a measurement — n=14.

@@ -2,9 +2,10 @@
   "status": "verified",
   "citations": [
     {
-      "docId": "ev_cert01",
-      "quote": "Maya Reyes holds AWS Certified Solutions Architect – Professional, issued 11 June 2025, valid through 11 June 2028"
+      "docId": "ev_017",
+      "quote": "Implemented erasure for personal fields on payout records while retaining the financial record required for our seven-year retention obligation. Worked with legal to agree which fields are personal data and which are transaction records."
     }
   ],
-  "rationale": "Third-party certification record with a verification code and a validity window covering the application date."
+  "supportedLevel": "intermediate",
+  "rationale": "Ticket ENG-1102 records that erasure was implemented for personal fields on payout records and that the fields were agreed with legal, which matches the claim as written."
 }

@@ -96,7 +96,7 @@ export default async function ApplicationPage({ params }: { params: Promise<{ id
           <div className="mt-2.5">
             <Meter value={match.claimedScore} tone="amber" />
           </div>
-          <p className="mt-2 text-[12px] text-ink-3">What an ATS would have scored.</p>
+          <p className="mt-2 text-[12px] text-ink-3">Keyword match: the skill is on the résumé, so the box is ticked.</p>
         </div>
         <div>
           <p className="eyebrow">Verified fit</p>

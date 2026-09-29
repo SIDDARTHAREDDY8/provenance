@@ -2,10 +2,14 @@
   "status": "verified",
   "citations": [
     {
-      "docId": "ev_017",
-      "quote": "Worked with legal to agree which fields are personal data and which are transaction records"
+      "docId": "ev_ref01",
+      "quote": "She was primary on-call for payments on a six-week rotation."
+    },
+    {
+      "docId": "ev_008",
+      "quote": "I was primary on-call."
     }
   ],
-  "rationale": "The ticket records the implementation and the work with legal on what constitutes personal data.",
-  "supportedLevel": "intermediate"
+  "supportedLevel": "none",
+  "rationale": "The engineering manager's reference states primary on-call for payments on a six-week rotation, and the INC-412 ticket independently records being primary on-call during a sev1, which directly supports the claim as written."
 }

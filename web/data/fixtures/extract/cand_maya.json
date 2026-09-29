@@ -1,98 +1,110 @@
 {
   "claims": [
     {
+      "text": "Backend engineer with seven years in payments infrastructure.",
+      "category": "employment",
+      "section": "SUMMARY",
+      "skill": "payments_domain"
+    },
+    {
+      "text": "Postgres, Python, distributed systems and the unglamorous correctness work that keeps money moving.",
+      "category": "skill",
+      "section": "SUMMARY"
+    },
+    {
+      "text": "Payments Engineering — Backend Engineer II (2019–2026)",
+      "category": "employment",
+      "section": "EXPERIENCE"
+    },
+    {
       "text": "Reduced p95 latency on the invoice list endpoint from 1.9s to 240ms",
       "category": "achievement",
-      "section": "Experience",
-      "skill": "sql_perf"
+      "section": "EXPERIENCE"
     },
     {
       "text": "Cut the settlement report query from 34s to 1.1s by adding a partial index",
       "category": "achievement",
-      "section": "Experience",
+      "section": "EXPERIENCE",
       "skill": "sql_perf"
     },
     {
       "text": "Migrated an 890M-row ledger to partitioned tables with zero customer-facing errors",
       "category": "achievement",
-      "section": "Experience",
-      "skill": "migration_execution",
-      "level": "advanced"
+      "section": "EXPERIENCE",
+      "skill": "migration_execution"
     },
     {
       "text": "Designed and shipped the v2 payouts API with idempotency keys and cursor pagination",
       "category": "achievement",
-      "section": "Experience",
-      "skill": "api_design",
-      "level": "advanced"
+      "section": "EXPERIENCE",
+      "skill": "api_design"
     },
     {
       "text": "Led a team of 8 engineers across Payments and Data Platform",
       "category": "scope",
-      "section": "Experience",
-      "skill": "project_leadership",
-      "level": "advanced"
+      "section": "EXPERIENCE",
+      "skill": "project_leadership"
     },
     {
       "text": "Owned the backend hiring loop and ran interview debriefs",
       "category": "scope",
-      "section": "Experience",
-      "skill": "hiring",
-      "level": "intermediate"
+      "section": "EXPERIENCE",
+      "skill": "hiring"
     },
     {
-      "text": "Expert-level production experience with Kafka and event streaming",
-      "category": "skill",
-      "section": "Skills",
-      "skill": "stream_processing",
-      "level": "expert"
+      "text": "Primary on-call for payments",
+      "category": "scope",
+      "section": "EXPERIENCE",
+      "skill": "incident_response"
     },
     {
-      "text": "Primary on-call for payments and resolved a sev1 connection-pool exhaustion in 38 minutes",
+      "text": "resolved a sev1 connection-pool exhaustion in 38 minutes",
       "category": "achievement",
-      "section": "Experience",
-      "skill": "incident_response",
-      "level": "advanced"
+      "section": "EXPERIENCE",
+      "skill": "incident_response"
     },
     {
       "text": "Reduced incident volume by 90% through observability work",
       "category": "achievement",
-      "section": "Experience",
-      "skill": "observability",
-      "level": "advanced"
+      "section": "EXPERIENCE",
+      "skill": "observability"
     },
     {
       "text": "Implemented GDPR erasure for payout records in coordination with legal",
       "category": "achievement",
-      "section": "Experience",
-      "skill": "compliance",
-      "level": "intermediate"
-    },
-    {
-      "text": "Advanced PostgreSQL performance tuning at scale",
-      "category": "skill",
-      "section": "Skills",
-      "skill": "sql_perf",
-      "level": "advanced"
+      "section": "EXPERIENCE",
+      "skill": "compliance"
     },
     {
       "text": "Mentored junior engineers on the Payments team",
       "category": "scope",
-      "section": "Experience",
-      "skill": "mentoring",
-      "level": "advanced"
+      "section": "EXPERIENCE",
+      "skill": "mentoring"
     },
     {
-      "text": "AWS Certified Solutions Architect - Professional",
-      "category": "credential",
-      "section": "Certifications"
+      "text": "Expert-level production experience with Kafka and event streaming",
+      "category": "skill",
+      "section": "SKILLS",
+      "skill": "stream_processing",
+      "level": "expert"
+    },
+    {
+      "text": "Advanced PostgreSQL performance tuning at scale",
+      "category": "skill",
+      "section": "SKILLS",
+      "skill": "sql_perf",
+      "level": "advanced"
     },
     {
       "text": "Kubernetes at production scale",
       "category": "skill",
-      "section": "Skills",
-      "skill": "kubernetes",
-      "level": "advanced"
+      "section": "SKILLS",
+      "skill": "kubernetes"
+    },
+    {
+      "text": "AWS Certified Solutions Architect - Professional",
+      "category": "credential",
+      "section": "CERTIFICATIONS"
     }
   ]
 }

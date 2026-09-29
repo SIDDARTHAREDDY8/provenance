@@ -59,6 +59,17 @@ const TOOL = {
  * instead: for claims about scope, employment or credentials, every attested
  * document enters the context and the adjudicator reads them all.
  */
+/**
+ * Retrieved chunks per claim.
+ *
+ * Raised from 6 after a live run: the eval showed an adverse verdict that was
+ * correct given its context and wrong given the full evidence pack, because the
+ * one document showing the claimed effect never made the cut. An adjudicator
+ * cannot be better than its retrieval, so the cheapest fix for a wrong verdict
+ * is usually more context rather than a better prompt.
+ */
+export const RETRIEVAL_K = 8;
+
 const THIRD_PARTY_AUTHORITATIVE = new Set<ResumeClaim["category"]>([
   "scope",
   "employment",
@@ -114,7 +125,7 @@ export const corroborate: StepDef<CorroborateInput, CorroborateOutput> = {
     const retrieval: CorroborateOutput["retrieval"] = {};
 
     for (const claim of input.claims) {
-      const hits = await input.index.search(claim.text, 6, {
+      const hits = await input.index.search(claim.text, RETRIEVAL_K, {
         includeAllAttested: THIRD_PARTY_AUTHORITATIVE.has(claim.category),
         pinAttested: 1,
       });

@@ -1,0 +1,11 @@
+{
+  "status": "partially_verified",
+  "citations": [
+    {
+      "docId": "ev_016",
+      "quote": "Scaled the payments-api deployment from 6 to 9 replicas ahead of the quarter-end settlement peak."
+    }
+  ],
+  "supportedLevel": "beginner",
+  "rationale": "The evidence shows a payments-api deployment being scaled from 6 to 9 replicas, which indicates some hands-on work with Kubernetes-style deployments, but nothing retrieved shows the breadth, scale or depth that 'production scale' implies."
+}

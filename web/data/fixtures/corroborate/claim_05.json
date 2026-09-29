@@ -1,18 +1,11 @@
 {
-  "status": "contradicted",
+  "status": "verified",
   "citations": [
     {
-      "docId": "ev_ref01",
-      "quote": "She did not have direct reports at any point and was not in the management chain"
-    },
-    {
-      "docId": "ev_ref01",
-      "quote": "she coordinated three engineers as the technical lead of that project, which is the largest span she has held"
-    },
-    {
-      "docId": "ev_007",
-      "quote": "She coordinated three engineers across Payments and Data Platform without being asked to"
+      "docId": "ev_002",
+      "quote": "Added a partial index on events(tenant_id, created_at) WHERE kind = 'settlement', which cut the report query from 34s to 1.1s for our largest merchant."
     }
   ],
-  "rationale": "The referee states she was an individual contributor with no direct reports, and that three engineers was her largest span."
+  "supportedLevel": "intermediate",
+  "rationale": "The ENG-884 ticket states the same partial index change and the same 34s to 1.1s improvement, measured for the largest merchant, which matches the claim as written."
 }

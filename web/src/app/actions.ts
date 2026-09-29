@@ -27,6 +27,15 @@ function ensureWorker(): void {
 }
 
 export async function startAssessment(applicationId: string): Promise<string> {
+  // Reject before queueing. A request that can never succeed should come back as
+  // an answer, not as a job the caller has to poll in order to learn it failed.
+  const db = store();
+  const application = (await db.applications()).find((a) => a.id === applicationId);
+  if (!application) throw new Error(`Unknown application ${applicationId}`);
+  if ((await db.evidence(application.candidateId)).length === 0) {
+    throw new Error("This candidate has no evidence pack on file, so there is nothing to assess.");
+  }
+
   ensureWorker();
   const job = await queue().enqueue("assess", { applicationId });
   await record("run_started", "reviewer", `Queued assessment for ${applicationId}`, {

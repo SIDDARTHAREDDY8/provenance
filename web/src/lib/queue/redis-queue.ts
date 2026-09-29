@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
 import type Redis from "ioredis";
-import { BACKOFF_MS, MAX_ATTEMPTS, type Job, type JobQueue } from "./types";
+import { BACKOFF_MS, MAX_ATTEMPTS, isPermanent, type Job, type JobQueue } from "./types";
 
 const READY = "prov:jobs:ready";
 const INFLIGHT = "prov:jobs:inflight";
@@ -112,7 +112,7 @@ export class RedisQueue implements JobQueue {
       } catch (err) {
         job.error = err instanceof Error ? err.message : String(err);
         await redis.lrem(INFLIGHT, 1, id);
-        if (job.attempts < MAX_ATTEMPTS) {
+        if (job.attempts < MAX_ATTEMPTS && !isPermanent(err)) {
           job.state = "queued";
           await this.save(job);
           const delay = BACKOFF_MS[job.attempts] ?? 4_000;

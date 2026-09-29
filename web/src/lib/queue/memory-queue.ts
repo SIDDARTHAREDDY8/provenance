@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { BACKOFF_MS, MAX_ATTEMPTS, type Job, type JobQueue } from "./types";
+import { BACKOFF_MS, MAX_ATTEMPTS, isPermanent, type Job, type JobQueue } from "./types";
 
 /**
  * In-process queue. The default, so the app runs with no Redis.
@@ -73,7 +73,7 @@ export class MemoryQueue implements JobQueue {
       job.finishedAt = new Date().toISOString();
     } catch (err) {
       job.error = err instanceof Error ? err.message : String(err);
-      if (job.attempts < MAX_ATTEMPTS) {
+      if (job.attempts < MAX_ATTEMPTS && !isPermanent(err)) {
         job.state = "queued";
         const delay = BACKOFF_MS[job.attempts] ?? 4_000;
         setTimeout(() => {

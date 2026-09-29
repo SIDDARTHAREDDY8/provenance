@@ -1,6 +1,7 @@
 import { runAssessment } from "@/lib/agents/pipeline";
 import { record } from "@/lib/audit";
 import { store, type StoredAssessment } from "@/lib/store";
+import { PermanentFailure } from "@/lib/queue/types";
 import type { ReusableCorroboration } from "@/lib/agents/pipeline";
 import { extractFeatures } from "@/lib/ml/features";
 import { claimRisk } from "@/lib/ml/infer";
@@ -39,7 +40,7 @@ export async function assessApplication(
       docs.length === 0 ? "evidence pack" : null,
       resume.trim().length === 0 ? "résumé" : null,
     ].filter(Boolean).join(" or ");
-    throw new Error(
+    throw new PermanentFailure(
       `This candidate has no ${missing} on file, so there is nothing to verify against. ` +
         `An empty pack would mark every claim unsupported, which would read as a finding ` +
         `about the person and is really a finding about the pipeline having been handed nothing.`,

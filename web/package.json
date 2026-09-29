@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start -p 3210",
     "eval": "tsx scripts/eval.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "capture": "tsx scripts/capture.ts"
   },
   "dependencies": {
     "@huggingface/transformers": "^4.3.0",

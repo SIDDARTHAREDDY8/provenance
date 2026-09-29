@@ -12,6 +12,7 @@ the score the evidence supports.** The gap between them is the product.
 npm install
 npm run dev        # http://localhost:3210
 npm run eval       # verification quality gates (TypeScript)
+npm run capture    # record real model output into data/fixtures/
 npm run ml:train   # train the classifier and ranker (Python)
 npm run ml:eval    # ML gates + Python↔TypeScript feature parity
 docker compose up  # the whole stack: web + ML service + Postgres + Redis
@@ -171,7 +172,7 @@ accuracy numbers, it shows up as quietly worse verification a quarter later.
 | App | Next.js 16, App Router, server components/actions, TypeScript strict | — |
 | Styling | Tailwind v4, CSS-first `@theme` tokens | — |
 | Agent runtime | Typed steps, retries with backoff, per-step output gates, full trace | `web/src/lib/agents/runtime.ts` |
-| LLM | Forced tool use, `temperature: 0` | `ANTHROPIC_API_KEY` → live; absent → authored fixtures |
+| LLM | Forced tool use, `temperature: 0` | `ANTHROPIC_API_KEY` → API; `LLM_PROVIDER=claude-code` → CLI login; absent → replayed fixtures |
 | Retrieval | Chunking, local sentence-transformer, cosine + MMR, attested evidence included not ranked | `EMBEDDING_PROVIDER=openai` / `=lexical` |
 | ML | scikit-learn training in Python, coefficients exported, inference in TypeScript | `ml/` |
 | Storage | File store | `DATABASE_URL` → Postgres (`db/schema.sql`) |
@@ -193,9 +194,12 @@ anything that wants a Python runtime.
 ## Honest limits
 
 - **The fixtures are authored, not captured.** `web/data/fixtures/` was written by
-  hand, including its deliberate failure. It is labelled as such in
-  `web/src/lib/llm/fixture.ts`. Set `ANTHROPIC_API_KEY` and the same pipeline
-  runs live against the same prompts.
+  hand, including its deliberate failure, and is labelled as such in
+  `web/src/lib/llm/fixture.ts`. `npm run capture` replaces them with genuine
+  model output — via the API, or via the Claude Code CLI's own login if you have
+  a subscription but no API credit. It writes each response verbatim, then
+  replays from what it wrote and fails if any verdict differs, because a fixture
+  that does not reproduce is not a fixture.
 - **Training data is synthetic**, from a generator documented in `ml/app/synth.py`.
   The reported metrics are a statement about that process, not about the world.
   The 14 real fixture claims are a smoke test, not a measurement — n=14.

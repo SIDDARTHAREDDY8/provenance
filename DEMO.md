@@ -77,15 +77,16 @@ Speak plainly. Don't read the UI aloud — say the thing the UI can't.
 
 **1:55 — /compliance, then stop**
 
-> Selection rates against the four-fifths rule. Group C flagged. Group D
-> withheld, because reporting three people identifies them.
+> Selection rates against the four-fifths rule. Group C flagged for examination.
+> Group D shows no rate at all — three people, below the reporting threshold, so
+> publishing its rate would identify them.
 
 ---
 
 ## 30-second version
 
 Queue → Assess → the 60/35 split → the contradicted Kafka claim with its
-citations → the redacted compliance table. Five beats, whole argument.
+citations → the compliance table with Group D withheld. Five beats, whole argument.
 
 ## The one finding worth 20 seconds on its own
 

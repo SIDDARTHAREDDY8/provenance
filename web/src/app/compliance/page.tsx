@@ -6,10 +6,17 @@ import { FOUR_FIFTHS, K_ANONYMITY_THRESHOLD, adverseImpact, type CohortRow } fro
 
 export const dynamic = "force-dynamic";
 
-function Redacted({ w }: { w: number }) {
+/**
+ * A withheld cell.
+ *
+ * The dash is not "no data" — it is "a value exists and is not being shown",
+ * which the row's own label spells out. Screen readers get the reason rather
+ * than a bare punctuation mark.
+ */
+function Withheld() {
   return (
-    <span className="redacted" style={{ width: w, height: 11 }} aria-label="withheld">
-      &nbsp;
+    <span className="text-ink-3" aria-label="withheld — group too small to report">
+      —
     </span>
   );
 }
@@ -78,9 +85,9 @@ export default async function CompliancePage() {
             <tr key={r.group}>
               <td className={r.suppressed ? "text-ink-3 italic" : ""}>{r.group}</td>
               <td className="num text-ink-3">{r.n}</td>
-              <td className="num">{r.rate === null ? <Redacted w={44} /> : `${Math.round(r.rate * 100)}%`}</td>
+              <td className="num">{r.rate === null ? <Withheld /> : `${Math.round(r.rate * 100)}%`}</td>
               <td className="num">
-                {r.impactRatio === null ? <Redacted w={38} /> : r.impactRatio.toFixed(2)}
+                {r.impactRatio === null ? <Withheld /> : r.impactRatio.toFixed(2)}
               </td>
               <td>
                 {r.suppressed ? (

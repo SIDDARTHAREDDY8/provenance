@@ -20,6 +20,7 @@ const NEUTRAL_CWD = mkdtempSync(path.join(os.tmpdir(), "provenance-llm-"));
 
 interface CliResult {
   is_error?: boolean;
+  api_error_status?: number | null;
   result?: string;
   total_cost_usd?: number;
 }
@@ -107,13 +108,31 @@ ${schema}`;
         timeout: 180_000,
       }));
     } catch (err) {
-      throw new Error(
-        `claude CLI failed for "${req.cacheKey}": ${err instanceof Error ? err.message.slice(0, 200) : String(err)}`,
-      );
+      // Echoing the failed command here means echoing the whole prompt, which
+      // buries the one line that matters. Report the reason, not the argv.
+      const message = err instanceof Error ? err.message : String(err);
+      const reason = /ENOENT/.test(message)
+        ? "the `claude` CLI is not on PATH"
+        : message.split("\n")[0]?.slice(0, 160);
+      throw new Error(`claude CLI could not run (${req.cacheKey}): ${reason}`);
     }
 
     const envelope = JSON.parse(stdout) as CliResult;
     claudeCodeSpendUsd += envelope.total_cost_usd ?? 0;
+
+    if (envelope.api_error_status === 401) {
+      throw new Error(
+        `claude CLI got 401 for "${req.cacheKey}".\n` +
+          "  The CLI's stored credentials were rejected. On machines where Claude Code is\n" +
+          "  signed in through the desktop app, auth is brokered by that app and a bare\n" +
+          "  shell invocation has nothing to refresh the token with.\n" +
+          "  Fixes, in order of reliability:\n" +
+          "    1. ANTHROPIC_API_KEY=sk-ant-... npm run capture\n" +
+          "    2. run `claude` interactively once so it refreshes, then retry\n" +
+          "  The committed fixtures are already real captured output, so this is only\n" +
+          "  needed to re-record them.",
+      );
+    }
     if (envelope.is_error || typeof envelope.result !== "string") {
       throw new Error(`claude CLI error for "${req.cacheKey}": ${envelope.result ?? "no result"}`);
     }
